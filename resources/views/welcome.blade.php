@@ -58,7 +58,7 @@
 
 
     </div><!-- //container -->
-</header><!-- //site-header -->
+    </header><!-- //site-header -->
 
     <!-- partial -->
     <main id="main" class="main">
@@ -419,14 +419,7 @@
       <!-- Kolom Kiri: Google Maps -->
       <div class="col-md-6 kontak-map">
         <div class="map-container">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!2m12!3m3!1s0x2e69f3e1e639a99d%3A0x9ddca3957c6cf1dd!2sOpenAI!5e0!3m2!1sen!2sid!4v1625645914823"
-            width="100%"
-            height="100%"
-            style="border:0;"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2346.7442489700748!2d114.27550098043753!3d-8.427404453796097!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zOMKwMjUnMzMuMyJTIDExNMKwMTYnMzguMyJF!5e0!3m2!1sen!2sid!4v1751963900461!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
 
