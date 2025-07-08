@@ -11,10 +11,10 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>@yield('title') | Seserahanbypings - Toko Seserahan Elegan & Eksklusif</title>
-    <meta name="description" content="Seserahanbypings menyediakan seserahan eksklusif untuk pernikahan, lamaran, dan tunangan. Desain elegan & harga bersahabat.">
-    <meta name="keywords" content="seserahan, seserahanbypings, seserahan banyuwangi, seserahan pernikahan, seserahan lamaran, toko seserahan, seserahan murah, seserahan eksklusif">
-    <meta property="og:title" content="Seserahanbypings - Toko Seserahan Eksklusif">
+    <title>@yield('title') | Seserahan by_pings - Toko Seserahan Elegan & Eksklusif</title>
+    <meta name="description" content="Seserahan by_pings menyediakan seserahan eksklusif untuk pernikahan, lamaran, dan tunangan. Desain elegan & harga bersahabat.">
+    <meta name="keywords" content="seserahan, Seserahan by_pings, seserahan banyuwangi, seserahan pernikahan, seserahan lamaran, toko seserahan, seserahan murah, seserahan eksklusif">
+    <meta property="og:title" content="Seserahan by_pings - Toko Seserahan Eksklusif">
     <meta property="og:description" content="Desain seserahan terbaik untuk momen spesial Anda. Cek katalog & pesan sekarang!">
     <meta property="og:image" content="{{ asset('assets/images/og-image.jpg') }}">
 
@@ -111,7 +111,7 @@
                   </svg>
                 </span>
               </span>
-              <span class="app-brand-text demo menu-text fw-bold ms-2">Sneat</span>
+              <span class="app-brand-text demo menu-text fw-bold ms-2">Seserahan by_pings</span>
             </a>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
@@ -239,11 +239,15 @@
                     <li>
                       <div class="dropdown-divider my-1"></div>
                     </li>
-                    <li>
-                      <a class="dropdown-item" href="javascript:void(0);">
-                        <i class="icon-base bx bx-power-off icon-md me-3"></i><span>Log Out</span>
-                      </a>
-                    </li>
+                   <li>
+                      <form method="POST" action="{{ route('logout') }}" id="logout-form">
+                        @csrf
+                        <a href="#" class="dropdown-item d-flex align-items-center" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="icon-base bx bx-power-off icon-md me-3"></i>
+                            <span>Log Out</span>
+                        </a>
+                    </form>
+                  </li>
                   </ul>
                 </li>
                 <!--/ User -->
@@ -259,43 +263,14 @@
                 <div
                   class="footer-container d-flex align-items-center justify-content-between py-4 flex-md-row flex-column">
                   <div class="mb-2 mb-md-0">
-                    ©
+                    Copyright ©
                     <script>
                       document.write(new Date().getFullYear());
                     </script>
                     , made with ❤️ by
-                    <a href="https://themeselection.com" target="_blank" class="footer-link">ThemeSelection</a>
+                    <a href="https://diveratech.site" target="_blank" class="footer-link">Seserahan by_pings</a>
                   </div>
-                  <div class="d-none d-lg-inline-block">
-                    <a
-                      href="https://themeselection.com/item/category/admin-templates/"
-                      target="_blank"
-                      class="footer-link me-4"
-                      >Admin Templates</a
-                    >
-
-                    <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
-                    <a
-                      href="https://themeselection.com/item/category/bootstrap-admin-templates/"
-                      target="_blank"
-                      class="footer-link me-4"
-                      >Bootstrap Dashboard</a
-                    >
-
-                    <a
-                      href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/documentation/"
-                      target="_blank"
-                      class="footer-link me-4"
-                      >Documentation</a
-                    >
-
-                    <a
-                      href="https://github.com/themeselection/sneat-bootstrap-html-admin-template-free/issues"
-                      target="_blank"
-                      class="footer-link"
-                      >Support</a
-                    >
-                  </div>
+                  
                 </div>
               </div>
             </footer>

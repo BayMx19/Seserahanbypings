@@ -3,10 +3,10 @@
 <head>
     <!-- partial:parts/_head.html -->
     <meta charset="utf-8">
-<title>Seserahanbypings - Toko Seserahan Elegan & Eksklusif</title>
-<meta name="description" content="Seserahanbypings menyediakan seserahan eksklusif untuk pernikahan, lamaran, dan tunangan. Desain elegan & harga bersahabat.">
-<meta name="keywords" content="seserahan, seserahanbypings, seserahan banyuwangi, seserahan pernikahan, seserahan lamaran, toko seserahan, seserahan murah, seserahan eksklusif">
-<meta property="og:title" content="Seserahanbypings - Toko Seserahan Eksklusif">
+<title>Seserahan by_pings - Toko Seserahan Elegan & Eksklusif</title>
+<meta name="description" content="Seserahan by_pings menyediakan seserahan eksklusif untuk pernikahan, lamaran, dan tunangan. Desain elegan & harga bersahabat.">
+<meta name="keywords" content="seserahan, Seserahan by_pings, seserahan banyuwangi, seserahan pernikahan, seserahan lamaran, toko seserahan, seserahan murah, seserahan eksklusif">
+<meta property="og:title" content="Seserahan by_pings - Toko Seserahan Eksklusif">
 <meta property="og:description" content="Desain seserahan terbaik untuk momen spesial Anda. Cek katalog & pesan sekarang!">
 <meta property="og:image" content="{{ asset('assets/images/og-image.jpg') }}">
 <meta name="viewport" content="width=device-width, initial-scale=1 , maximum-scale=1, user-scalable=0">
@@ -84,7 +84,7 @@
                                         <img src="images/content/main-page-2.jpg" alt="main-page-2">
                                     </div>
                                 </div>
-                                <div class="photo-info wysiwyg"><p>Seserahanbypings</p></div>
+                                <div class="photo-info wysiwyg"><p>Seserahan by_pings</p></div>
 
                             </div>
 
@@ -92,7 +92,7 @@
                     </div>
                     <div class="col col_5 col_desktop-12 order-desktop-1">
                         <div class="main-container">
-                            <h1 class="h1 main-title">Bingkisan Istimewa<br><span class="round-border round-border-3">Seserahanbypings</span></h1>
+                            <h1 class="h1 main-title">Bingkisan Istimewa<br><span class="round-border round-border-3">Seserahan by_pings</span></h1>
                             <div class="wysiwyg main-description">Hadirkan kesan elegan di hari spesialmu dengan seserahan handmade penuh cinta. Cocok untuk lamaran, tunangan, hingga pernikahan.</div>
                             <a href="{{'login'}}"><button type="button" class="btn popup-init">Pesan Sekarang</button></a>
                         </div>
@@ -104,7 +104,7 @@
             <div class="container">
                 
                     <div class="col text-center" style="margin-bottom: 50px;">
-                        <h2 class="h2 title fw-bold" style="margin: 0 !important;">Kenapa Memilih <span class="text-primary text-bold">Seserahanbypings?</span></h2>
+                        <h2 class="h2 title fw-bold" style="margin: 0 !important;">Kenapa Memilih <span class="text-primary text-bold">Seserahan by_pings?</span></h2>
                         <p class="text-muted mb-5">Kami hadir untuk menjadikan momen spesialmu lebih berkesan.</p>
                     </div>
                 
@@ -224,8 +224,8 @@
             <div class="col col_6 col_desktop-12">
                 <div class="description-container">
                     <div class="wysiwyg">
-                        <h2 class="h2 title fw-bold mb-4">Tentang <span class="text-primary">Seserahanbypings</span></h2>
-                        <p>Seserahanbypings hadir untuk membantu kamu menyiapkan seserahan yang elegan, penuh makna, dan sesuai dengan harapan. Kami percaya bahwa setiap seserahan bukan hanya sekadar hadiah, tapi bentuk cinta dan doa terbaik untuk pasangan.</p>
+                        <h2 class="h2 title fw-bold mb-4">Tentang <span class="text-primary">Seserahan by_pings</span></h2>
+                        <p>Seserahan by_pings hadir untuk membantu kamu menyiapkan seserahan yang elegan, penuh makna, dan sesuai dengan harapan. Kami percaya bahwa setiap seserahan bukan hanya sekadar hadiah, tapi bentuk cinta dan doa terbaik untuk pasangan.</p>
                         <p>Dengan desain yang bisa dikustom, pilihan paket lengkap, dan pelayanan profesional, kami siap menemani setiap momen spesialmu menjadi lebih berkesan.</p>
                         <ul>
                             <li>Desain bisa request tema, warna, dan isi</li>
@@ -501,7 +501,7 @@
     </div>
     <div class="footer-bottom">
         <div class="container">
-            <span class="copyright text-center">Copyright ©2025 <a href="http://diveratech.site/">Seserahanbypings</a>, All rights reserved.</span>
+            <span class="copyright text-center">Copyright ©2025 <a href="http://diveratech.site/">Seserahan by_pings</a>, All rights reserved.</span>
         </div>
     </div>
 </footer>
