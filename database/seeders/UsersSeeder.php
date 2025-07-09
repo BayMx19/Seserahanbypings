@@ -17,7 +17,7 @@ class UsersSeeder extends Seeder
         DB::table('users')->insert([
         'name' => "Admin",
         'nohp' => "082191927762",
-        'email' => "admin@gmail.com",
+        'email' => "admin@seserahanbypings.site",
         'password' => Hash::make('Admin123'),
         'role' => "Admin",
         'foto_profil' => "",
@@ -27,7 +27,7 @@ class UsersSeeder extends Seeder
         DB::table('users')->insert([
         'name' => "Pembeli",
         'nohp' => "082191927762",
-        'email' => "pembeli@gmail.com",
+        'email' => "pembeli@seserahanbypings.site",
         'password' => Hash::make('Pembeli123'),
         'role' => "User",
         'foto_profil' => "",

@@ -185,16 +185,18 @@
                   </div>
                 </div>
                 <br>
+                <div class="mb-2">
                 <button type="submit" class="btn btn-primary d-grid w-100">Sign up</button>
+                </div>
               </form>
-              <br>
+              
+              <button type="button" class="btn btn-secondary d-grid w-100"  onclick="window.location.href='{{ url('/') }}'">Batal</button>
               <p class="text-center">
                 <span>Sudah Punya Akun?</span>
                 <a href="{{route('login')}}">
                   <span>Masuk Disini</span>
                 </a>
               </p>
-              <button type="button" class="btn btn-secondary d-grid w-100"  onclick="window.location.href='{{ url('/') }}'">Batal</button>
 
             </div>
           </div>

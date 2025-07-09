@@ -123,7 +123,7 @@
               <!-- /Logo -->
               
 
-              <form id="formAuthentication" class="mb-6" method="POST" action="{{ route('login') }}">
+              <form id="formAuthentication"  method="POST" action="{{ route('login') }}">
                 @csrf
 
                 <div class="mb-6">
@@ -170,11 +170,12 @@
                     
                   </div>
                 </div>
-                <div class="mb-6">
+                <div class="mb-2">
                   <button class="btn btn-primary d-grid w-100" type="submit">Login</button>
                 </div>
               </form>
               
+              <button type="button" class="btn btn-secondary d-grid w-100"  onclick="window.location.href='{{ url('/') }}'">Batal</button>
               <p class="text-center">
                   <span>Belum Punya Akun?</span>
                   <a href="{{'register'}}">
@@ -182,7 +183,6 @@
                     </a>
               </p>
               
-                  <button type="button" class="btn btn-secondary d-grid w-100"  onclick="window.location.href='{{ url('/') }}'">Batal</button>
               
             </div>
           </div>
