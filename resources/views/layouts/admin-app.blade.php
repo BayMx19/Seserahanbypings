@@ -192,16 +192,7 @@
 
             <div class="navbar-nav-right d-flex align-items-center justify-content-end" id="navbar-collapse">
               <!-- Search -->
-              <div class="navbar-nav align-items-center me-auto">
-                <div class="nav-item d-flex align-items-center">
-                  <span class="w-px-22 h-px-22"><i class="icon-base bx bx-search icon-md"></i></span>
-                  <input
-                    type="text"
-                    class="form-control border-0 shadow-none ps-1 ps-sm-2 d-md-block d-none"
-                    placeholder="Search..."
-                    aria-label="Search..." />
-                </div>
-              </div>
+              
               <!-- /Search -->
 
               <ul class="navbar-nav flex-row align-items-center ms-md-auto">
@@ -215,7 +206,13 @@
                     href="javascript:void(0);"
                     data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                      @if (Auth::check())
+                      <img
+                              src="{{ Auth::user()->foto_profil ? asset('storage/' . Auth::user()->foto_profil) : asset('assets/default_avatars.jpg') }}"
+                              alt="Foto Profil"
+                              class="w-px-40 h-auto rounded-circle"
+                          />       
+                      @endif             
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
@@ -224,7 +221,13 @@
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
-                              <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                              @if (Auth::check())
+                              <img
+                                      src="{{ Auth::user()->foto_profil ? asset('storage/' . Auth::user()->foto_profil) : asset('assets/default_avatars.jpg') }}"
+                                      alt="Foto Profil"
+                                      class="w-px-40 h-auto rounded-circle"
+                                  />       
+                              @endif   
                             </div>
                           </div>
                           <div class="flex-grow-1">

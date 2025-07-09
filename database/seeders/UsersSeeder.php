@@ -14,7 +14,7 @@ class UsersSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('users')->insert([
+        DB::table('m_users')->insert([
         'name' => "Admin",
         'nohp' => "082191927762",
         'email' => "admin@seserahanbypings.site",
@@ -24,7 +24,7 @@ class UsersSeeder extends Seeder
         'jenis_kelamin' => "Perempuan",
         'status' => "ACTIVE",
         ]);
-        DB::table('users')->insert([
+        DB::table('m_users')->insert([
         'name' => "Pembeli",
         'nohp' => "082191927762",
         'email' => "pembeli@seserahanbypings.site",

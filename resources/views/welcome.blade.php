@@ -50,7 +50,7 @@
                                     </nav><!-- //nav -->
                                 </div>
                                 <div class="header-nav__info">
-                                    <a href="{{'login'}}">Masuk</a>
+                                    <a href="{{'login'}}" class="text-bold">Masuk</a>
                                 </div>
                             </div>
                         </div>
