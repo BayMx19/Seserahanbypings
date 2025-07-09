@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\User\HomeController as UserHomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\RoleMiddleware;
 
 Route::get('/', function () {
     return view('welcome');
@@ -9,5 +13,17 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/admin/dashboard', [App\Http\Controllers\admin\DashboardController::class, 'index'])->name('dashboard');
+
+
+
+
+Route::middleware(['auth', RoleMiddleware::class . ':Admin'])->group(function () {
+    Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+    Route::resource('/admin/users', AdminUserController::class);
+});
+
+Route::middleware(['auth', RoleMiddleware::class . ':User'])->group(function () {
+    Route::get('/home', [UserHomeController::class, 'index'])->name('home');
+
+});
+
