@@ -13,10 +13,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-
-
-
-
 Route::middleware(['auth', RoleMiddleware::class . ':Admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::resource('/admin/users', AdminUserController::class);
