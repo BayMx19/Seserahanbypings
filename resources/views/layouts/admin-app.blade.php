@@ -285,6 +285,7 @@
     <!-- Core JS -->
 
     <script src="{{ asset('assets/admin/assets/vendor/libs/jquery/jquery.js')}}"></script>
+    <script src="{{ asset('assets/admin/assets/js/dashboards-analytics.js') }}"></script>
 
     <script src="{{ asset('assets/admin/assets/vendor/libs/popper/popper.js')}}"></script>
     <script src="{{ asset('assets/admin/assets/vendor/js/bootstrap.js')}}"></script>

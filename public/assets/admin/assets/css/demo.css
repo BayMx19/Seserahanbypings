@@ -111,3 +111,7 @@
   text-align: center;
   margin-top: 1rem;
 }
+
+.text-bold{
+  font-weight: bold !important;
+}
