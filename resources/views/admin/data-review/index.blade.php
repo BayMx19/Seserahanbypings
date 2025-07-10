@@ -3,6 +3,7 @@
 @section('title', 'Data Review')
 
 @section('content')
+<h3 class="text-bold">Data Review</h3>
     <div class="row g-6">
                 <!-- Basic Badges -->
                 <div class="col-lg-6">

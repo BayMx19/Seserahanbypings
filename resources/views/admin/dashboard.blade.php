@@ -3,7 +3,7 @@
 @section('title', 'Dashboard Admin')
 
 @section('content')
-<h3 class="text-bold">Dashboard</h3>
+<h3 class="text-bold">Dashboards</h3>
             <div class="card mb-6">
                
                 <div class="card-body">

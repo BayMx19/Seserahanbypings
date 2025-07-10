@@ -18,7 +18,6 @@
     <meta property="og:description" content="Desain seserahan terbaik untuk momen spesial Anda. Cek katalog & pesan sekarang!">
     <meta property="og:image" content="{{ asset('assets/images/og-image.jpg') }}">
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -28,30 +27,18 @@
     <link rel="stylesheet" href="{{ asset('assets/admin/assets/vendor/fonts/iconify-icons.css')}}" />
     <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
     <link href='https://cdn.boxicons.com/fonts/brands/boxicons-brands.min.css' rel='stylesheet'>
-    <!-- Core CSS -->
-    <!-- build:css assets/vendor/css/theme.css  -->
 
     <link rel="stylesheet" href="{{ asset('assets/admin/assets/vendor/css/core.css')}}" />
     <link rel="stylesheet" href="{{ asset('assets/admin/assets/css/demo.css')}}" />
 
-    <!-- Vendors CSS -->
-
     <link rel="stylesheet" href="{{ asset('assets/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css')}}" />
 
-    <!-- endbuild -->
-
-    <!-- Page CSS -->
-    <!-- Page -->
     <link rel="stylesheet" href="{{ asset('assets/admin/assets/vendor/css/pages/page-auth.css')}}" />
 
-    <!-- Helpers -->
     <script src="{{ asset('assets/admin/assets/vendor/js/helpers.js')}}"></script>
-    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-
-    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
 
     <script src="{{ asset('assets/admin/assets/js/config.js')}}"></script>
-   
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.2/css/dataTables.dataTables.css" />
    
   </head>
   <body>
@@ -281,8 +268,6 @@
          </div>
       </div>
      </div>
-     
-    <!-- Core JS -->
 
     <script src="{{ asset('assets/admin/assets/vendor/libs/jquery/jquery.js')}}"></script>
     <script src="{{ asset('assets/admin/assets/js/dashboards-analytics.js') }}"></script>
@@ -294,16 +279,10 @@
 
     <script src="{{ asset('assets/admin/assets/vendor/js/menu.js')}}"></script>
 
-    <!-- endbuild -->
-
-    <!-- Vendors JS -->
-
-    <!-- Main JS -->
-
     <script src="{{ asset('assets/admin/assets/js/main.js')}}"></script>
 
-    <!-- Page JS -->
-
-    <!-- Place this tag before closing body tag for github widget button. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/2.3.2/js/dataTables.js"></script>
+     @yield('scripts')
   </body>

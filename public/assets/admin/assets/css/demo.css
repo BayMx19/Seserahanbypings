@@ -115,3 +115,64 @@
 .text-bold{
   font-weight: bold !important;
 }
+/* Pastikan teks header rata kiri */
+th.nohp-header {
+    text-align: left !important;
+    position: relative;
+    padding-right: 30px !important; /* ruang untuk icon sort di kanan */
+}
+
+/* Paksa icon sorting ke kanan */
+th.nohp-header.sorting::after,
+th.nohp-header.sorting_asc::after,
+th.nohp-header.sorting_desc::after {
+    position: absolute !important;
+    right: 8px !important;
+    left: auto !important;
+    top: 50%;
+    transform: translateY(-50%);
+}
+th.sorting-fake::after {
+  content: '\2195'; /* panah atas-bawah unicode */
+  font-size: 0.8rem;
+  position: relative;
+  float: right;
+  color: #aaa;
+}
+
+.btn-submit {
+    background-color: #4CAF50; 
+    color: white;
+    padding: 10px 20px;
+    border: 2px solid #4CAF50;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 80%;
+    text-align: center;
+    justify-content: center !important;
+    font-weight: bold !important;
+}
+.btn-submit:hover {
+    background-color: white;
+    color: #4CAF50; /* Hijau lebih terang saat hover */
+    border: 2px solid #4CAF50;
+
+}
+
+.btn-batal{
+    background-color: #919191; 
+    color: white;
+    padding: 10px 20px;
+    border: 2px solid #919191;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 80%;
+    text-align: center;
+    justify-content: center !important;
+    font-weight: bold !important;
+}
+.btn-batal:hover {
+    background-color: white;
+    color: #919191; /* Abu-abu lebih terang saat hover */
+    border: 2px solid #919191;
+}

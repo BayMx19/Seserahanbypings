@@ -3,6 +3,7 @@
 @section('title', 'Profile')
 
 @section('content')
+<h3 class="text-bold">Profile</h3>
     <div class="row g-6">
                 <!-- Basic Badges -->
                 <div class="col-lg-6">

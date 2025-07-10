@@ -74,7 +74,7 @@ class RegisterController extends Controller
     }
      protected function redirectTo()
     {
-        return '/users/home';
+        return '/home';
     }
 
 }
