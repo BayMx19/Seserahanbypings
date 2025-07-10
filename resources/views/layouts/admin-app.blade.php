@@ -125,8 +125,8 @@
 
           <ul class="menu-inner py-1">
             <!-- Dashboards -->
-            <li class="menu-item active ">
-              <a href="javascript:void(0);" class="menu-link">
+            <li class="menu-item @if (request()->is('admin/dashboard')) active @endif">
+              <a href="{{'/admin/dashboard'}}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home"></i>
                 <div class="text-truncate" data-i18n="Dashboards">Dashboards</div>
                 
@@ -135,15 +135,15 @@
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Master</span>
             </li>
-            <li class="menu-item ">
-              <a href="javascript:void(0);" class="menu-link">
+            <li class="menu-item @if (request()->is('admin/users')) active @endif">
+              <a href="{{'/admin/users'}}" class="menu-link">
                 <i class="menu-icon  bx bx-group"></i>
                 <div class="text-truncate" data-i18n="Dashboards">Master Users</div>
                 
               </a>
             </li>
-            <li class="menu-item ">
-              <a href="javascript:void(0);" class="menu-link">
+            <li class="menu-item @if (request()->is('admin/produk')) active @endif">
+              <a href="{{'/admin/produk'}}" class="menu-link">
                 <i class="menu-icon bx bx-box"></i>
                 <div class="text-truncate" data-i18n="Dashboards">Master Produk</div>
                 
@@ -152,15 +152,15 @@
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Transaksi</span>
             </li>
-            <li class="menu-item ">
-              <a href="javascript:void(0);" class="menu-link">
+            <li class="menu-item @if (request()->is('admin/transaksi')) active @endif">
+              <a href="{{'/admin/transaksi'}}" class="menu-link">
                 <i class="menu-icon  bx bx-wallet"></i>
                 <div class="text-truncate" data-i18n="Dashboards">Data Transaksi</div>
                 
               </a>
             </li>
-            <li class="menu-item ">
-              <a href="javascript:void(0);" class="menu-link">
+            <li class="menu-item @if (request()->is('admin/review')) active @endif">
+              <a href="{{'/admin/review'}}" class="menu-link">
                 <i class="menu-icon  bx bx-message"></i>
                 <div class="text-truncate" data-i18n="Dashboards">Data Review</div>
               </a>
@@ -168,8 +168,8 @@
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Akun</span>
             </li>
-            <li class="menu-item ">
-              <a href="javascript:void(0);" class="menu-link">
+            <li class="menu-item @if (request()->is('admin/profile')) active @endif">
+              <a href="{{'/admin/profile'}}" class="menu-link">
                 <i class="menu-icon  bx bx-user"></i>
                 <div class="text-truncate" data-i18n="Dashboards">Profile</div>
               </a>
