@@ -45,10 +45,14 @@
                                 <div class="header-nav__menu">
                                     <nav class="nav">
                                         <ul class="nav__list">
-                                            <li class="nav__item"><a href="#advantage" class="nav__link">Home</a></li>
-                                            <li class="nav__item"><a href="#experiences" class="nav__link">Produk</a></li>
-                                            <li class="nav__item"><a href="#delivery" class="nav__link">Tentang</a></li>
-                                            <li class="nav__item"><a href="#tastes" class="nav__link">Kontak</a></li>
+                                            <li class="nav__item">@auth
+                                                    <a href="{{ url('/home') }}" class="nav__link">Home</a>
+                                                @else
+                                                    <a href="{{ url('/') }}" class="nav__link">Home</a>
+                                                @endauth
+                                            </li>
+                                            <li class="nav__item"><a href="#about-us" class="nav__link">Tentang</a></li>
+                                            <li class="nav__item"><a href="#products" class="nav__link">Produk</a></li>
                                             
                                         </ul><!-- //nav__list -->
                                     </nav><!-- //nav -->
