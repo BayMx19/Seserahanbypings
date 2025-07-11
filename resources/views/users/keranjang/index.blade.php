@@ -3,7 +3,7 @@
 @section('title', 'Keranjang Saya')
 
 @section('content')
-<section class="section pt-1 pb-1">
+<section class="section section-keranjang">
     <div class="container">
         <h2 class="text-center mb-4 fw-bold text-blue">Keranjang Saya</h2>
         <hr>
@@ -15,6 +15,13 @@
                     'price' => 80000,
                     'quantity' => 1,
                     'image' => 'assets/img/1.jpg'
+    ],
+                [
+                    'id' => 2,
+                    'name' => 'ASTREA',
+                    'price' => 90000,
+                    'quantity' => 1,
+                    'image' => 'assets/img/2.jpg'
                 ]
             ];
             $total = collect($dummyCart)->sum(function($item) {
@@ -33,9 +40,45 @@
                 
                 @foreach($dummyCart as $cart)
                      <div class="cart-item-inner">
-                        
+                        <div class="row d-flex justify-content-between align-items-center">
+                        <!-- Gambar -->
+                        <div class="col-md-2 col-lg-2 col-xl-2">
+                            <img src="{{ asset($cart['image']) }}" class="img-fluid rounded-3" alt="{{ $cart['name'] }}">
+                        </div>
+
+                        <!-- Nama dan detail produk -->
+                        <div class="col-md-3 col-lg-3 col-xl-3">
+                            <p class="lead fw-normal mb-2">{{ $cart['name'] }}</p>
+                            <p><span class="text-muted">Qty: </span>{{ $cart['quantity'] }}</p>
+                        </div>
+
+                        <!-- Button + / - -->
+                        <div class="col-md-2 col-lg-2 col-xl-2 d-flex">
+                            <button class="btn btn-link px-2" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                            <i class="fas fa-minus"></i>
+                            </button>
+
+                            <input min="1" name="quantity[]" value="{{ $cart['quantity'] }}" type="number" class="form-control form-control-sm" />
+
+                            <button class="btn btn-link px-2" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                            <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+
+                        <!-- Harga -->
+                        <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                            <h5 class="mb-0">Rp {{ number_format($cart['price'] * $cart['quantity'], 0, ',', '.') }}</h5>
+                        </div>
+
+                        <!-- Hapus -->
+                        <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                            <a href="#" class="text-danger">
+                            <i class="fas fa-trash fa-lg"></i>
+                            </a>
+                        </div>
+                        </div>
                     </div>
-                 
+                    <br>    
                 @endforeach
             </div>
             <hr>

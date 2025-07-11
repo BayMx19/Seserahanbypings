@@ -2045,9 +2045,9 @@ input[type="reset"] {
 .section {
   padding: 100px 0; }
   .section:first-of-type {
-    padding-top: 200px; }
+    padding-top: 150px; }
   .section:last-of-type {
-    padding-bottom: 200px; }
+    padding-bottom: 150px; }
   @media screen and (max-width: 1023px) {
     .section {
       padding: 90px 0; }
@@ -3190,3 +3190,4 @@ input[type="reset"] {
   text-align: center !important;
   justify-content: center !important;
 }
+
