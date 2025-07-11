@@ -3138,6 +3138,7 @@ input[type="reset"] {
     border-radius: 8px;
     padding: 15px 20px;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+    max-height: 180px !important;
 }
 
 .footer-keranjang{
@@ -3196,4 +3197,9 @@ input[type="reset"] {
   text-align: center;
   justify-content: center !important;
   background-color: none ;
+}
+
+.img-cart {
+  max-height: 100px !important;
+  max-width: 100% !important;
 }

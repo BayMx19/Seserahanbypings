@@ -43,7 +43,7 @@
                         <div class="row d-flex justify-content-between align-items-center">
                         <!-- Gambar -->
                         <div class="col-md-2 col-lg-2 col-xl-2">
-                            <img src="{{ asset($cart['image']) }}" class="img-fluid rounded-3" alt="{{ $cart['name'] }}">
+                            <img src="{{ asset($cart['image']) }}" class="img-cart rounded-3" alt="{{ $cart['name'] }}">
                         </div>
 
                         <!-- Nama dan detail produk -->
