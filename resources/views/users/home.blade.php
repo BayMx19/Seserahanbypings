@@ -33,7 +33,7 @@
                                 <div class="main-container">
                                     <h1 class="h1 main-title">Bingkisan Istimewa<br><span class="round-border round-border-3">Seserahan byPings</span></h1>
                                     <div class="wysiwyg main-description">Hadirkan kesan elegan di hari spesialmu dengan seserahan handmade penuh cinta. Cocok untuk lamaran, tunangan, hingga pernikahan.</div>
-                                    <a href="#products"><button type="button" class="btn popup-init">Pesan Sekarang</button></a>
+                                    <a href="#products" style="text-decoration: none !important;" type="button" class="btn button-landing">Pesan Sekarang</a>
                                 </div>
                             </div>
                         </div>
@@ -114,7 +114,7 @@
 
                     <!-- Konten Deskripsi -->
                     <div class="col col_6 col_desktop-12">
-                        <h2 class="h2 emotional-title mb-4">Seserahan Bukan Sekadar Hadiah, Tapi Simbol Kasih & Doa</h2>
+                        <h2 class="h2 emotional-title mb-4 text-bold">Seserahan Bukan Sekadar Hadiah, Tapi Simbol Kasih & Doa</h2>
 
                         <div class="emotional-list">
                             <div class="emotional-item mb-4">
@@ -123,7 +123,7 @@
                                         <img src="{{ asset('assets/img/6.jpg') }}" alt="Makna" width="40">
                                     </div>
                                     <div class="emotional-info">
-                                        <h3 class="h3 emotional-subtitle">Makna dalam Setiap Item</h3>
+                                        <h4 class="h4 text-bold emotional-subtitle">Makna dalam Setiap Item</h4>
                                         <p class="text-muted">Setiap isi seserahan punya simbol dan harapan tersendiri untuk pasangan.</p>
                                     </div>
                                 </div>
@@ -134,7 +134,7 @@
                                         <img src="{{ asset('assets/img/7.jpg') }}" alt="Kenangan" width="40">
                                     </div>
                                     <div class="emotional-info">
-                                        <h3 class="h3 emotional-subtitle">Menjadi Bagian dari Momen Spesial</h3>
+                                        <h4 class="h4  text-bold emotional-subtitle">Menjadi Bagian dari Momen Spesial</h4>
                                         <p class="text-muted">Kami percaya, visual yang indah menciptakan kenangan yang abadi.</p>
                                     </div>
                                 </div>
@@ -145,7 +145,7 @@
                                         <img src="{{ asset('assets/img/8.png') }}" alt="Kustom" width="40">
                                     </div>
                                     <div class="emotional-info">
-                                        <h3 class="h3 emotional-subtitle">Tersedia Paket Kustom & Premium</h3>
+                                        <h4 class="h4 text-bold emotional-subtitle">Tersedia Paket Kustom & Premium</h4>
                                         <p class="text-muted">Dari konsep hingga eksekusi, kami bantu wujudkan seserahan impianmu.</p>
                                     </div>
                                 </div>
@@ -163,14 +163,13 @@
                     <div class="col col_6 col_desktop-12">
                         <div class="description-container">
                             <div class="wysiwyg">
-                                <h2 class="h2 title fw-bold mb-4">Tentang <span class="text-primary text-bold text-blue">Seserahan byPings</span></h2>
+                                <h3 class="h3 title fw-bold mb-4">Tentang <span class="text-primary text-bold text-blue">Seserahan byPings</span></h3>
                                 <p><b class="text-blue">Seserahan byPings</b> hadir untuk membantu kamu menyiapkan seserahan yang elegan, penuh makna, dan sesuai dengan harapan. Kami percaya bahwa setiap seserahan bukan hanya sekadar hadiah, tapi bentuk cinta dan doa terbaik untuk pasangan.</p>
                                 <p>Dengan desain yang bisa dikustom, pilihan paket lengkap, dan pelayanan profesional, kami siap menemani setiap momen spesialmu menjadi lebih berkesan.</p>
-                                <ul>
-                                    <li>Desain bisa request tema, warna, dan isi</li>
-                                    <li>Pengemasan rapi dan estetik</li>
-                                    <li>Layanan cepat & ramah</li>
-                                </ul>
+                                <p><i class="fa-solid fa-check"></i> Desain bisa request tema, warna, dan isi</p>
+                                    <p><i class="fa-solid fa-check"></i> Pengemasan rapi dan estetik</p>
+                                    <p><i class="fa-solid fa-check"></i> Layanan cepat & ramah</p>
+                                
                             </div>
                         </div>
                     </div>
@@ -204,7 +203,7 @@
                     
                     <div class="col col_12 col_desktop-12">
                         <div class="post-description text-center text-mob-left">
-                            <h2 class="h2 title">Produk Kami</span></h2>
+                            <h2 class="h2 title fw-bold" style="margin: 0 !important;">Produk Kami</span></h2>
                             <div class="wysiwyg">
                                 <p>Temukan berbagai pilihan Seserahan, Mahar, dan Box eksklusif untuk hari spesialmu.</p>
                             </div>.
@@ -336,20 +335,20 @@
         <section id="kontak" class="section kontak-section" >
             <div class="container" >
                 <div class="post-description text-center text-mob-left">
-                <h2 class="h2 title">Temukan Kami</h2>
+                <h2 class="h2 title fw-bold" style="margin: 0 !important;">Temukan Kami</h2>
                 <div class="wysiwyg">
                     <p>Kunjungi workshop kami atau hubungi langsung untuk konsultasi dan pemesanan seserahan terbaikmu.</p>
                 </div>
                 </div>
                 <div class="row" style="justify-content: center !important; align-items:center !important;">
 
-                    <div class="col-12 d-flex justify-content-center">
-                        <div class="map-container" style="width: 100%; max-width: 800px; align-item: center !important;">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2346.7442489700748!2d114.27550098043753!3d-8.427404453796097!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zOMKwMjUnMzMuMyJTIDExNMKwMTYnMzguMyJF!5e0!3m2!1sen!2sid!4v1751963900461!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
+                            <div class=" temukan-kami-map">
+                                <div class="col-12" style="width: 100%; align-item: center !important;">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2346.7442489700748!2d114.27550098043753!3d-8.427404453796097!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zOMKwMjUnMzMuMyJTIDExNMKwMTYnMzguMyJF!5e0!3m2!1sen!2sid!4v1751963900461!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                                </iframe>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
             </div>
         </section>
 

@@ -70,9 +70,9 @@
             <div class="card-body">
               <!-- Logo -->
               <div class="app-brand justify-content-center mb-6">
-                <a href="index.html" class="app-brand-link gap-2">
+                <a href="#" class="app-brand-link gap-2">
                   <img src="{{ asset('assets/logo/logo.png')}}" style="width: 50px"/>
-                  <span class="app-brand-text demo text-heading fw-bold">Seserahan byPings</span>
+                  <span class="app-brand-text demo text-heading fw-bold" style="font-size: 20px !important">Seserahan byPings</span>
                 </a>
               </div>
              
@@ -145,7 +145,7 @@
                 </div>
                 <br>
                 <div class="mb-2">
-                <button type="submit" class="btn btn-primary d-grid w-100">Sign up</button>
+                <button type="submit" class="btn btn-primary d-grid w-100">Sign Up</button>
                 </div>
               </form>
               
