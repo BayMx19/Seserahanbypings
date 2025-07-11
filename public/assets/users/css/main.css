@@ -3191,3 +3191,9 @@ input[type="reset"] {
   justify-content: center !important;
 }
 
+.btn-logout{
+
+  text-align: center;
+  justify-content: center !important;
+  background-color: none ;
+}

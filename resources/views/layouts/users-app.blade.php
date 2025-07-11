@@ -21,8 +21,10 @@
 <style>
     .dropdown-user {
         position: relative;
+        padding-top: 2px;
         display: inline-block;
     }
+
 
     .dropdown-menu-user {
         display: none;
@@ -131,48 +133,48 @@
                                             <li class="nav__item"><a href="#products" class="nav__link">Produk</a></li>
                                             
                                         </ul><!-- //nav__list -->
+                                        <div class="dropdown-user">
+                                            <a href="javascript:void(0);" onclick="toggleDropdown()" style="color: #7A5AF8; font-weight: 600; font-size: 18px !important;">
+                                                Selamat Datang, {{ Auth::user()->name }}!
+                                            </a>
+        
+                                            <div id="userDropdown" class="dropdown-menu-user">
+                                                <!-- Link ke profile -->
+                                                <a href="#" class="d-flex align-items-center">
+                                                    <span class="dot"></span>
+                                                    <div style="margin-left: 5px;">
+                                                        <i class="fas fa-user me-2"></i>
+                                                        <strong>Profile Saya</strong><br>
+                                                    </div>
+                                                </a>
+                                                <a href="{{'/keranjang'}}" class="d-flex align-items-center">
+                                                    <span class="dot"></span>
+                                                    <div style="margin-left: 5px;">
+                                                        <i class="fas fa-shopping-cart me-2"></i>
+                                                        <strong>Keranjang</strong><br>
+                                                    </div>
+                                                </a>
+                                                <a href="#" class="d-flex align-items-center">
+                                                    <span class="dot"></span>
+                                                    <div style="margin-left: 5px;">
+                                                        <i class="fas fa-receipt me-2"></i>
+                                                        <strong>Riwayat Transaksi</strong><br>
+                                                    </div>
+                                                </a>
+        
+                                                <div class="dropdown-divider"></div>
+        
+                                                <!-- Logout -->
+                                                <form action="{{ route('logout') }}" method="POST" class="d-flex align-items-center px-3 py-2">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-logout p-2 d-flex align-items-center text-danger">
+                                                        <i class="fas fa-sign-out-alt me-2"></i> Log Out
+                                                    </button>
+                                                </form>
+                                            </div>
+        
+                                        </div>
                                     </nav><!-- //nav -->
-                                </div>
-                                <div class="dropdown-user">
-                                    <a href="javascript:void(0);" onclick="toggleDropdown()" style="color: #7A5AF8; font-weight: 600; font-size: 18px !important;">
-                                        Selamat Datang, {{ Auth::user()->name }}!
-                                    </a>
-
-                                    <div id="userDropdown" class="dropdown-menu-user">
-                                        <!-- Link ke profile -->
-                                        <a href="#" class="d-flex align-items-center">
-                                            <span class="dot"></span>
-                                            <div style="margin-left: 5px;">
-                                                <i class="fas fa-user me-2"></i>
-                                                <strong>Profile Saya</strong><br>
-                                            </div>
-                                        </a>
-                                        <a href="{{'/keranjang'}}" class="d-flex align-items-center">
-                                            <span class="dot"></span>
-                                            <div style="margin-left: 5px;">
-                                                <i class="fas fa-shopping-cart me-2"></i>
-                                                <strong>Keranjang</strong><br>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="d-flex align-items-center">
-                                            <span class="dot"></span>
-                                            <div style="margin-left: 5px;">
-                                                <i class="fas fa-receipt me-2"></i>
-                                                <strong>Riwayat Transaksi</strong><br>
-                                            </div>
-                                        </a>
-
-                                        <div class="dropdown-divider"></div>
-
-                                        <!-- Logout -->
-                                        <form action="{{ route('logout') }}" method="POST" class="d-flex align-items-center px-3 py-2">
-                                            @csrf
-                                            <button type="submit" class="btn btn-link p-0 d-flex align-items-center text-danger">
-                                                <i class="fas fa-sign-out-alt me-2"></i> Log Out
-                                            </button>
-                                        </form>
-                                    </div>
-
                                 </div>
                             </div>
                         </div>
