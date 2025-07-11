@@ -3,19 +3,23 @@
 <head>
     <!-- partial:parts/_head.html -->
     <meta charset="utf-8">
-<title>Seserahan by_pings - Toko Seserahan Elegan & Eksklusif</title>
-<meta name="description" content="Seserahan by_pings menyediakan seserahan eksklusif untuk pernikahan, lamaran, dan tunangan. Desain elegan & harga bersahabat.">
-<meta name="keywords" content="seserahan, Seserahan by_pings, seserahan banyuwangi, seserahan pernikahan, seserahan lamaran, toko seserahan, seserahan murah, seserahan eksklusif">
-<meta property="og:title" content="Seserahan by_pings - Toko Seserahan Eksklusif">
+<title>Seserahan byPings - Toko Seserahan Elegan & Eksklusif</title>
+<meta name="description" content="Seserahan byPings menyediakan seserahan eksklusif untuk pernikahan, lamaran, dan tunangan. Desain elegan & harga bersahabat.">
+<meta name="keywords" content="seserahan, Seserahan byPings, seserahan banyuwangi, seserahan pernikahan, seserahan lamaran, toko seserahan, seserahan murah, seserahan eksklusif">
+<meta property="og:title" content="Seserahan byPings - Toko Seserahan Eksklusif">
 <meta property="og:description" content="Desain seserahan terbaik untuk momen spesial Anda. Cek katalog & pesan sekarang!">
-<meta property="og:image" content="{{ asset('assets/images/og-image.jpg') }}">
+<meta property="og:image" content="{{ asset('/assets/logo/logo.png')}}">
 <meta name="viewport" content="width=device-width, initial-scale=1 , maximum-scale=1, user-scalable=0">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <link rel="stylesheet" href="{{ asset('assets/users/css/libs.min.css')}}"/>
 <link rel="stylesheet" href="{{ asset('assets/users/css/main.css')}}"/>
-<link href="{{ asset('assets/users/images/favicon.ico')}}" rel="shortcut icon" type="image/x-icon" />
+<link href="{{ asset('/assets/logo/logo.png')}}" rel="shortcut icon" type="image/x-icon" />
 <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- partial -->
+<style>
+    .text-blue {
+        color: #696cff !important
+    }
+</style>
 </head>
 <body>
 <div id="wrapper" class="wrapper">
@@ -26,9 +30,9 @@
                     <div class="site-logo">
                         <a href="index.html" class="site-logo__link">
                             <picture>
-                                <source media="(max-width: 767px)" srcset="images/logo-mob.png">
-                                <source srcset="images/logo.png">
-                                <img class="site-logo__img" src="images/logo.png" alt="logo"/>
+                                <source media="(max-width: 767px)" srcset="{{ asset('assets/logo/logo.png')}}">
+                                    <img class="site-logo__img" src="{{ asset('/assets/logo/logo.png')}}" alt="logo" style="width: 50px!important;"/>
+                                    <source srcset="{{ asset('assets/logo/logo.png')}}" style="width: 50px !important;">
                             </picture>
                         </a>
                     </div>
@@ -73,7 +77,7 @@
                                     <div class="photo-item main-photo-item main-photo-item-1">
                                         <div class="photo-img">
                                             <div class="photo-img__block">
-                                                <img src="images/content/main-page-1.jpg" alt="main-page-1">
+                                                <img src="{{ asset('assets/img/1.jpg')}}" alt="main-page-1">
                                             </div>
                                         </div>
                                         <div class="photo-info wysiwyg"></div>
@@ -81,10 +85,10 @@
                                     <div class="photo-item main-photo-item main-photo-item-2">
                                         <div class="photo-img">
                                             <div class="photo-img__block">
-                                                <img src="images/content/main-page-2.jpg" alt="main-page-2">
+                                                <img src="{{ asset('assets/img/2.jpg')}}" alt="main-page-2">
                                             </div>
                                         </div>
-                                        <div class="photo-info wysiwyg"><p>Seserahan by_pings</p></div>
+                                        <div class="photo-info wysiwyg"><p>Seserahan byPings</p></div>
 
                                     </div>
 
@@ -92,7 +96,7 @@
                             </div>
                             <div class="col col_5 col_desktop-12 order-desktop-1">
                                 <div class="main-container">
-                                    <h1 class="h1 main-title">Bingkisan Istimewa<br><span class="round-border round-border-3">Seserahan by_pings</span></h1>
+                                    <h1 class="h1 main-title">Bingkisan Istimewa<br><span class="round-border round-border-3">Seserahan byPings</span></h1>
                                     <div class="wysiwyg main-description">Hadirkan kesan elegan di hari spesialmu dengan seserahan handmade penuh cinta. Cocok untuk lamaran, tunangan, hingga pernikahan.</div>
                                     <a href="{{'login'}}"><button type="button" class="btn popup-init">Pesan Sekarang</button></a>
                                 </div>
@@ -104,7 +108,7 @@
                     <div class="container">
                         
                             <div class="col text-center" style="margin-bottom: 50px;">
-                                <h2 class="h2 title fw-bold" style="margin: 0 !important;">Kenapa Memilih <span class="text-primary text-bold">Seserahan by_pings?</span></h2>
+                                <h2 class="h2 title fw-bold" style="margin: 0 !important;">Kenapa Memilih <span class="text-primary text-bold text-blue">Seserahan byPings?</span></h2>
                                 <p class="text-muted mb-5">Kami hadir untuk menjadikan momen spesialmu lebih berkesan.</p>
                             </div>
                         
@@ -152,21 +156,21 @@
                                 <div class="photo-item emotional-photo__item emotional-photo__item-1">
                                     <div class="photo-img">
                                         <div class="photo-img__block">
-                                            <img src="{{ asset('assets/users/images/content/main-page-3.jpg') }}" alt="moment-1">
+                                            <img src="{{ asset('assets/img/3.jpg')}}" alt="moment-1">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="photo-item emotional-photo__item emotional-photo__item-2">
                                     <div class="photo-img">
                                         <div class="photo-img__block">
-                                            <img src="{{ asset('assets/users/images/content/main-page-4.jpg') }}" alt="moment-2">
+                                            <img src="{{ asset('assets/img/4.jpg')}}" alt="moment-2">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="photo-item emotional-photo__item emotional-photo__item-3">
                                     <div class="photo-img">
                                         <div class="photo-img__block">
-                                            <img src="{{ asset('assets/users/images/content/main-page-5.jpg') }}" alt="moment-3">
+                                            <img src="{{ asset('assets/img/5.jpg')}}" alt="moment-3">
                                         </div>
                                     </div>
                                 </div>
@@ -181,7 +185,7 @@
                                 <div class="emotional-item mb-4">
                                     <div class="emotional-block d-flex">
                                         <div class="emotional-icon me-3">
-                                            <img src="{{ asset('assets/users/images/icons/heart.svg') }}" alt="Makna" width="40">
+                                            <img src="{{ asset('assets/img/6.jpg') }}" alt="Makna" width="40">
                                         </div>
                                         <div class="emotional-info">
                                             <h3 class="h3 emotional-subtitle">Makna dalam Setiap Item</h3>
@@ -192,7 +196,7 @@
                                 <div class="emotional-item mb-4">
                                     <div class="emotional-block d-flex">
                                         <div class="emotional-icon me-3">
-                                            <img src="{{ asset('assets/users/images/icons/camera.svg') }}" alt="Kenangan" width="40">
+                                            <img src="{{ asset('assets/img/7.jpg') }}" alt="Kenangan" width="40">
                                         </div>
                                         <div class="emotional-info">
                                             <h3 class="h3 emotional-subtitle">Menjadi Bagian dari Momen Spesial</h3>
@@ -203,7 +207,7 @@
                                 <div class="emotional-item">
                                     <div class="emotional-block d-flex">
                                         <div class="emotional-icon me-3">
-                                            <img src="{{ asset('assets/users/images/icons/gift.svg') }}" alt="Kustom" width="40">
+                                            <img src="{{ asset('assets/img/8.png') }}" alt="Kustom" width="40">
                                         </div>
                                         <div class="emotional-info">
                                             <h3 class="h3 emotional-subtitle">Tersedia Paket Kustom & Premium</h3>
@@ -224,8 +228,8 @@
                             <div class="col col_6 col_desktop-12">
                                 <div class="description-container">
                                     <div class="wysiwyg">
-                                        <h2 class="h2 title fw-bold mb-4">Tentang <span class="text-primary">Seserahan by_pings</span></h2>
-                                        <p>Seserahan by_pings hadir untuk membantu kamu menyiapkan seserahan yang elegan, penuh makna, dan sesuai dengan harapan. Kami percaya bahwa setiap seserahan bukan hanya sekadar hadiah, tapi bentuk cinta dan doa terbaik untuk pasangan.</p>
+                                        <h2 class="h2 title fw-bold mb-4">Tentang <span class="text-primary text-bold text-blue">Seserahan byPings</span></h2>
+                                        <p><b class="text-blue">Seserahan byPings</b> hadir untuk membantu kamu menyiapkan seserahan yang elegan, penuh makna, dan sesuai dengan harapan. Kami percaya bahwa setiap seserahan bukan hanya sekadar hadiah, tapi bentuk cinta dan doa terbaik untuk pasangan.</p>
                                         <p>Dengan desain yang bisa dikustom, pilihan paket lengkap, dan pelayanan profesional, kami siap menemani setiap momen spesialmu menjadi lebih berkesan.</p>
                                         <ul>
                                             <li>Desain bisa request tema, warna, dan isi</li>
@@ -245,7 +249,7 @@
                                         <div class="photo-item description-photo-item-1">
                                             <div class="photo-img">
                                                 <div class="photo-img__block rounded shadow">
-                                                    <img src="{{ asset('assets/users/images/content/photo-seserahan-1.jpg') }}" alt="Seserahan by Pings" class="img-fluid rounded">
+                                                    <img src="{{ asset('assets/logo/logo.png') }}" alt="Seserahan byPings" class="img-fluid rounded">
                                                 </div>
                                             </div>
                                             <div class="photo-info wysiwyg">
@@ -404,7 +408,7 @@
                                     
                                     </div>
                                     <h3 class="h3 title" style="margin-bottom: 20px;">Daftar Sekarang  untuk mendapatkan penawaran spesial dari kami!</h3>
-                                    <button type="button" class="btn btn_primary">Daftar Sekarang</button>
+                                    <a href="{{'register'}}"><button type="button" class="btn btn_primary">Daftar Sekarang</button></a>
                                 </div>
                                 
                             </div>
@@ -413,40 +417,24 @@
                     </div>
                 </section>
                 <!-- Section Kontak -->
-                <section id="kontak" class="section kontak-section">
-                <div class="container">
-                    <div class="row">
-                    <!-- Kolom Kiri: Google Maps -->
-                    <div class="col-md-6 kontak-map">
-                        <div class="map-container">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2346.7442489700748!2d114.27550098043753!3d-8.427404453796097!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zOMKwMjUnMzMuMyJTIDExNMKwMTYnMzguMyJF!5e0!3m2!1sen!2sid!4v1751963900461!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <section id="kontak" class="section kontak-section" >
+                    <div class="container" >
+                        <div class="post-description text-center text-mob-left">
+                        <h2 class="h2 title">Temukan Kami</h2>
+                        <div class="wysiwyg">
+                            <p>Kunjungi workshop kami atau hubungi langsung untuk konsultasi dan pemesanan seserahan terbaikmu.</p>
                         </div>
-                    </div>
+                        </div>
+                        <div class="row" style="justify-content: center !important; align-items:center !important;">
 
-                    <!-- Kolom Kanan: Formulir -->
-                    <div class="col-md-6 kontak-form">
-                        <div class="form-box">
-                        <h4 class="form-title">Hubungi Kami</h4>
-                        <form method="POST" action="#">
-                            @csrf
-                            <div class="form-group">
-                            <label for="name">Nama</label>
-                            <input type="text" id="name" name="name" required />
+                            <div class="col-12 d-flex justify-content-center">
+                                <div class="map-container" style="width: 100%; max-width: 800px; align-item: center !important;">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2346.7442489700748!2d114.27550098043753!3d-8.427404453796097!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zOMKwMjUnMzMuMyJTIDExNMKwMTYnMzguMyJF!5e0!3m2!1sen!2sid!4v1751963900461!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                                </iframe>
+                                </div>
                             </div>
-                            <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required />
-                            </div>
-                            <div class="form-group">
-                            <label for="message">Pesan</label>
-                            <textarea id="message" name="message" rows="5" required></textarea>
-                            </div>
-                            <button type="submit" class="btn-kirim">Kirim Pesan</button>
-                        </form>
                         </div>
                     </div>
-                    </div>
-                </div>
                 </section>
 
 
@@ -464,13 +452,13 @@
                                 <div class="footer-logo text-desktop-center">
                                     <a href="index.html" class="site-logo site-logo__link">
                                         <picture>
-                                            <source media="(max-width: 767px)" srcset="images/logo.png">
-                                            <source srcset="images/logo.png">
-                                            <img class="site-logo__img" src="images/logo.png" alt="logo"/>
+                                            <source media="(max-width: 767px)" srcset="{{ asset('assets/logo/logo.png')}}">
+                                                <img class="site-logo__img" src="{{ asset('/assets/logo/logo.png')}}" alt="logo" style="width: 50px!important;"/>
+                                                <source srcset="{{ asset('assets/logo/logo.png')}}" style="width: 50px !important;">
                                         </picture>
                                     </a>
                                     <div class="wysiwyg">
-                                        <p>Pellentesque tempor felis interdum ultrices tincidunt enim integer diam nisi viverra </p>
+                                        <p>Seserahan elegan, penuh makna, dan bisa custom. Temani momen spesialmu bersama <b class="text-blue text-bold">Seserahan byPings</b>.</p>
                                     </div>
                                 </div>
                             </div>
@@ -482,17 +470,14 @@
                     <div class="col col_6 col_desktop-6 col_mob-12">
                         <ul class="contact-list icon-list">
                             <li class="contact-item icon-text icon-position-right address">
-                                City. Street Name, 88
+                                Jl. Sraten - Tapanrejo, Kabupaten Banyuwangi, Jawa Timur 68472
                                 <svg class="icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <g opacity="0.8"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 19.5C16.1421 19.5 19.5 16.1421 19.5 12C19.5 7.85786 16.1421 4.5 12 4.5C7.85786 4.5 4.5 7.85786 4.5 12C4.5 16.1421 7.85786 19.5 12 19.5ZM12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z"/> <path d="M18 12C18 15.3137 15.3137 18 12 18C8.68629 18 6 15.3137 6 12C6 8.68629 8.68629 6 12 6C15.3137 6 18 8.68629 18 12Z"/> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 0.75C12.4142 0.75 12.75 1.08579 12.75 1.5V11.25H22.5C22.9142 11.25 23.25 11.5858 23.25 12C23.25 12.4142 22.9142 12.75 22.5 12.75H12.75V22.5C12.75 22.9142 12.4142 23.25 12 23.25C11.5858 23.25 11.25 22.9142 11.25 22.5V12.75H1.5C1.08579 12.75 0.75 12.4142 0.75 12C0.75 11.5858 1.08579 11.25 1.5 11.25H11.25V1.5C11.25 1.08579 11.5858 0.75 12 0.75Z"/> </g> </svg>
                             </li>
                             <li class="contact-item icon-text icon-position-right">
-                                <a href="tel:9999912345678" class="contact-link">+999 99 1234 5678</a>
+                                <a href="https://wa.me/+6281913457542" class="contact-link">081913457542</a>
                                 <svg class="icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <g opacity="0.8"> <path d="M3 8.25C3 6.17893 4.61177 4.5 6.6 4.5H17.4C19.3882 4.5 21 6.17893 21 8.25V13.875C21 15.9461 19.3882 17.625 17.4 17.625H8.4L3 19.5V8.25Z"/> <path d="M6 9.75C6 9.33579 6.33579 9 6.75 9H17.25C17.6642 9 18 9.33579 18 9.75C18 10.1642 17.6642 10.5 17.25 10.5H6.75C6.33579 10.5 6 10.1642 6 9.75Z" fill="white"/> <path d="M6 12.75C6 12.3358 6.33579 12 6.75 12H14.25C14.6642 12 15 12.3358 15 12.75C15 13.1642 14.6642 13.5 14.25 13.5H6.75C6.33579 13.5 6 13.1642 6 12.75Z" fill="white"/> </g> </svg>
                             </li>
-                            <li class="contact-item icon-text icon-position-right">
-                                <a href="mailto:#" class="contact-link">info@example.com</a>
-                                <svg class="icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <g opacity="0.8"> <path d="M3 6.42857C3 5.36345 3.80589 4.5 4.8 4.5H19.2C20.1941 4.5 21 5.36345 21 6.42857V16.0714C21 17.1365 20.1941 18 19.2 18H4.8C3.80589 18 3 17.1365 3 16.0714V6.42857Z" /> <path fill-rule="evenodd" clip-rule="evenodd" d="M5.41205 7.9309C5.70746 7.48634 6.30614 7.36621 6.74925 7.66258L12 11.1746L17.2507 7.66258C17.6939 7.36621 18.2925 7.48634 18.5879 7.9309C18.8834 8.37547 18.7636 8.97612 18.3205 9.2725L12 13.5L5.67949 9.2725C5.23638 8.97612 5.11664 8.37547 5.41205 7.9309Z" fill="white"/> </g> </svg>
-                            </li>
+                            
                         </ul>
                     </div>
                 </div>
@@ -501,7 +486,7 @@
     </div>
     <div class="footer-bottom">
         <div class="container">
-            <span class="copyright text-center">Copyright ©2025 <a href="http://diveratech.site/">Seserahan by_pings</a>, All rights reserved.</span>
+            <span class="copyright text-center">Copyright ©2025 <a href="http://diveratech.site/">Seserahan byPings</a>, All rights reserved.</span>
         </div>
     </div>
     </footer>

@@ -11,10 +11,10 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Register | Seserahan by_pings - Toko Seserahan Elegan & Eksklusif</title>
-    <meta name="description" content="Seserahan by_pings menyediakan seserahan eksklusif untuk pernikahan, lamaran, dan tunangan. Desain elegan & harga bersahabat.">
-    <meta name="keywords" content="seserahan, Seserahan by_pings, seserahan banyuwangi, seserahan pernikahan, seserahan lamaran, toko seserahan, seserahan murah, seserahan eksklusif">
-    <meta property="og:title" content="Seserahan by_pings - Toko Seserahan Eksklusif">
+    <title>Register | Seserahan byPings - Toko Seserahan Elegan & Eksklusif</title>
+    <meta name="description" content="Seserahan byPings menyediakan seserahan eksklusif untuk pernikahan, lamaran, dan tunangan. Desain elegan & harga bersahabat.">
+    <meta name="keywords" content="seserahan, Seserahan byPings, seserahan banyuwangi, seserahan pernikahan, seserahan lamaran, toko seserahan, seserahan murah, seserahan eksklusif">
+    <meta property="og:title" content="Seserahan byPings - Toko Seserahan Eksklusif">
     <meta property="og:description" content="Desain seserahan terbaik untuk momen spesial Anda. Cek katalog & pesan sekarang!">
     <meta property="og:image" content="{{ asset('assets/images/og-image.jpg') }}">
 
@@ -117,7 +117,7 @@
                       </svg>
                     </span>
                   </span>
-                  <span class="app-brand-text demo text-heading fw-bold">Seserahan by_pings</span>
+                  <span class="app-brand-text demo text-heading fw-bold">Seserahan byPings</span>
                 </a>
               </div>
              

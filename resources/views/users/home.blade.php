@@ -12,7 +12,7 @@
                                     <div class="photo-item main-photo-item main-photo-item-1">
                                         <div class="photo-img">
                                             <div class="photo-img__block">
-                                                <img src="images/content/main-page-1.jpg" alt="main-page-1">
+                                                <img src="{{ asset('assets/img/1.jpg')}}" alt="main-page-1">
                                             </div>
                                         </div>
                                         <div class="photo-info wysiwyg"></div>
@@ -20,10 +20,10 @@
                                     <div class="photo-item main-photo-item main-photo-item-2">
                                         <div class="photo-img">
                                             <div class="photo-img__block">
-                                                <img src="images/content/main-page-2.jpg" alt="main-page-2">
+                                                <img src="{{ asset('assets/img/2.jpg')}}" alt="main-page-2">
                                             </div>
                                         </div>
-                                        <div class="photo-info wysiwyg"><p>Seserahan by_pings</p></div>
+                                        <div class="photo-info wysiwyg"><p>Seserahan byPings</p></div>
 
                                     </div>
 
@@ -31,9 +31,9 @@
                             </div>
                             <div class="col col_5 col_desktop-12 order-desktop-1">
                                 <div class="main-container">
-                                    <h1 class="h1 main-title">Bingkisan Istimewa<br><span class="round-border round-border-3">Seserahan by_pings</span></h1>
+                                    <h1 class="h1 main-title">Bingkisan Istimewa<br><span class="round-border round-border-3">Seserahan byPings</span></h1>
                                     <div class="wysiwyg main-description">Hadirkan kesan elegan di hari spesialmu dengan seserahan handmade penuh cinta. Cocok untuk lamaran, tunangan, hingga pernikahan.</div>
-                                    <a href="{{'login'}}"><button type="button" class="btn popup-init">Pesan Sekarang</button></a>
+                                    <a href="#products"><button type="button" class="btn popup-init">Pesan Sekarang</button></a>
                                 </div>
                             </div>
                         </div>
@@ -43,7 +43,7 @@
                     <div class="container">
                         
                             <div class="col text-center" style="margin-bottom: 50px;">
-                                <h2 class="h2 title fw-bold" style="margin: 0 !important;">Kenapa Memilih <span class="text-primary text-bold">Seserahan by_pings?</span></h2>
+                                <h2 class="h2 title fw-bold" style="margin: 0 !important;">Kenapa Memilih <span class="text-primary text-bold text-blue">Seserahan byPings?</span></h2>
                                 <p class="text-muted mb-5">Kami hadir untuk menjadikan momen spesialmu lebih berkesan.</p>
                             </div>
                         
@@ -91,21 +91,21 @@
                             <div class="photo-item emotional-photo__item emotional-photo__item-1">
                                 <div class="photo-img">
                                     <div class="photo-img__block">
-                                        <img src="{{ asset('assets/users/images/content/main-page-3.jpg') }}" alt="moment-1">
+                                        <img src="{{ asset('assets/img/3.jpg')}}" alt="moment-1">
                                     </div>
                                 </div>
                             </div>
                             <div class="photo-item emotional-photo__item emotional-photo__item-2">
                                 <div class="photo-img">
                                     <div class="photo-img__block">
-                                        <img src="{{ asset('assets/users/images/content/main-page-4.jpg') }}" alt="moment-2">
+                                        <img src="{{ asset('assets/img/4.jpg')}}" alt="moment-2">
                                     </div>
                                 </div>
                             </div>
                             <div class="photo-item emotional-photo__item emotional-photo__item-3">
                                 <div class="photo-img">
                                     <div class="photo-img__block">
-                                        <img src="{{ asset('assets/users/images/content/main-page-5.jpg') }}" alt="moment-3">
+                                        <img src="{{ asset('assets/img/5.jpg')}}" alt="moment-3">
                                     </div>
                                 </div>
                             </div>
@@ -120,7 +120,7 @@
                             <div class="emotional-item mb-4">
                                 <div class="emotional-block d-flex">
                                     <div class="emotional-icon me-3">
-                                        <img src="{{ asset('assets/users/images/icons/heart.svg') }}" alt="Makna" width="40">
+                                        <img src="{{ asset('assets/img/6.jpg') }}" alt="Makna" width="40">
                                     </div>
                                     <div class="emotional-info">
                                         <h3 class="h3 emotional-subtitle">Makna dalam Setiap Item</h3>
@@ -131,7 +131,7 @@
                             <div class="emotional-item mb-4">
                                 <div class="emotional-block d-flex">
                                     <div class="emotional-icon me-3">
-                                        <img src="{{ asset('assets/users/images/icons/camera.svg') }}" alt="Kenangan" width="40">
+                                        <img src="{{ asset('assets/img/7.jpg') }}" alt="Kenangan" width="40">
                                     </div>
                                     <div class="emotional-info">
                                         <h3 class="h3 emotional-subtitle">Menjadi Bagian dari Momen Spesial</h3>
@@ -142,7 +142,7 @@
                             <div class="emotional-item">
                                 <div class="emotional-block d-flex">
                                     <div class="emotional-icon me-3">
-                                        <img src="{{ asset('assets/users/images/icons/gift.svg') }}" alt="Kustom" width="40">
+                                        <img src="{{ asset('assets/img/8.png') }}" alt="Kustom" width="40">
                                     </div>
                                     <div class="emotional-info">
                                         <h3 class="h3 emotional-subtitle">Tersedia Paket Kustom & Premium</h3>
@@ -163,8 +163,8 @@
                     <div class="col col_6 col_desktop-12">
                         <div class="description-container">
                             <div class="wysiwyg">
-                                <h2 class="h2 title fw-bold mb-4">Tentang <span class="text-primary">Seserahan by_pings</span></h2>
-                                <p>Seserahan by_pings hadir untuk membantu kamu menyiapkan seserahan yang elegan, penuh makna, dan sesuai dengan harapan. Kami percaya bahwa setiap seserahan bukan hanya sekadar hadiah, tapi bentuk cinta dan doa terbaik untuk pasangan.</p>
+                                <h2 class="h2 title fw-bold mb-4">Tentang <span class="text-primary text-bold text-blue">Seserahan byPings</span></h2>
+                                <p><b class="text-blue">Seserahan byPings</b> hadir untuk membantu kamu menyiapkan seserahan yang elegan, penuh makna, dan sesuai dengan harapan. Kami percaya bahwa setiap seserahan bukan hanya sekadar hadiah, tapi bentuk cinta dan doa terbaik untuk pasangan.</p>
                                 <p>Dengan desain yang bisa dikustom, pilihan paket lengkap, dan pelayanan profesional, kami siap menemani setiap momen spesialmu menjadi lebih berkesan.</p>
                                 <ul>
                                     <li>Desain bisa request tema, warna, dan isi</li>
@@ -184,7 +184,7 @@
                                 <div class="photo-item description-photo-item-1">
                                     <div class="photo-img">
                                         <div class="photo-img__block rounded shadow">
-                                            <img src="{{ asset('assets/users/images/content/photo-seserahan-1.jpg') }}" alt="Seserahan by Pings" class="img-fluid rounded">
+                                            <img src="{{ asset('assets/logo/logo.png') }}" alt="Seserahan byPings" class="img-fluid rounded">
                                         </div>
                                     </div>
                                     <div class="photo-info wysiwyg">
@@ -200,9 +200,9 @@
 
         <section id="products" class="section section-main__post">
             <div class="container">
-                <div class="row">
-                    <div class="col col_3 col_desktop-12"></div>
-                    <div class="col col_6 col_desktop-12">
+                <div class="row" >
+                    
+                    <div class="col col_12 col_desktop-12">
                         <div class="post-description text-center text-mob-left">
                             <h2 class="h2 title">Produk Kami</span></h2>
                             <div class="wysiwyg">
@@ -210,7 +210,7 @@
                             </div>.
                         </div>
                     </div>
-                    <div class="col col_3 col_desktop-12"></div>
+                    
                 </div>
                 <!-- Tab Button Kategori -->
                 <div class="d-flex flex-wrap justify-content-center gap-3 mb-4">
@@ -332,61 +332,28 @@
 
             </div>
         </section>
-        <section class="section section_secondary-bg">
-            <div class="container">
-                <div class="row">
-                    <div class="col col_2 col_desktop-12"></div>
-                    <div class="col col_8 col_desktop-12">
-                        <div class="subscript-title text-center">
-                            <div class="subscript-icon">
-                                
-                               
-                            </div>
-                            <h3 class="h3 title" style="margin-bottom: 20px;">Daftar Sekarang  untuk mendapatkan penawaran spesial dari kami!</h3>
-                            <button type="button" class="btn btn_primary">Daftar Sekarang</button>
-                        </div>
-                        
-                    </div>
-                    <div class="col col_2 col_desktop-12"></div>
+        
+        <section id="kontak" class="section kontak-section" >
+            <div class="container" >
+                <div class="post-description text-center text-mob-left">
+                <h2 class="h2 title">Temukan Kami</h2>
+                <div class="wysiwyg">
+                    <p>Kunjungi workshop kami atau hubungi langsung untuk konsultasi dan pemesanan seserahan terbaikmu.</p>
                 </div>
-            </div>
-        </section>
-        <!-- Section Kontak -->
-        <section id="kontak" class="section kontak-section">
-        <div class="container">
-            <div class="row">
-            <!-- Kolom Kiri: Google Maps -->
-            <div class="col-md-6 kontak-map">
-                <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2346.7442489700748!2d114.27550098043753!3d-8.427404453796097!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zOMKwMjUnMzMuMyJTIDExNMKwMTYnMzguMyJF!5e0!3m2!1sen!2sid!4v1751963900461!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
-            </div>
+                <div class="row" style="justify-content: center !important; align-items:center !important;">
 
-            <!-- Kolom Kanan: Formulir -->
-            <div class="col-md-6 kontak-form">
-                <div class="form-box">
-                <h4 class="form-title">Hubungi Kami</h4>
-                <form method="POST" action="#">
-                    @csrf
-                    <div class="form-group">
-                    <label for="name">Nama</label>
-                    <input type="text" id="name" name="name" required />
+                    <div class="col-12 d-flex justify-content-center">
+                        <div class="map-container" style="width: 100%; max-width: 800px; align-item: center !important;">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2346.7442489700748!2d114.27550098043753!3d-8.427404453796097!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zOMKwMjUnMzMuMyJTIDExNMKwMTYnMzguMyJF!5e0!3m2!1sen!2sid!4v1751963900461!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                        </div>
                     </div>
-                    <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required />
-                    </div>
-                    <div class="form-group">
-                    <label for="message">Pesan</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="btn-kirim">Kirim Pesan</button>
-                </form>
                 </div>
             </div>
-            </div>
-        </div>
         </section>
+
+
 
 
 @endsection
