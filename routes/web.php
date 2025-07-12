@@ -22,6 +22,7 @@ Route::middleware(['auth', RoleMiddleware::class . ':Admin'])->group(function ()
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::resource('/admin/users', AdminUserController::class);
     Route::resource('/admin/produk', AdminProdukController::class);
+    Route::get('/admin/data-produk', [AdminProdukController:: class, 'getListProduk']);
     Route::resource('/admin/transaksi', AdminTransaksiController::class);
     Route::resource('/admin/review', AdminReviewController::class);
     Route::resource('/admin/profile', AdminProfileController::class);

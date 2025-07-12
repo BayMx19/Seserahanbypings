@@ -21,6 +21,8 @@
             <th>Nama Produk</th>
             <th>Kategori</th>
             <th>Stok</th>
+            <th>Harga Jual</th>
+            <th>Harga Sewa</th>
             <th>Status</th>
             <th>Actions</th>
         </tr>
@@ -35,6 +37,49 @@
 
 @section('scripts')
 <script>
+  function formatRupiah(angka) {
+    let number_string = angka.replace(/[^,\d]/g, '').toString(),
+    split = number_string.split(','),
+    sisa = split[0].length % 3,
+    rupiah = split[0].substr(0, sisa),
+    ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+    if (ribuan) {
+      let separator = sisa ? '.' : '';
+      rupiah += separator + ribuan.join('.');
+    }
+
+    rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
+    return 'Rp ' + rupiah;
+  }
+
+  function deleteProduk(event, id) {
+    event.preventDefault();
+
+    if (!confirm("Yakin ingin menghapus produk ini?")) return;
+
+    $.ajax({
+        url: `/admin/produk/${id}`, // Sesuaikan dengan route
+        method: 'POST',
+        data: {
+            _method: 'DELETE',
+            _token: '{{ csrf_token() }}'
+        },
+        success: function(res) {
+            alert('Produk berhasil dihapus.');
+            $(`#produk-row-${id}`).fadeOut(300, function () {
+                $(this).remove();
+            });
+        },
+        error: function(err) {
+            alert('Terjadi kesalahan saat menghapus produk.');
+            console.error(err);
+        }
+    });
+
+    return false;
+  }
+
   function loadProdukData() {
     $.ajax({
       url: "/admin/data-produk",
@@ -47,21 +92,23 @@
         $('#dataTable tbody').empty();
 
         response.forEach(function(data, index) {
-            let statusIcon = (data.status_produk === 'ACTIVE') 
-              ? '<span class="badge bg-label-success">ACTIVE</span>' 
-              : '<span class="badge bg-label-danger">INACTIVE</span>';
+            let statusIcon = data.status_produk === 'ACTIVE' 
+            ? '<span class="badge bg-label-success">Active</span>' 
+            : '<span class="badge bg-label-danger">Inactive</span>';
 
             $('#dataTable tbody').append(`
-                <tr>
+                <tr id="produk-row-${data.id}">
                     <td>${index + 1}</td>
                     <td>${data.nama_produk}</td>
                     <td>${data.kategori}</td>
                     <td>${data.stok}</td>
+                    <td>${formatRupiah(data.harga_jual.toString())}</td>
+                    <td>${formatRupiah(data.harga_sewa.toString())}</td>
                     <td>${statusIcon}</td>
                     <td>
-                      <a href="/produk/${data.id}/edit" class="btn btn-sm btn-primary">Edit</a>
+                      <a href="/admin/produk/${data.id}/edit" class="btn btn-sm btn-primary"><i class="bx bx-edit"></i></a>
                       <form onsubmit="return deleteProduk(event, ${data.id})" style="display:inline;">
-                          <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                          <button type="submit" class="btn btn-sm btn-danger"><i class="bx bx-trash"></i></button>
                       </form>
                     </td>
                 </tr>
@@ -72,11 +119,13 @@
             autoWidth: false,
             columns: [
               { width: "5%" },
-              { width: "25%" },
-              { width: "25%" },
+              { width: "15%" },
+              { width: "15%" },
               { width: "10%" },
               { width: "15%" },
-              { width: "20%" }
+              { width: "15%" },
+              { width: "10%" },
+              { width: "15%" }
             ]
         });
       },
