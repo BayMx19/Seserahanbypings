@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\TransaksiController as AdminTransaksiController;
 use App\Http\Controllers\Admin\ReviewController as AdminReviewController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\User\HomeController as UserHomeController;
-
+use App\Http\Controllers\User\KeranjangController as UserKeranjangController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RoleMiddleware;
@@ -30,6 +30,6 @@ Route::middleware(['auth', RoleMiddleware::class . ':Admin'])->group(function ()
 
 Route::middleware(['auth', RoleMiddleware::class . ':User'])->group(function () {
     Route::get('/home', [UserHomeController::class, 'index'])->name('home');
-
+    Route::get('/keranjang', [UserKeranjangController::class, 'index']);
 });
 

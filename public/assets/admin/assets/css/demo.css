@@ -14,7 +14,7 @@
 }
 
 .app-brand-text.demo {
-  font-size: 1.75rem;
+  font-size: 1rem;
   letter-spacing: -0.5px;
 }
 
@@ -176,3 +176,4 @@ th.sorting-fake::after {
     color: #919191; /* Abu-abu lebih terang saat hover */
     border: 2px solid #919191;
 }
+
