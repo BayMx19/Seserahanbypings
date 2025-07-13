@@ -53,12 +53,12 @@
         // Form validation
         formValidation();
         // Styling a Form
-        jcf.setOptions('Select', {
-            wrapNative: false,
-            useCustomScroll: false,
-            fakeDropInBody: false
-        });
-        jcf.replaceAll();
+        // jcf.setOptions('Select', {
+        //     wrapNative: false,
+        //     useCustomScroll: false,
+        //     fakeDropInBody: false
+        // });
+        // jcf.replaceAll();
         // Shape mask
         $(".phone_mask").mask("+1(999) 999-99-99");
     }
