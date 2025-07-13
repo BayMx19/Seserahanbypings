@@ -12,124 +12,82 @@
                 @csrf
                 @method('PUT')
                 <div class="mb-6">
-                    <label class="form-label" for="name">Nama Produk</label>
+                    <label class="form-label">Nama Produk</label>
                     <div class="input-group input-group-merge">
-                    <span class="input-group-text"><i class="icon-base bx bx-package"></i></span>
-                    <input
-                        type="text"
-                        class="form-control"
-                        id="nama_produk"
-                        name="nama_produk"
-                        placeholder="Masukkan Nama Produk"
-                        value="{{ old('nama_produk', $produk->nama_produk) }}"
-                        />
+                        <span class="input-group-text"><i class="icon-base bx bx-package"></i></span>
+                        <input type="text" class="form-control" name="nama_produk" value="{{ $produk->nama_produk }}" />
                     </div>
                 </div>
+
                 <div class="mb-6">
-                    <label class="form-label" for="name">Harga Jual Produk</label>
+                    <label class="form-label">Stok Produk</label>
                     <div class="input-group input-group-merge">
-                    <span class="input-group-text"><i class="icon-base bx bx-money"></i></span>
-                    <input
-                        type="text"
-                        class="form-control"
-                        id="harga_jual"
-                        placeholder="Masukkan Harga Jual Produk"
-                        value="{{ old('harga_jual', $produk->harga_jual) }}"
-                        />
-                     <input type="hidden" id="harga_jual_hidden" name="harga_jual">
+                        <span class="input-group-text"><i class="icon-base bx-bar-chart"></i></span>
+                        <input type="number" class="form-control" name="stok" value="{{ $produk->stok }}" />
                     </div>
                 </div>
+
                 <div class="mb-6">
-                    <label class="form-label" for="name">Harga Sewa Produk</label>
+                    <label class="form-label">Upload Gambar Produk</label>
                     <div class="input-group input-group-merge">
-                    <span class="input-group-text"><i class="icon-base bx bx-money"></i></span>
-                    <input
-                        type="text"
-                        class="form-control"
-                        id="harga_sewa"
-                        name="harga_sewa"
-                        placeholder="Masukkan Harga Sewa Produk"
-                        value="{{ old('harga_sewa', $produk->harga_sewa) }}"
-                        />
-                    <input type="hidden" id="harga_sewa_hidden" name="harga_sewa">
+                        <span class="input-group-text"><i class="icon-base bx bx-image"></i></span>
+                        <input type="file" class="form-control" name="gambar" accept="image/*" />
                     </div>
-                </div>
-                <div class="mb-6">
-                    <label class="form-label" for="role">Kategori Produk</label>
-                    <div class="input-group input-group-merge">
-                    <span  class="input-group-text"><i class="icon-base bx bx-purchase-tag"></i></span>
-                    <select
-                        class="form-select"
-                        id="kategori"
-                        name="kategori"
-                        >
-                        <option disabled {{ $produk->kategori ? '' : 'selected' }}>Pilih Kategori</option>
-                        <option value="Seserahan" {{ $produk->kategori == 'Seserahan' ? 'selected' : '' }}>Seserahan</option>
-                        <option value="Mahar" {{ $produk->kategori == 'Mahar' ? 'selected' : '' }}>Mahar</option>
-                        <option value="Box" {{ $produk->kategori == 'Box' ? 'selected' : '' }}>Box</option>
-                    </select>
-                    </div>
-                </div>
-                <div class="mb-6">
-                    <label class="form-label" for="nohp">Stok Produk Tersedia</label>
-                    <div class="input-group input-group-merge">
-                    <span  class="input-group-text"><i class="icon-base bx-bar-chart"></i></span>
-                    <input
-                        type="number"
-                        id="stok"
-                        class="form-control"
-                        name="stok"
-                        placeholder="Masukkan Jumlah Stok Produk"
-                        value="{{ old('stok', $produk->stok) }}"
-                        />
-                    </div>
-                </div>
-                <div class="mb-6">
-                    <label class="form-label" for="gambar">Upload Gambar Produk</label>
-                    <input
-                        type="file"
-                        class="form-control"
-                        id="gambar"
-                        name="gambar"
-                        accept="image/*"
-                    />
-                    @if($produk->gambar)
-                        <div class="mb-3 mt-3">
-                            <label class="form-label d-block">Gambar Produk Sebelumnya</label>
-                            <img src="{{ asset('storage/' . $produk->gambar) }}" alt="Gambar Produk" width="120">
-                        </div>
+                    @if ($produk->gambar)
+                        <img src="{{ asset('storage/' . $produk->gambar) }}" alt="Gambar" class="mt-2" width="120">
                     @endif
                 </div>
+
                 <div class="mb-6">
-                    <label class="form-label" for="deskripsi">Deskripsi Produk</label>
+                    <label class="form-label">Deskripsi Produk</label>
                     <div class="input-group input-group-merge">
                         <span class="input-group-text"><i class="icon-base bx bx-text"></i></span>
-                        <textarea
-                            class="form-control"
-                            id="deskripsi"
-                            name="deskripsi"
-                            placeholder="Masukkan Deskripsi Produk"
-                            rows="7"
-                        >{{ old('deskripsi', $produk->deskripsi) }}</textarea>
+                        <textarea class="form-control" name="deskripsi" rows="7">{{ $produk->deskripsi }}</textarea>
                     </div>
                 </div>
+
                 <div class="mb-6">
-                    <label class="form-label" for="status">Status Produk</label>
+                    <label class="form-label">Status Produk</label>
                     <div class="input-group input-group-merge">
                         <span class="input-group-text"><i class="icon-base bx bx-toggle-left"></i></span>
-                        <select class="form-select" id="status_produk" name="status_produk">
-                        <option disabled {{ $produk->status_produk ? '' : 'selected' }}>Pilih Status</option>
-                        <option value="ACTIVE" {{ $produk->status_produk == 'ACTIVE' ? 'selected' : '' }}>Active</option>
-                        <option value="INACTIVE" {{ $produk->status_produk == 'INACTIVE' ? 'selected' : '' }}>Inactive</option>
+                        <select class="form-select" name="status_produk">
+                            <option value="ACTIVE" {{ $produk->status_produk === 'ACTIVE' ? 'selected' : '' }}>Active</option>
+                            <option value="INACTIVE" {{ $produk->status_produk === 'INACTIVE' ? 'selected' : '' }}>Inactive</option>
                         </select>
                     </div>
                 </div>
+
+                <div class="mb-6">
+                    <label class="form-label">Daftar Harga per Kategori</label>
+                    <div id="hargaWrapper">
+                        @foreach ($produk->harga as $harga)
+                        <div class="row mb-2 harga-item">
+                            <div class="col-md-6">
+                                <select name="harga_kategori[]" class="form-select" required>
+                                    <option value="" disabled>Pilih Kategori</option>
+                                    <option value="Sewa + Jasa Hias" {{ $harga->kategori == 'Sewa + Jasa Hias' ? 'selected' : '' }}>Sewa + Jasa Hias</option>
+                                    <option value="Sewa Box" {{ $harga->kategori == 'Sewa Box' ? 'selected' : '' }}>Sewa Box</option>
+                                    <option value="Jasa" {{ $harga->kategori == 'Jasa' ? 'selected' : '' }}>Jasa</option>
+                                </select>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" class="form-control harga-input" name="harga_nilai[]" value="{{ number_format($harga->harga, 0, ',', '.') }}" required>
+                            </div>
+                            <div class="col-md-1 d-flex align-items-center">
+                                <button type="button" class="btn btn-danger btn-sm removeHarga"><i class="bx bx-trash"></i></button>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                    <button type="button" class="btn btn-secondary btn-sm mt-2" id="tambahHarga">+ Tambah Kategori</button>
+                </div>
+
                 <div style="text-align: center; margin-top: 50px;">
-                    <button type="submit" class="btn btn-submit">Submit</button>
+                    <button type="submit" class="btn btn-submit">Update</button>
                 </div>
             </form>
             <div style="text-align: center; margin-top: 10px;">
-                <a href="{{'/admin/produk'}}"><button class="btn btn-batal" >Batal</button></a>
+                <a href="{{ url('/admin/produk') }}"><button class="btn btn-batal">Batal</button></a>
             </div>
         </div>
     </div>
@@ -138,7 +96,6 @@
 
 @section('scripts')
 <script>
-    // Fungsi untuk format angka menjadi Rp
     function formatRupiah(angka) {
         let number_string = angka.replace(/[^,\d]/g, '').toString(),
             split = number_string.split(','),
@@ -151,67 +108,46 @@
             rupiah += separator + ribuan.join('.');
         }
 
-        rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
         return 'Rp ' + rupiah;
     }
 
-    // Hapus karakter non-angka
     function cleanNumber(str) {
         return str.replace(/[^\d]/g, '');
     }
 
-    // Pasang handler dan langsung format jika ada value awal
-    function handleRupiahInput(inputId, hiddenId) {
-        const input = document.getElementById(inputId);
-        const hidden = document.getElementById(hiddenId);
-
-        if (!input) return;
-
-        // Jika input sudah ada isinya saat page load → langsung format
-        if (input.value) {
-            let angkaAwal = cleanNumber(input.value);
-            input.value = formatRupiah(angkaAwal);
-            hidden.value = angkaAwal;
+    document.addEventListener('input', function(e) {
+        if (e.target.classList.contains('harga-input')) {
+            let angka = cleanNumber(e.target.value);
+            e.target.value = formatRupiah(angka);
         }
+    });
 
-        // Event saat mengetik
-        input.addEventListener('input', function () {
-            let angka = cleanNumber(this.value);
-            this.value = formatRupiah(angka);
-            hidden.value = angka;
-        });
+    document.getElementById('tambahHarga').addEventListener('click', function () {
+        const wrapper = document.getElementById('hargaWrapper');
+        const newField = document.createElement('div');
+        newField.className = 'row mb-2 harga-item';
+        newField.innerHTML = `
+            <div class="col-md-6">
+                <select name="harga_kategori[]" class="form-select" required>
+                    <option value="" disabled selected>Pilih Kategori</option>
+                    <option value="Sewa + Jasa Hias">Sewa + Jasa Hias</option>
+                    <option value="Sewa Box">Sewa Box</option>
+                    <option value="Jasa">Jasa</option>
+                </select>
+            </div>
+            <div class="col-md-5">
+                <input type="text" class="form-control harga-input" name="harga_nilai[]" placeholder="Masukkan Harga" required>
+            </div>
+            <div class="col-md-1 d-flex align-items-center">
+                <button type="button" class="btn btn-danger btn-sm removeHarga"><i class="bx bx-trash"></i></button>
+            </div>`;
+        wrapper.appendChild(newField);
+    });
 
-        // Cegah karakter non-angka saat ketik
-        input.addEventListener('keypress', function (e) {
-            if (!/[0-9]/.test(e.key)) {
-                e.preventDefault();
-            }
-        });
-    }
-
-    // Jalankan saat DOM siap (untuk aman)
-    document.addEventListener('DOMContentLoaded', function () {
-        handleRupiahInput('harga_jual', 'harga_jual_hidden');
-        handleRupiahInput('harga_sewa', 'harga_sewa_hidden');
-
-        const form = document.querySelector('form'); // sesuaikan jika lebih dari satu form
-        if (form) {
-            form.addEventListener('submit', function () {
-                const hargaJualInput = document.getElementById('harga_jual');
-                const hargaSewaInput = document.getElementById('harga_sewa');
-                const hargaJualHidden = document.getElementById('harga_jual_hidden');
-                const hargaSewaHidden = document.getElementById('harga_sewa_hidden');
-
-                if (hargaJualInput && hargaJualHidden) {
-                    hargaJualHidden.value = cleanNumber(hargaJualInput.value);
-                }
-
-                if (hargaSewaInput && hargaSewaHidden) {
-                    hargaSewaHidden.value = cleanNumber(hargaSewaInput.value);
-                }
-            });
+    document.addEventListener('click', function (e) {
+        if (e.target.closest('.removeHarga')) {
+            e.target.closest('.harga-item').remove();
         }
     });
 </script>
-
 @endsection

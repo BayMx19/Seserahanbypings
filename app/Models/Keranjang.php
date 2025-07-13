@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class KeranjangModel extends Model
+class Keranjang extends Model
 {
     //
 }

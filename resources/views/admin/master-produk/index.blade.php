@@ -19,10 +19,8 @@
         <tr>
             <th>No</th>
             <th>Nama Produk</th>
-            <th>Kategori</th>
             <th>Stok</th>
-            <th>Harga Jual</th>
-            <th>Harga Sewa</th>
+            <th>Deskripsi</th>
             <th>Status</th>
             <th>Actions</th>
         </tr>
@@ -37,29 +35,13 @@
 
 @section('scripts')
 <script>
-  function formatRupiah(angka) {
-    let number_string = angka.replace(/[^,\d]/g, '').toString(),
-    split = number_string.split(','),
-    sisa = split[0].length % 3,
-    rupiah = split[0].substr(0, sisa),
-    ribuan = split[0].substr(sisa).match(/\d{3}/gi);
-
-    if (ribuan) {
-      let separator = sisa ? '.' : '';
-      rupiah += separator + ribuan.join('.');
-    }
-
-    rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
-    return 'Rp ' + rupiah;
-  }
-
   function deleteProduk(event, id) {
     event.preventDefault();
 
     if (!confirm("Yakin ingin menghapus produk ini?")) return;
 
     $.ajax({
-        url: `/admin/produk/${id}`, // Sesuaikan dengan route
+        url: `/admin/produk/${id}`,
         method: 'POST',
         data: {
             _method: 'DELETE',
@@ -100,15 +82,13 @@
                 <tr id="produk-row-${data.id}">
                     <td>${index + 1}</td>
                     <td>${data.nama_produk}</td>
-                    <td>${data.kategori}</td>
                     <td>${data.stok}</td>
-                    <td>${formatRupiah(data.harga_jual.toString())}</td>
-                    <td>${formatRupiah(data.harga_sewa.toString())}</td>
+                    <td>${data.deskripsi ?? '-'}</td>
                     <td>${statusIcon}</td>
                     <td>
-                      <a href="/admin/produk/${data.id}/edit" class="btn btn-sm btn-primary"><i class="bx bx-edit"></i></a>
+                      <a href="/admin/produk/${data.id}/edit" class="btn btn-sm btn-primary">Edit</a>
                       <form onsubmit="return deleteProduk(event, ${data.id})" style="display:inline;">
-                          <button type="submit" class="btn btn-sm btn-danger"><i class="bx bx-trash"></i></button>
+                          <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                       </form>
                     </td>
                 </tr>
@@ -119,13 +99,11 @@
             autoWidth: false,
             columns: [
               { width: "5%" },
-              { width: "15%" },
-              { width: "15%" },
+              { width: "25%" },
               { width: "10%" },
-              { width: "15%" },
-              { width: "15%" },
+              { width: "30%" },
               { width: "10%" },
-              { width: "15%" }
+              { width: "20%" }
             ]
         });
       },

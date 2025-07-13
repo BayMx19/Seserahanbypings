@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Produk;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,6 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('/users/home');
+        $produk = Produk::with('harga')->where('status_produk', 'ACTIVE')->get();
+        return view('/users/home', compact('produk'));
     }
 }

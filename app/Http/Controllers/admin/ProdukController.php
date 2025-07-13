@@ -25,9 +25,8 @@ class ProdukController extends Controller
 
     public function getListProduk()
     {
-        $listProduk = Produk::select('id', 'nama_produk', 'stok', 'kategori', 'harga_jual', 'harga_sewa', 'status_produk')->get();
-
-        return response() ->json($listProduk);
+        $listProduk = Produk::select('id', 'nama_produk', 'stok', 'deskripsi', 'status_produk')->get();
+        return response()->json($listProduk);
     }
 
     public function create()
@@ -38,17 +37,17 @@ class ProdukController extends Controller
     public function store(Request $request)
     {
         $gambarPath = null;
+
         if ($request->hasFile('gambar')) {
             $gambarPath = $request->file('gambar')->store('gambar_produk', 'public');
         }
 
+        DB::beginTransaction();
         try {
-            DB::table('m_produk')->insert([
+
+            $productId = DB::table('m_produk')->insertGetId([
                 'nama_produk' => $request->nama_produk,
-                'harga_jual' => $request->harga_jual,
-                'harga_sewa' => $request->harga_sewa,
                 'stok' => $request->stok,
-                'kategori' => $request->kategori,
                 'status_produk' => $request->status_produk,
                 'deskripsi' => $request->deskripsi,
                 'gambar' => $gambarPath,
@@ -56,56 +55,102 @@ class ProdukController extends Controller
                 'updated_at' => now(),
             ]);
 
+            if ($request->has('harga_kategori') && $request->has('harga_nilai')) {
+                foreach ($request->harga_kategori as $index => $kategori) {
+                    $hargaBersih = preg_replace('/[^\d]/', '', $request->harga_nilai[$index]); // hilangkan format Rp
+                    DB::table('produk_harga')->insert([
+                        'product_id' => $productId,
+                        'kategori' => $kategori,
+                        'harga' => $hargaBersih,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                }
+            }
+
+            DB::commit();
             return redirect('/admin/produk')->with('success', 'Produk berhasil ditambahkan.');
-        } catch (QueryException $e) {
-             Log::error('Gagal insert produk: ' . $e->getMessage());
-                return redirect('/admin/produk')->with('error', 'Gagal menambahkan Produk.');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Gagal insert produk: ' . $e->getMessage());
+            return redirect('/admin/produk')->with('error', 'Gagal menambahkan Produk.');
         }
     }
 
     public function edit($id)
     {
-        $produk = Produk::findOrFail($id);
+        $produk = Produk::with('harga')->findOrFail($id);
         return view('admin.master-produk.edit', compact('produk'));
     }
 
     public function update(Request $request, $id)
     {
-        $produk = Produk::FindOrFail($id);
+        $produk = DB::table('m_produk')->where('id', $id)->first();
 
-        $produk->nama_produk = $request->nama_produk;
-        $produk->harga_jual = $request->harga_jual;
-        $produk->harga_sewa = $request->harga_sewa;
-        $produk->stok = $request->stok;
-        $produk->kategori = $request->kategori;
-        $produk->status_produk = $request->status_produk;
-        $produk->deskripsi = $request->deskripsi;
-
-        if ($request->hasFile('gambar')) {
-            // Hapus foto lama jika ada
-            if ($produk->gambar && Storage::exists('public/' . $produk->gambar)) {
-                Storage::delete('public/' . $produk->gambar);
-            }
-
-            // Simpan foto baru
-            $gambarPath = $request->file('gambar')->store('gambar_produk', 'public');
-            $produk->gambar = $gambarPath;
+        if (!$produk) {
+            return redirect('/admin/produk')->with('error', 'Produk tidak ditemukan.');
         }
 
-        $produk->save();
+        $gambarPath = $produk->gambar;
 
-        return redirect()->route('produk.index')->with('success', 'Data produk berhasil diperbarui.');
+        if ($request->hasFile('gambar')) {
+            $gambarPath = $request->file('gambar')->store('gambar_produk', 'public');
+        }
 
+        try {
+
+            DB::table('m_produk')->where('id', $id)->update([
+                'nama_produk' => $request->nama_produk,
+                'stok' => $request->stok,
+                'deskripsi' => $request->deskripsi,
+                'status_produk' => $request->status_produk,
+                'gambar' => $gambarPath,
+                'updated_at' => now(),
+            ]);
+
+            DB::table('produk_harga')->where('product_id', $id)->delete();
+
+            $kategoriList = $request->input('harga_kategori');
+            $hargaList = $request->input('harga_nilai');
+
+            foreach ($kategoriList as $index => $kategori) {
+                DB::table('produk_harga')->insert([
+                    'product_id' => $id,
+                    'kategori' => $kategori,
+                    'harga' => preg_replace('/[^\d]/', '', $hargaList[$index]),
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+
+            return redirect('/admin/produk')->with('success', 'Produk berhasil diperbarui.');
+        } catch (\Exception $e) {
+            Log::error('Gagal update produk: ' . $e->getMessage());
+            return redirect('/admin/produk')->with('error', 'Gagal memperbarui produk.');
+        }
     }
+
 
     public function destroy($id)
     {
-        $produk = Produk::FindOrFail($id);
+        try {
+            $produk = DB::table('m_produk')->where('id', $id)->first();
 
-        if ($produk->gambar && Storage::exists('public/' . $produk->gambar)) {
-            Storage::delete('public/' . $produk->gambar);
+            if (!$produk) {
+                return redirect('/admin/produk')->with('error', 'Produk tidak ditemukan.');
+            }
+
+            if ($produk->gambar && Storage::disk('public')->exists($produk->gambar)) {
+                Storage::disk('public')->delete($produk->gambar);
+            }
+
+            DB::table('m_produk')->where('id', $id)->delete();
+
+            return redirect('/admin/produk')->with('success', 'Produk berhasil dihapus.');
+        } catch (\Exception $e) {
+            Log::error('Gagal hapus produk: ' . $e->getMessage());
+            return redirect('/admin/produk')->with('error', 'Gagal menghapus produk.');
         }
-
-        $produk->delete();
     }
 }

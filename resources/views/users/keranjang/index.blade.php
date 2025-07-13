@@ -48,7 +48,7 @@
 
                         <!-- Nama dan detail produk -->
                         <div class="col-md-3 col-lg-3 col-xl-3">
-                            <p class="lead fw-normal mb-2">{{ $cart['name'] }}</p>
+                            <p class="lead fw-normal mb-2"><b>{{ $cart['name'] }}</b></p>
                             <p><span class="text-muted">Qty: </span>{{ $cart['quantity'] }}</p>
                         </div>
 

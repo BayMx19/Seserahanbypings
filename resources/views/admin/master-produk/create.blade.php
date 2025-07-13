@@ -23,51 +23,9 @@
                         />
                     </div>
                 </div>
+               
                 <div class="mb-6">
-                    <label class="form-label" for="name">Harga Jual Produk</label>
-                    <div class="input-group input-group-merge">
-                    <span class="input-group-text"><i class="icon-base bx bx-money"></i></span>
-                    <input
-                        type="text"
-                        class="form-control"
-                        id="harga_jual"
-                        placeholder="Masukkan Harga Jual Produk"
-                        />
-                     <input type="hidden" id="harga_jual_hidden" name="harga_jual">
-                    </div>
-                </div>
-                <div class="mb-6">
-                    <label class="form-label" for="name">Harga Sewa Produk</label>
-                    <div class="input-group input-group-merge">
-                    <span class="input-group-text"><i class="icon-base bx bx-money"></i></span>
-                    <input
-                        type="text"
-                        class="form-control"
-                        id="harga_sewa"
-                        name="harga_sewa"
-                        placeholder="Masukkan Harga Sewa Produk"
-                        />
-                    <input type="hidden" id="harga_sewa_hidden" name="harga_sewa">
-                    </div>
-                </div>
-                <div class="mb-6">
-                    <label class="form-label" for="role">Kategori Produk</label>
-                    <div class="input-group input-group-merge">
-                    <span  class="input-group-text"><i class="icon-base bx bx-purchase-tag"></i></span>
-                    <select
-                        class="form-select"
-                        id="kategori"
-                        name="kategori"
-                        >
-                        <option value="" disabled selected>Pilih Kategori</option>
-                        <option value="Seserahan">Seserahan</option>
-                        <option value="Mahar">Mahar</option>
-                        <option value="Box">Box</option>
-                    </select>
-                    </div>
-                </div>
-                <div class="mb-6">
-                    <label class="form-label" for="nohp">Stok Produk Tersedia</label>
+                    <label class="form-label" for="nohp">Stok Produk</label>
                     <div class="input-group input-group-merge">
                     <span  class="input-group-text"><i class="icon-base bx-bar-chart"></i></span>
                     <input
@@ -118,6 +76,28 @@
                         </select>
                     </div>
                 </div>
+                <div class="mb-6">
+    <label class="form-label">Daftar Harga per Kategori</label>
+    <div id="hargaWrapper">
+        <div class="row mb-2 harga-item">
+            <div class="col-md-6">
+                <select name="harga_kategori[]" class="form-select" required>
+                    <option value="" disabled selected>Pilih Kategori</option>
+                    <option value="Sewa + Jasa Hias">Sewa + Jasa Hias</option>
+                    <option value="Sewa Box">Sewa Box</option>
+                    <option value="Jasa">Jasa</option>
+                </select>
+            </div>
+            <div class="col-md-5">
+                <input type="text" class="form-control harga-input" name="harga_nilai[]" placeholder="Masukkan Harga" required>
+            </div>
+            <div class="col-md-1 d-flex align-items-center">
+                <button type="button" class="btn btn-danger btn-sm removeHarga"><i class="bx bx-trash"></i></button>
+            </div>
+        </div>
+    </div>
+    <button type="button" class="btn btn-secondary btn-sm mt-2" id="tambahHarga">+ Tambah Kategori</button>
+</div>
                 <div style="text-align: center; margin-top: 50px;">
                     <button type="submit" class="btn btn-submit">Submit</button>
                 </div>
@@ -132,7 +112,6 @@
 
 @section('scripts')
 <script>
-    // Fungsi untuk format angka menjadi Rp
     function formatRupiah(angka) {
         let number_string = angka.replace(/[^,\d]/g, '').toString(),
             split = number_string.split(','),
@@ -145,16 +124,8 @@
             rupiah += separator + ribuan.join('.');
         }
 
-        rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
         return 'Rp ' + rupiah;
     }
-
-    // Fungsi untuk mengambil angka murni (tanpa Rp dan titik)
-    function cleanNumber(str) {
-        return str.replace(/[^\d]/g, '');
-    }
-
-    // Fungsi utama: pasang pada input dan hidden
     function handleRupiahInput(inputId, hiddenId) {
         const input = document.getElementById(inputId);
         const hidden = document.getElementById(hiddenId);
@@ -172,9 +143,47 @@
         });
     }
 
-    // Aktifkan untuk input harga jual & harga sewa
+    function cleanNumber(str) {
+        return str.replace(/[^\d]/g, '');
+    }
+
+    document.addEventListener('input', function(e) {
+        if (e.target.classList.contains('harga-input')) {
+            let angka = cleanNumber(e.target.value);
+            e.target.value = formatRupiah(angka);
+        }
+    });
+
+    document.getElementById('tambahHarga').addEventListener('click', function () {
+        const wrapper = document.getElementById('hargaWrapper');
+        const newField = document.createElement('div');
+        newField.className = 'row mb-2 harga-item';
+        newField.innerHTML = `
+            <div class="col-md-6">
+                <select name="harga_kategori[]" class="form-select" required>
+                    <option value="" disabled selected>Pilih Kategori</option>
+                    <option value="Sewa + Jasa Hias">Sewa + Jasa Hias</option>
+                    <option value="Sewa Box">Sewa Box</option>
+                    <option value="Jasa">Jasa</option>
+                </select>
+            </div>
+            <div class="col-md-5">
+                <input type="text" class="form-control harga-input" name="harga_nilai[]" placeholder="Masukkan Harga" required>
+            </div>
+            <div class="col-md-1 d-flex align-items-center">
+                <button type="button" class="btn btn-danger btn-sm removeHarga"><i class="bx bx-trash"></i></button>
+            </div>`;
+        wrapper.appendChild(newField);
+    });
+
+    document.addEventListener('click', function (e) {
+        if (e.target.closest('.removeHarga')) {
+            e.target.closest('.harga-item').remove();
+        }
+    });
+
+    // Tetap aktifkan harga jual dan sewa utama
     handleRupiahInput('harga_jual', 'harga_jual_hidden');
     handleRupiahInput('harga_sewa', 'harga_sewa_hidden');
 </script>
-
 @endsection

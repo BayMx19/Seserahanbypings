@@ -275,6 +275,30 @@
         }
     });
 </script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const harga = document.getElementById('hargaProduk');
+    const select = document.getElementById('jenisHarga');
+
+    select.addEventListener('change', function () {
+      const value = parseInt(this.value);
+      harga.textContent = `Rp ${value.toLocaleString('id-ID')}`;
+    });
+
+    document.getElementById('minQty').addEventListener('click', function () {
+      const qtyInput = document.getElementById('qtyInput');
+      let val = parseInt(qtyInput.value);
+      if (val > 1) qtyInput.value = val - 1;
+    });
+
+    document.getElementById('plusQty').addEventListener('click', function () {
+      const qtyInput = document.getElementById('qtyInput');
+      qtyInput.value = parseInt(qtyInput.value) + 1;
+    });
+  });
+</script>
+
+
 </body>
 </html>
 
