@@ -177,10 +177,13 @@
                                                     <span class="dot"></span>
                                                     <div style="margin-left: 5px;">
                                                         <i class="fas fa-shopping-cart me-2 position-relative">
-                                                            @if(isset($keranjangCount) && $keranjangCount > 0)
-                                                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                                           @if($keranjangCount > 0)
+                                                                <span id="keranjangBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                                                     {{ $keranjangCount }}
-                                                                    
+                                                                </span>
+                                                            @else
+                                                                <span id="keranjangBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">
+                                                                    0
                                                                 </span>
                                                             @endif
                                                         </i>

@@ -396,6 +396,11 @@
             .then(response => response.json())
             .then(data => {
                 alert(data.message); 
+                 const badge = document.getElementById('keranjangBadge');
+                    let current = parseInt(badge.innerText) || 0;
+                    let added = qty || 1;
+                    badge.innerText = current + added;
+                    badge.classList.remove('d-none');
                 const modal = bootstrap.Modal.getInstance(document.getElementById('modalDetailProduk'));
                 modal.hide();
             })

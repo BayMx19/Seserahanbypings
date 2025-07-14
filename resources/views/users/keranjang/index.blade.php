@@ -51,17 +51,7 @@
 
                         <!-- Qty Update -->
                         <div class="col-md-2 col-lg-2 col-xl-2 d-flex">
-                            <form action="{{ route('keranjang.update', $cart->id) }}" method="POST" class="d-flex align-items-center w-100">
-                                @csrf
-                                @method('PUT')
-                                
-                                
-                                <input min="1" name="qty" value="{{ $cart->qty }}" type="number" class="form-control form-control-sm text-center" style="width: 60px;" readonly/>
-
-                                
-
-                               
-                            </form>
+                            <input min="1" name="qty" value="{{ $cart->qty }}" type="number" class="form-control form-control-sm text-center" style="width: 60px;" readonly/>
                         </div>
 
                         <!-- Harga -->
