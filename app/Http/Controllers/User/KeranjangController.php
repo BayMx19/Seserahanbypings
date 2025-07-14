@@ -48,4 +48,18 @@ class KeranjangController extends Controller
             'keranjang' => $keranjang,
         ]);
     }
+
+    public function destroy($id)
+    {
+        $keranjang = Keranjang::findOrFail($id);
+
+        // Pastikan hanya pembeli yang punya hak bisa menghapus
+        if ($keranjang->pembeli_id !== Auth::user()->id) {
+            abort(403, 'Akses ditolak.');
+        }
+
+        $keranjang->delete();
+
+        return redirect()->back()->with('success', 'Item berhasil dihapus dari keranjang.');
+    }
 }
