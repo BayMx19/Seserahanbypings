@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Keranjang extends Model
 {
-    protected $table = 'keranjang';
+    protected $table = 't_keranjang';
 
     protected $fillable = [
         'produk_id',
         'pembeli_id',
         'kategori_harga_id',
-        'amount',
+        'qty',
         'status',
     ];
 

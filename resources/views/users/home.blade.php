@@ -232,6 +232,7 @@
                                                     class="btn btn-list-product mb-2 openModal"
                                                     data-bs-toggle="modal" 
                                                     data-bs-target="#modalDetailProduk"
+                                                    data-product-id="{{ $item->id }}"
                                                     data-image="{{ asset('storage/' . $item->gambar) }}"
                                                     data-title="{{ $item->nama_produk }}"
                                                     data-description="{{ $item->deskripsi }}"
@@ -295,9 +296,16 @@
                <select class="form-select select-layanan" id="modalSelectLayanan">
                     <option disabled selected>Pilih kategori layanan</option>
                 </select>
-            </div>
-
+          </div>
           <h4 id="modalHarga" class="text-primary fw-bold">Rp -</h4>
+          <div class="mb-3">
+            <label class="form-label">Jumlah</label>
+            <div class="input-group" style="max-width: 150px;">
+                <button class="btn btn-outline-secondary" type="button" id="btnQtyMinus">-</button>
+                <input type="number" id="modalQty" class="form-control text-center" value="1" min="1">
+                <button class="btn btn-outline-secondary" type="button" id="btnQtyPlus">+</button>
+            </div>
+            </div>
 
           <button class="btn btn-primary w-100 mt-3" id="btnTambahKeranjang">Tambahkan ke Keranjang</button>
         </div>
@@ -313,6 +321,10 @@
         const modalDescription = document.getElementById('modalDescription');
         const modalHarga = document.getElementById('modalHarga');
         const modalSelect = document.getElementById('modalSelectLayanan');
+        const qtyInput = document.getElementById('modalQty');
+        const btnMinus = document.getElementById('btnQtyMinus');
+        const btnPlus = document.getElementById('btnQtyPlus');
+        let currentProdukId = null;
 
         document.querySelectorAll('.openModal').forEach(button => {
             button.addEventListener('click', function () {
@@ -326,28 +338,73 @@
                 modalSelect.innerHTML = '<option disabled selected>Pilih kategori layanan</option>';
                 prices.forEach(price => {
                     const option = document.createElement('option');
-                    option.value = price.harga;
+                    option.value = price.id; 
+                    option.setAttribute('data-harga', price.harga); 
                     option.textContent = price.kategori;
                     modalSelect.appendChild(option);
                 });
-
                 modalHarga.textContent = 'Rp -';
+                qtyInput.value = 1;
+                currentProdukId = this.getAttribute('data-product-id');
             });
         });
 
         modalSelect.addEventListener('change', function () {
-            const selectedPrice = this.value;
+            const selectedOption = this.options[this.selectedIndex];
+            const selectedPrice = selectedOption.getAttribute('data-harga');
             modalHarga.textContent = 'Rp ' + parseInt(selectedPrice).toLocaleString('id-ID');
         });
-    });
-    document.getElementById('btnTambahKeranjang').addEventListener('click', function () {
-        const isAuthenticated = @json(Auth::check());
-
-        if (!isAuthenticated) {
-            window.location.href = "{{ route('login') }}";
-        } else {
-            console.log('User sudah login, tunggu instruksi lanjutan...');
-        }
+        btnMinus.addEventListener('click', function () {
+            let current = parseInt(qtyInput.value) || 1;
+            if (current > 1) {
+                qtyInput.value = current - 1;
+            }
+        });
+        
+        btnPlus.addEventListener('click', function () {
+            let current = parseInt(qtyInput.value) || 1;
+            qtyInput.value = current + 1;
+        });
+        document.getElementById('btnTambahKeranjang').addEventListener('click', function () {
+            const isAuthenticated = @json(Auth::check());
+    
+            if (!isAuthenticated) {
+                window.location.href = "{{ route('login') }}";
+                return;
+            } 
+            const kategoriHargaId = modalSelect.value;
+            const qty = parseInt(document.getElementById('modalQty').value);
+            const produkId = currentProdukId;
+    
+            if (!kategoriHargaId || !produkId || qty < 1) {
+                alert('Pilih kategori dan jumlah dengan benar.');
+                return;
+            }
+    
+            fetch("{{ route('keranjang.store') }}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                },
+                body: JSON.stringify({
+                    produk_id: produkId,
+                    kategori_harga_id: kategoriHargaId,
+                    qty: qty
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message); 
+                const modal = bootstrap.Modal.getInstance(document.getElementById('modalDetailProduk'));
+                modal.hide();
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("Terjadi kesalahan. Coba lagi nanti.");
+            });
+    
+        });
     });
 </script>
 

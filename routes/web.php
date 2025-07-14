@@ -32,7 +32,7 @@ Route::middleware(['auth', RoleMiddleware::class . ':Admin'])->group(function ()
 
 Route::middleware(['auth', RoleMiddleware::class . ':User'])->group(function () {
     Route::get('/home', [UserHomeController::class, 'index'])->name('home');
-    Route::get('/keranjang', [UserKeranjangController::class, 'index']);
+    Route::resource('/keranjang', UserKeranjangController::class);
     Route::resource('/profile', UserProfileController::class);
 });
 
