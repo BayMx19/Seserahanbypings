@@ -98,25 +98,29 @@
     }
 
     /* Tambahkan ini ke file CSS kamu atau dalam <style> di blade */
-.select-layanan {
-  display: block;
-  width: 100%;
-  padding: 0.5rem 0.75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #212529;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #ced4da; /* Ini bikin garis seperti input biasa */
-  border-radius: 0.375rem;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
+    .select-layanan {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da; /* Ini bikin garis seperti input biasa */
+    border-radius: 0.375rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
 
-.select-layanan:focus {
-  border-color: #86b7fe;
-  outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
-}
+    .select-layanan:focus {
+    border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+    }
+    .badge {
+        font-size: 0.6rem;
+        padding: 4px 6px;
+    }
 
 </style>
 </head>
@@ -169,10 +173,17 @@
                                                         <strong>Profile Saya</strong><br>
                                                     </div>
                                                 </a>
-                                                <a href="{{'/keranjang'}}" class="d-flex align-items-center">
+                                                <a href="{{ route('keranjang.index') }}" class="d-flex align-items-center position-relative">
                                                     <span class="dot"></span>
                                                     <div style="margin-left: 5px;">
-                                                        <i class="fas fa-shopping-cart me-2"></i>
+                                                        <i class="fas fa-shopping-cart me-2 position-relative">
+                                                            @if(isset($keranjangCount) && $keranjangCount > 0)
+                                                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                                                    {{ $keranjangCount }}
+                                                                    
+                                                                </span>
+                                                            @endif
+                                                        </i>
                                                         <strong>Keranjang</strong><br>
                                                     </div>
                                                 </a>
