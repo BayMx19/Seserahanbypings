@@ -6,7 +6,7 @@
 <h3 class="text-bold">Profile</h3>
 <div class="row">
   <div class="col-md-12">
-    <form action="{{ route('profile.update',$user->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.profile.update') }}" method="POST" enctype="multipart/form-data">
       @csrf
       @method('PUT')
       <div class="card mb-6">
@@ -48,11 +48,42 @@
 
           <div class="row g-3">
             @foreach ($fields as $field => $label)
-              <div class="col-md-6">
-                <label for="{{ $field }}" class="form-label">{{ $label }}</label>
-                <input class="form-control" type="text" id="{{ $field }}" name="{{ $field }}" value="{{ old($field, $user->$field) }}" />
-              </div>
-            @endforeach
+            <div class="col-md-6">
+              <label for="{{ $field }}" class="form-label">{{ $label }}</label>
+
+              @if ($field === 'jenis_kelamin')
+                <select class="form-select" id="{{ $field }}" name="{{ $field }}">
+                  <option value="Laki-laki" {{ old($field, $user->$field) === 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
+                  <option value="Perempuan" {{ old($field, $user->$field) === 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+                </select>
+
+              @elseif ($field === 'status')
+                <select class="form-select" id="{{ $field }}" name="{{ $field }}">
+                  <option value="Aktif" {{ old($field, $user->$field) === 'Aktif' ? 'selected' : '' }}>Aktif</option>
+                  <option value="Tidak Aktif" {{ old($field, $user->$field) === 'Tidak Aktif' ? 'selected' : '' }}>Tidak Aktif</option>
+                </select>
+
+              @elseif ($field === 'email')
+                <input
+                  class="form-control"
+                  type="text"
+                  id="{{ $field }}"
+                  name="{{ $field }}"
+                  value="{{ old($field, $user->$field) }}"
+                  readonly
+                />
+
+              @else
+                <input
+                  class="form-control"
+                  type="text"
+                  id="{{ $field }}"
+                  name="{{ $field }}"
+                  value="{{ old($field, $user->$field) }}"
+                />
+              @endif
+            </div>
+          @endforeach
 
             <div class="col-md-6">
               <label for="password" class="form-label">Password (kosongkan jika tidak diganti)</label>

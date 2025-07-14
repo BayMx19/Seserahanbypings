@@ -162,7 +162,7 @@
         
                                             <div id="userDropdown" class="dropdown-menu-user">
                                                 <!-- Link ke profile -->
-                                                <a href="#" class="d-flex align-items-center">
+                                                <a href="{{('/profile')}}" class="d-flex align-items-center">
                                                     <span class="dot"></span>
                                                     <div style="margin-left: 5px;">
                                                         <i class="fas fa-user me-2"></i>

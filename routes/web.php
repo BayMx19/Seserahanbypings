@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ReviewController as AdminReviewController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\User\HomeController as UserHomeController;
 use App\Http\Controllers\User\KeranjangController as UserKeranjangController;
+use App\Http\Controllers\User\ProfileController as UserProfileController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -24,12 +25,14 @@ Route::middleware(['auth', RoleMiddleware::class . ':Admin'])->group(function ()
     Route::get('/admin/data-produk', [AdminProdukController:: class, 'getListProduk']);
     Route::resource('/admin/transaksi', AdminTransaksiController::class);
     Route::resource('/admin/review', AdminReviewController::class);
-    Route::resource('/admin/profile', AdminProfileController::class);
+    Route::get('/admin/profile', [AdminProfileController::class, 'index'])->name('admin.profile.index');
+    Route::put('/admin/profile', [AdminProfileController::class, 'update'])->name('admin.profile.update');
 
 });
 
 Route::middleware(['auth', RoleMiddleware::class . ':User'])->group(function () {
     Route::get('/home', [UserHomeController::class, 'index'])->name('home');
     Route::get('/keranjang', [UserKeranjangController::class, 'index']);
+    Route::resource('/profile', UserProfileController::class);
 });
 
