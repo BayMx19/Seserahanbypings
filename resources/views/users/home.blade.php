@@ -298,14 +298,18 @@
                 </select>
           </div>
           <h4 id="modalHarga" class="text-primary fw-bold">Rp -</h4>
+          <hr>
           <div class="mb-3">
-            <label class="form-label">Jumlah</label>
+            <label class="form-label">Masukkan Jumlah</label>
             <div class="input-group" style="max-width: 150px;">
                 <button class="btn btn-outline-secondary" type="button" id="btnQtyMinus">-</button>
                 <input type="number" id="modalQty" class="form-control text-center" value="1" min="1">
                 <button class="btn btn-outline-secondary" type="button" id="btnQtyPlus">+</button>
             </div>
             </div>
+            <label class="form-label">Total Harga</label>
+            <h4 class="text-primary fw-bold" id="totalHarga">Rp -</h4>
+
 
           <button class="btn btn-primary w-100 mt-3" id="btnTambahKeranjang">Tambahkan ke Keranjang</button>
         </div>
@@ -353,17 +357,29 @@
             const selectedOption = this.options[this.selectedIndex];
             const selectedPrice = selectedOption.getAttribute('data-harga');
             modalHarga.textContent = 'Rp ' + parseInt(selectedPrice).toLocaleString('id-ID');
+            updateTotalHarga();
         });
+        function updateTotalHarga() {
+            const selectedOption = modalSelect.options[modalSelect.selectedIndex];
+            const selectedPrice = selectedOption ? parseInt(selectedOption.getAttribute('data-harga')) : 0;
+            const qty = parseInt(qtyInput.value) || 1;
+
+            const total = selectedPrice * qty;
+            document.getElementById('totalHarga').textContent = 'Rp ' + total.toLocaleString('id-ID');
+        }
         btnMinus.addEventListener('click', function () {
             let current = parseInt(qtyInput.value) || 1;
             if (current > 1) {
                 qtyInput.value = current - 1;
             }
+            updateTotalHarga();
+            
         });
         
         btnPlus.addEventListener('click', function () {
             let current = parseInt(qtyInput.value) || 1;
             qtyInput.value = current + 1;
+            updateTotalHarga();
         });
         document.getElementById('btnTambahKeranjang').addEventListener('click', function () {
             const isAuthenticated = @json(Auth::check());
