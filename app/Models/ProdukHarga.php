@@ -11,7 +11,7 @@ class ProdukHarga extends Model
     protected $table = 'produk_harga';
     protected $fillable = [
         'product_id',
-        'kategori',
+        'layanan',
         'harga',
     ];
     public function product()

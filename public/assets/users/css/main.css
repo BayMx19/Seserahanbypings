@@ -3244,3 +3244,12 @@ input[type="reset"] {
   outline: 0;
   box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
 }
+.swiper-slide.hidden {
+    visibility: hidden !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.swiper-slide.hidden-slide {
+  display: none !important;
+}

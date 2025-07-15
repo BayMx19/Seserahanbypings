@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('produk_id')->constrained('m_produk')->onDelete('cascade');
             $table->foreignId('pembeli_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('kategori_harga_id')->constrained('produk_harga')->onDelete('cascade');
+            $table->foreignId('layanan_harga_id')->constrained('produk_harga')->onDelete('cascade');
             $table->integer('qty');
             $table->string('status')->default('Belum Checkout');
             $table->timestamps();

@@ -23,7 +23,7 @@
 
         @php
             $total = $keranjangItems->sum(function($item) {
-                return $item->kategoriHarga->harga * $item->qty;
+                return $item->layananHarga->harga * $item->qty;
             });
         @endphp
 
@@ -40,13 +40,14 @@
                     <div class="row d-flex justify-content-between align-items-center">
                         <!-- Gambar -->
                         <div class="col-md-2 col-lg-2 col-xl-2">
-                            <img src="{{ asset('storage/' . $cart->produk->gambar) }}" class="img-cart rounded-3" alt="{{ $cart->produk->nama_produk }}">
+                            <img src="{{ asset('storage/' . $cart->produk->gambar) }}" class="img-cart rounded-3" alt="{{ $cart->produk->nama }}">
                         </div>
 
                         <!-- Nama dan detail produk -->
                         <div class="col-md-3 col-lg-3 col-xl-3">
-                            <p class="lead fw-normal mb-2"><b>{{ $cart->produk->nama_produk }}</b></p>
-                            <p><span class="text-muted">Layanan:</span> {{ $cart->kategoriHarga->kategori }}</p>
+                            <p class="lead fw-normal mb-2"><b>{{ $cart->produk->nama }}</b></p>
+                            <p style="margin-bottom: 0px !important;"><span class="text-muted" >Kategori:</span> {{ $cart->produk->kategori }}</p>
+                            <p><span class="text-muted">Layanan:</span> {{ $cart->layananHarga->layanan }}</p>
                         </div>
 
                         <!-- Qty Update -->
@@ -56,7 +57,7 @@
 
                         <!-- Harga -->
                         <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                            <h5 class="mb-0">Rp {{ number_format($cart->kategoriHarga->harga * $cart->qty, 0, ',', '.') }}</h5>
+                            <h5 class="mb-0">Rp {{ number_format($cart->layananHarga->harga * $cart->qty, 0, ',', '.') }}</h5>
                         </div>
 
                         <!-- Hapus -->

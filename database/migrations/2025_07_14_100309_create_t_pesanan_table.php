@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('pembeli_id')->constrained('users')->onDelete('cascade');
             $table->string('kode_invoice')->unique();
             $table->dateTime('tanggal_pesanan');
+            $table->date('tanggal_acara')->nullable();
             $table->bigInteger('total_harga');
             $table->string('status_pesanan');
             $table->timestamps();

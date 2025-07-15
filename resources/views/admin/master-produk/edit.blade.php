@@ -15,7 +15,17 @@
                     <label class="form-label">Nama Produk</label>
                     <div class="input-group input-group-merge">
                         <span class="input-group-text"><i class="icon-base bx bx-package"></i></span>
-                        <input type="text" class="form-control" name="nama_produk" value="{{ $produk->nama_produk }}" />
+                        <input type="text" class="form-control" name="nama" value="{{ $produk->nama }}" />
+                    </div>
+                </div>
+                <div class="mb-6 mt-3">
+                    <label class="form-label">Kategori Produk</label>
+                    <div class="input-group input-group-merge">
+                        <span class="input-group-text"><i class="icon-base bx bx-grid-alt"></i></span>
+                        <select class="form-select" name="kategori" required>
+                            <option value="Box" {{ $produk->kategori == 'Box' ? 'selected' : '' }}>Box</option>
+                            <option value="Seserahan" {{ $produk->kategori == 'Seserahan' ? 'selected' : '' }}>Seserahan</option>
+                        </select>
                     </div>
                 </div>
 
@@ -50,24 +60,25 @@
                     <label class="form-label">Status Produk</label>
                     <div class="input-group input-group-merge">
                         <span class="input-group-text"><i class="icon-base bx bx-toggle-left"></i></span>
-                        <select class="form-select" name="status_produk">
-                            <option value="ACTIVE" {{ $produk->status_produk === 'ACTIVE' ? 'selected' : '' }}>Active</option>
-                            <option value="INACTIVE" {{ $produk->status_produk === 'INACTIVE' ? 'selected' : '' }}>Inactive</option>
+                        <select class="form-select" name="status">
+                            <option value="ACTIVE" {{ $produk->status === 'ACTIVE' ? 'selected' : '' }}>Active</option>
+                            <option value="INACTIVE" {{ $produk->status === 'INACTIVE' ? 'selected' : '' }}>Inactive</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="mb-6">
-                    <label class="form-label">Daftar Harga per Kategori</label>
+                    <label class="form-label">Daftar Harga per Layanan</label>
                     <div id="hargaWrapper">
                         @foreach ($produk->harga as $harga)
                         <div class="row mb-2 harga-item">
                             <div class="col-md-6">
-                                <select name="harga_kategori[]" class="form-select" required>
-                                    <option value="" disabled>Pilih Kategori</option>
-                                    <option value="Sewa + Jasa Hias" {{ $harga->kategori == 'Sewa + Jasa Hias' ? 'selected' : '' }}>Sewa + Jasa Hias</option>
-                                    <option value="Sewa Box" {{ $harga->kategori == 'Sewa Box' ? 'selected' : '' }}>Sewa Box</option>
-                                    <option value="Jasa" {{ $harga->kategori == 'Jasa' ? 'selected' : '' }}>Jasa</option>
+                                <select name="harga_layanan[]" class="form-select" required>
+                                    <option value="" disabled>Pilih Layanan</option>
+                                    <option value="Sewa + Jasa Hias" {{ $harga->layanan == 'Sewa + Jasa Hias' ? 'selected' : '' }}>Sewa + Jasa Hias</option>
+                                    <option value="Sewa Box" {{ $harga->layanan == 'Sewa Box' ? 'selected' : '' }}>Sewa Box</option>
+                                    <option value="Jasa" {{ $harga->layanan == 'Jasa' ? 'selected' : '' }}>Jasa</option>
+                                    <option value="Beli" {{ $harga->layanan == 'Beli' ? 'selected' : '' }}>Beli</option>
                                 </select>
                             </div>
                             <div class="col-md-5">
@@ -79,7 +90,7 @@
                         </div>
                         @endforeach
                     </div>
-                    <button type="button" class="btn btn-secondary btn-sm mt-2" id="tambahHarga">+ Tambah Kategori</button>
+                    <button type="button" class="btn btn-secondary btn-sm mt-2" id="tambahHarga">+ Tambah Layanan</button>
                 </div>
 
                 <div style="text-align: center; margin-top: 50px;">
@@ -128,11 +139,12 @@
         newField.className = 'row mb-2 harga-item';
         newField.innerHTML = `
             <div class="col-md-6">
-                <select name="harga_kategori[]" class="form-select" required>
-                    <option value="" disabled selected>Pilih Kategori</option>
+                <select name="harga_layanan[]" class="form-select" required>
+                    <option value="" disabled selected>Pilih Layanan</option>
                     <option value="Sewa + Jasa Hias">Sewa + Jasa Hias</option>
                     <option value="Sewa Box">Sewa Box</option>
                     <option value="Jasa">Jasa</option>
+                    <option value="Beli">Beli</option>
                 </select>
             </div>
             <div class="col-md-5">

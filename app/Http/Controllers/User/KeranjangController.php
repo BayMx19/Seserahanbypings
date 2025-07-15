@@ -19,7 +19,7 @@ class KeranjangController extends Controller
         
         $user = Auth::user()->id;
 
-        $keranjangItems = Keranjang::with(['produk', 'kategoriHarga']) // relasi eager load
+        $keranjangItems = Keranjang::with(['produk', 'layananHarga']) // relasi eager load
             ->where('pembeli_id', $user)
             ->where('status', 'Belum Checkout')
             ->get();
@@ -31,13 +31,13 @@ class KeranjangController extends Controller
         // dd($request);
         $request->validate([
             'produk_id' => 'required|exists:m_produk,id',
-            'kategori_harga_id' => 'required|exists:produk_harga,id',
+            'layanan_harga_id' => 'required|exists:produk_harga,id',
             'qty' => 'required|integer|min:1',
         ]);
         $user = Auth::user()->id;
         $keranjang = Keranjang::create([
             'produk_id' => $request->produk_id,
-            'kategori_harga_id' => $request->kategori_harga_id,
+            'layanan_harga_id' => $request->layanan_harga_id,
             'qty' => $request->qty,
             'pembeli_id' => $user,
             'status' => 'Belum Checkout',

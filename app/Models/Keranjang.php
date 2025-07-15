@@ -11,7 +11,7 @@ class Keranjang extends Model
     protected $fillable = [
         'produk_id',
         'pembeli_id',
-        'kategori_harga_id',
+        'layanan_harga_id',
         'qty',
         'status',
     ];
@@ -21,9 +21,9 @@ class Keranjang extends Model
         return $this->belongsTo(Produk::class, 'produk_id');
     }
 
-    public function kategoriHarga()
+    public function layananHarga()
     {
-        return $this->belongsTo(ProdukHarga::class, 'kategori_harga_id');
+        return $this->belongsTo(ProdukHarga::class, 'layanan_harga_id');
     }
 
     public function pembeli()

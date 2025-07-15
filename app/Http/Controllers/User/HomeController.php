@@ -25,7 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $produk = Produk::with('harga')->where('status_produk', 'ACTIVE')->get();
+        $produk = Produk::with('harga')->where('status', 'ACTIVE')->get();
         return view('/users/home', compact('produk'));
     }
 }

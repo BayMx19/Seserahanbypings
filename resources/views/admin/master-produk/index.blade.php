@@ -19,8 +19,8 @@
         <tr>
             <th>No</th>
             <th>Nama Produk</th>
+            <th>Kategori</th>
             <th>Stok</th>
-            <th>Deskripsi</th>
             <th>Status</th>
             <th>Actions</th>
         </tr>
@@ -74,16 +74,16 @@
         $('#dataTable tbody').empty();
 
         response.forEach(function(data, index) {
-            let statusIcon = data.status_produk === 'ACTIVE' 
+            let statusIcon = data.status === 'ACTIVE' 
             ? '<span class="badge bg-label-success">Active</span>' 
             : '<span class="badge bg-label-danger">Inactive</span>';
 
             $('#dataTable tbody').append(`
                 <tr id="produk-row-${data.id}">
                     <td>${index + 1}</td>
-                    <td>${data.nama_produk}</td>
+                    <td>${data.nama}</td>
+                    <td>${data.kategori}</td>
                     <td>${data.stok}</td>
-                    <td>${data.deskripsi ?? '-'}</td>
                     <td>${statusIcon}</td>
                     <td>
                       <a href="/admin/produk/${data.id}/edit" class="btn btn-sm btn-primary">Edit</a>
@@ -99,9 +99,9 @@
             autoWidth: false,
             columns: [
               { width: "5%" },
+              { width: "30%" },
               { width: "25%" },
               { width: "10%" },
-              { width: "30%" },
               { width: "10%" },
               { width: "20%" }
             ]

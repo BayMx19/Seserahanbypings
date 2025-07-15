@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('produk_harga', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained('m_produk')->onDelete('cascade');
-            $table->string('kategori');
+            $table->string('layanan');
             $table->integer('harga');
             $table->timestamps();
         });

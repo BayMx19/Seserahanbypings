@@ -17,13 +17,23 @@
                     <input
                         type="text"
                         class="form-control"
-                        id="nama_produk"
-                        name="nama_produk"
+                        id="nama"
+                        name="nama"
                         placeholder="Masukkan Nama Produk"
                         />
                     </div>
                 </div>
-               
+               <div class="mb-6 mt-3">
+                    <label class="form-label" for="kategori">Kategori Produk</label>
+                    <div class="input-group input-group-merge">
+                        <span class="input-group-text"><i class="icon-base bx bx-grid-alt"></i></span>
+                        <select class="form-select" id="kategori" name="kategori" required>
+                            <option value="" disabled selected>Pilih Kategori</option>
+                            <option value="Box">Box</option>
+                            <option value="Seserahan">Seserahan</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="mb-6">
                     <label class="form-label" for="nohp">Stok Produk</label>
                     <div class="input-group input-group-merge">
@@ -69,7 +79,7 @@
                     <label class="form-label" for="status">Status Produk</label>
                     <div class="input-group input-group-merge">
                         <span class="input-group-text"><i class="icon-base bx bx-toggle-left"></i></span>
-                        <select class="form-select" id="status_produk" name="status_produk">
+                        <select class="form-select" id="status" name="status">
                             <option value="" disabled selected>Pilih Status</option>
                             <option value="ACTIVE">Active</option>
                             <option value="INACTIVE">Inactive</option>
@@ -77,15 +87,16 @@
                     </div>
                 </div>
                 <div class="mb-6">
-    <label class="form-label">Daftar Harga per Kategori</label>
+    <label class="form-label">Daftar Harga per Layanan</label>
     <div id="hargaWrapper">
         <div class="row mb-2 harga-item">
             <div class="col-md-6">
-                <select name="harga_kategori[]" class="form-select" required>
-                    <option value="" disabled selected>Pilih Kategori</option>
+                <select name="harga_layanan[]" class="form-select" required>
+                    <option value="" disabled selected>Pilih Layanan</option>
                     <option value="Sewa + Jasa Hias">Sewa + Jasa Hias</option>
                     <option value="Sewa Box">Sewa Box</option>
                     <option value="Jasa">Jasa</option>
+                    <option value="Beli">Beli</option>
                 </select>
             </div>
             <div class="col-md-5">
@@ -96,7 +107,7 @@
             </div>
         </div>
     </div>
-    <button type="button" class="btn btn-secondary btn-sm mt-2" id="tambahHarga">+ Tambah Kategori</button>
+    <button type="button" class="btn btn-secondary btn-sm mt-2" id="tambahHarga">+ Tambah Layanan</button>
 </div>
                 <div style="text-align: center; margin-top: 50px;">
                     <button type="submit" class="btn btn-submit">Submit</button>
@@ -160,11 +171,12 @@
         newField.className = 'row mb-2 harga-item';
         newField.innerHTML = `
             <div class="col-md-6">
-                <select name="harga_kategori[]" class="form-select" required>
-                    <option value="" disabled selected>Pilih Kategori</option>
+                <select name="harga_layanan[]" class="form-select" required>
+                    <option value="" disabled selected>Pilih Layanan</option>
                     <option value="Sewa + Jasa Hias">Sewa + Jasa Hias</option>
                     <option value="Sewa Box">Sewa Box</option>
                     <option value="Jasa">Jasa</option>
+                    <option value="Beli">Beli</option>
                 </select>
             </div>
             <div class="col-md-5">

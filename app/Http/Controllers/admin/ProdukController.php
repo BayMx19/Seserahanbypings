@@ -25,7 +25,7 @@ class ProdukController extends Controller
 
     public function getListProduk()
     {
-        $listProduk = Produk::select('id', 'nama_produk', 'stok', 'deskripsi', 'status_produk')->get();
+        $listProduk = Produk::select('id', 'nama', 'kategori', 'stok',  'status')->get();
         return response()->json($listProduk);
     }
 
@@ -36,6 +36,7 @@ class ProdukController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request);
         $gambarPath = null;
 
         if ($request->hasFile('gambar')) {
@@ -46,21 +47,22 @@ class ProdukController extends Controller
         try {
 
             $productId = DB::table('m_produk')->insertGetId([
-                'nama_produk' => $request->nama_produk,
+                'nama' => $request->nama,
+                'kategori' => $request->kategori,
                 'stok' => $request->stok,
-                'status_produk' => $request->status_produk,
+                'status' => $request->status,
                 'deskripsi' => $request->deskripsi,
                 'gambar' => $gambarPath,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
 
-            if ($request->has('harga_kategori') && $request->has('harga_nilai')) {
-                foreach ($request->harga_kategori as $index => $kategori) {
-                    $hargaBersih = preg_replace('/[^\d]/', '', $request->harga_nilai[$index]); // hilangkan format Rp
+            if ($request->has('harga_layanan') && $request->has('harga_nilai')) {
+                foreach ($request->harga_layanan as $index => $layanan) {
+                    $hargaBersih = preg_replace('/[^\d]/', '', $request->harga_nilai[$index]);
                     DB::table('produk_harga')->insert([
                         'product_id' => $productId,
-                        'kategori' => $kategori,
+                        'layanan' => $layanan,
                         'harga' => $hargaBersih,
                         'created_at' => now(),
                         'updated_at' => now(),
@@ -101,23 +103,24 @@ class ProdukController extends Controller
         try {
 
             DB::table('m_produk')->where('id', $id)->update([
-                'nama_produk' => $request->nama_produk,
+                'nama' => $request->nama,
+                'kategori' => $request->kategori,
                 'stok' => $request->stok,
                 'deskripsi' => $request->deskripsi,
-                'status_produk' => $request->status_produk,
+                'status' => $request->status,
                 'gambar' => $gambarPath,
                 'updated_at' => now(),
             ]);
 
             DB::table('produk_harga')->where('product_id', $id)->delete();
 
-            $kategoriList = $request->input('harga_kategori');
+            $layananList = $request->input('harga_layanan');
             $hargaList = $request->input('harga_nilai');
 
-            foreach ($kategoriList as $index => $kategori) {
+            foreach ($layananList as $index => $layanan) {
                 DB::table('produk_harga')->insert([
                     'product_id' => $id,
-                    'kategori' => $kategori,
+                    'layanan' => $layanan,
                     'harga' => preg_replace('/[^\d]/', '', $hargaList[$index]),
                     'created_at' => now(),
                     'updated_at' => now(),
