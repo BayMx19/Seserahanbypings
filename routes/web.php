@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ReviewController as AdminReviewController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\User\HomeController as UserHomeController;
 use App\Http\Controllers\User\KeranjangController as UserKeranjangController;
+use App\Http\Controllers\User\PesananController as UserPesananController;
 use App\Http\Controllers\User\ProfileController as UserProfileController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,7 @@ use App\Http\Middleware\RoleMiddleware;
 Route::get('/', [WelcomeController::class, 'index']);
 
 Auth::routes();
-
+Route::get('/checkout/finish', [UserPesananController::class, 'finish'])->name('checkout.redirect-finish');
 Route::middleware(['auth', RoleMiddleware::class . ':Admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::resource('/admin/users', AdminUserController::class);
@@ -34,5 +35,11 @@ Route::middleware(['auth', RoleMiddleware::class . ':User'])->group(function () 
     Route::get('/home', [UserHomeController::class, 'index'])->name('home');
     Route::resource('/keranjang', UserKeranjangController::class);
     Route::resource('/profile', UserProfileController::class);
+    Route::post('/checkout/store', [UserPesananController::class, 'store'])->name('checkout.store'); // simpan pesanan
+    Route::get('/checkout/{id}', [UserPesananController::class, 'getCheckoutIndex'])->name('checkout.show'); // detail
+    Route::post('/checkout/finalize/{id}', [UserPesananController::class, 'finalizeCheckout'])->name('checkout.finalize');
+    Route::post('/checkout/update-status', [UserPesananController::class, 'updateStatus'])->name('checkout.updateStatus');
+    
 });
+
 

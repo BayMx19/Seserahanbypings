@@ -84,10 +84,22 @@
                 <br>
                 <div class="mt-3 mt-md-0 button-keranjang">
                     <a href="{{ route('home') }}" class="btn btn-secondary me-3">Kembali Berbelanja</a>
-                    <a href="#" class="btn btn-primary">Selesaikan Pesanan</a>
+                    <a href="#" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('checkout-form').submit();">Checkout Pesanan</a>
+                    <form id="checkout-form" action="{{ route('checkout.store') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>                
                 </div>
             </div>
         @endif
     </div>
 </section>
 @endsection
+@push('scripts')
+<script>
+    function checkoutSubmit() {
+        if (confirm('Yakin ingin menyelesaikan pesanan ini?')) {
+            document.getElementById('checkout-form').submit();
+        }
+    }
+</script>
+@endpush
