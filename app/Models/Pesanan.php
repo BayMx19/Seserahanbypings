@@ -12,6 +12,7 @@ class Pesanan extends Model
         'pembeli_id',
         'kode_invoice',
         'tanggal_pesanan',
+        'tanggal_acara',
         'total_harga',
         'status_pesanan',
     ];

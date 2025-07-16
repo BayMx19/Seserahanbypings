@@ -16,9 +16,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RoleMiddleware;
 
 Route::get('/', [WelcomeController::class, 'index']);
-
 Auth::routes();
-Route::get('/checkout/finish', [UserPesananController::class, 'finish'])->name('checkout.redirect-finish');
+Route::get('/checkout/finish', [UserPesananController::class, 'getCheckoutFinish'])->name('checkout.redirect-finish');
 Route::middleware(['auth', RoleMiddleware::class . ':Admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::resource('/admin/users', AdminUserController::class);
@@ -28,17 +27,18 @@ Route::middleware(['auth', RoleMiddleware::class . ':Admin'])->group(function ()
     Route::resource('/admin/review', AdminReviewController::class);
     Route::get('/admin/profile', [AdminProfileController::class, 'index'])->name('admin.profile.index');
     Route::put('/admin/profile', [AdminProfileController::class, 'update'])->name('admin.profile.update');
+    Route::put('/admin/transaksi/{id}/status', [AdminTransaksiController::class, 'updateTransaksiStatus'])->name('admin.transaksi.updateStatus');
+
 
 });
-
 Route::middleware(['auth', RoleMiddleware::class . ':User'])->group(function () {
     Route::get('/home', [UserHomeController::class, 'index'])->name('home');
     Route::resource('/keranjang', UserKeranjangController::class);
     Route::resource('/profile', UserProfileController::class);
-    Route::post('/checkout/store', [UserPesananController::class, 'store'])->name('checkout.store'); // simpan pesanan
-    Route::get('/checkout/{id}', [UserPesananController::class, 'getCheckoutIndex'])->name('checkout.show'); // detail
-    Route::post('/checkout/finalize/{id}', [UserPesananController::class, 'finalizeCheckout'])->name('checkout.finalize');
-    Route::post('/checkout/update-status', [UserPesananController::class, 'updateStatus'])->name('checkout.updateStatus');
+    Route::post('/checkout/store', [UserPesananController::class, 'storePesananCheckout'])->name('checkout.store'); 
+    Route::get('/checkout/{id}', [UserPesananController::class, 'getCheckoutIndex'])->name('checkout.show'); 
+    Route::post('/checkout/finalize/{id}', [UserPesananController::class, 'postCheckoutFinalize'])->name('checkout.finalize');
+    Route::post('/checkout/update-status', [UserPesananController::class, 'updateCheckoutStatus'])->name('checkout.updateStatus');
     
 });
 

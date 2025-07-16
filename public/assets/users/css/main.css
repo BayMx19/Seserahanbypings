@@ -3253,3 +3253,14 @@ input[type="reset"] {
 .swiper-slide.hidden-slide {
   display: none !important;
 }
+
+.btn-checkout{
+  width: 100% !important;
+  font-weight: bold !important;
+}
+.text-red{
+  color: red !important;
+}
+.text-green{
+  color: #198754 !important;
+}

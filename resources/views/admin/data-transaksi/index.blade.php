@@ -4,164 +4,101 @@
 
 @section('content')
 <h3 class="text-bold">Data Transaksi</h3>
-    <div class="row g-6">
-                <!-- Basic Badges -->
-                <div class="col-lg-6">
-                  <div class="card">
-                    <h5 class="card-header">Basic Badges</h5>
-                    <div class="card-body">
-                      <div class="small fw-medium">Default</div>
-                      <div class="demo-inline-spacing">
-                        <span class="badge text-bg-primary">Primary</span>
-                        <span class="badge text-bg-secondary">Secondary</span>
-                        <span class="badge text-bg-success">Success</span>
-                        <span class="badge text-bg-danger">Danger</span>
-                        <span class="badge text-bg-warning">Warning</span>
-                        <span class="badge text-bg-info">Info</span>
-                        <span class="badge text-bg-dark">Dark</span>
-                      </div>
-                    </div>
-                    <hr class="m-0" />
-                    <div class="card-body">
-                      <div class="small fw-medium">Pills</div>
+<div class="card">
+    <div class="table-responsive text-wrap m-5 p-5">
+        <table class="table display" id="tabel-transaksi">
+            <thead>
+                <tr>
+                    <th>Invoice</th>
+                    <th>Tanggal Pesan</th>
+                    <th>Nama Pembeli</th>
+                    <th>Total</th>
+                    <th>Status Pembayaran</th>
+                    <th>Status Pengiriman</th>
+                    <th>Status Pesanan</th>
+                    <th>ACTIONS</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($pesananList as $pesanan)
+                    <tr>
+                        <td><strong>{{ $pesanan->kode_invoice }}</strong></td>
+                        <td>{{ $pesanan->created_at->format('d M Y') }}</td>
+                        <td>{{ $pesanan->pembeli->name ?? '-' }}</td>
+                        <td>Rp {{ number_format($pesanan->total_harga, 0, ',', '.') }}</td>
+                        <td>
+                            @php
+                              $status = $pesanan->pembayaran->status_pembayaran ?? '-';
+                            @endphp
 
-                      <div class="demo-inline-spacing">
-                        <span class="badge rounded-pill text-bg-primary">Primary</span>
-                        <span class="badge rounded-pill text-bg-secondary">Secondary</span>
-                        <span class="badge rounded-pill text-bg-success">Success</span>
-                        <span class="badge rounded-pill text-bg-danger">Danger</span>
-                        <span class="badge rounded-pill text-bg-warning">Warning</span>
-                        <span class="badge rounded-pill text-bg-info">Info</span>
-                        <span class="badge rounded-pill text-bg-dark">Dark</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                            @if ($status === 'Sudah Dibayar')
+                              <span class="text-green ">{{ $status }}</span>
+                            @elseif ($status === 'Belum Dibayar')
+                              <span class="text-red ">{{ $status }}</span>
+                            @else
+                              <span>{{ $status }}</span>
+                            @endif
+                        </td>
+                        <td>
+                            @php
+                              $statusPengiriman = $pesanan->pengiriman->status_pengiriman ?? '-';
+                            @endphp
 
-                <!-- Label Badges -->
-                <div class="col-lg-6">
-                  <div class="card">
-                    <h5 class="card-header">Label Badges</h5>
-                    <div class="card-body">
-                      <div class="small fw-medium">Label Default</div>
+                            @if (in_array($statusPengiriman, ['Sudah Dikirim', 'Sudah Diambil']))
+                              <span class="text-green">{{ $statusPengiriman }}</span>
+                            @elseif (in_array($statusPengiriman, ['Belum Dikirim', 'Belum Diambil']))
+                              <span class="text-red">{{ $statusPengiriman }}</span>
+                            @else
+                              <span>{{ $statusPengiriman }}</span>
+                            @endif
+                        </td>
+                        <td class="text-center align-middle">
+                            @php
+                                $status = $pesanan->status_pesanan;
+                                $badgeClass = '';
 
-                      <div class="demo-inline-spacing">
-                        <span class="badge bg-label-primary">Primary</span>
-                        <span class="badge bg-label-secondary">Secondary</span>
-                        <span class="badge bg-label-success">Success</span>
-                        <span class="badge bg-label-danger">Danger</span>
-                        <span class="badge bg-label-warning">Warning</span>
-                        <span class="badge bg-label-info">Info</span>
-                        <span class="badge bg-label-dark">Dark</span>
-                      </div>
-                    </div>
-                    <hr class="m-0" />
-                    <div class="card-body">
-                      <div class="small fw-medium">Label Pills</div>
+                                switch ($status) {
+                                    case 'Pending':
+                                        $badgeClass = 'bg-dark text-white';
+                                        break;
+                                    case 'Diproses':
+                                        $badgeClass = 'text-dark';
+                                        $customStyle = 'background-color: #03c3ec;';
+                                        break;
+                                    case 'Dikirim':
+                                        $badgeClass = 'text-dark';
+                                        $customStyle = 'background-color: #ffab00;';
+                                        break;
+                                    case 'Selesai':
+                                        $badgeClass = 'text-white';
+                                        $customStyle = 'background-color: #198754;';
+                                        break;
+                                    default:
+                                        $badgeClass = 'bg-secondary text-white';
+                                        $customStyle = '';
+                                        break;
+                                }
+                            @endphp
 
-                      <div class="demo-inline-spacing">
-                        <span class="badge rounded-pill bg-label-primary">Primary</span>
-                        <span class="badge rounded-pill bg-label-secondary">Secondary</span>
-                        <span class="badge rounded-pill bg-label-success">Success</span>
-                        <span class="badge rounded-pill bg-label-danger">Danger</span>
-                        <span class="badge rounded-pill bg-label-warning">Warning</span>
-                        <span class="badge rounded-pill bg-label-info">Info</span>
-                        <span class="badge rounded-pill bg-label-dark">Dark</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                            <span class="badge {{ $badgeClass }}" style="{{ $customStyle ?? '' }}">{{ $status }}</span>
+                        </td>
+                        <td>
+                            <a href="{{ route('transaksi.show', $pesanan->id) }}" class="btn btn-sm btn-primary">Detail</a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+</div>
+@endsection
 
-                <!-- Button with Badges -->
-                <div class="col-lg">
-                  <div class="card">
-                    <h5 class="card-header">Button with Badges</h5>
-                    <div class="card-body">
-                      <div class="row gy-3">
-                        <div class="col-sm-4">
-                          <small class="fw-medium">Default</small>
-                          <div class="demo-inline-spacing">
-                            <button type="button" class="btn btn-primary">
-                              Text
-                              <span class="badge bg-white text-primary ms-1">4</span>
-                            </button>
-                            <button type="button" class="btn btn-secondary">
-                              Text
-                              <span class="badge bg-white text-secondary rounded-pill ms-1">4</span>
-                            </button>
-                          </div>
-                        </div>
-                        <div class="col-sm-4">
-                          <small class="fw-medium">Outline</small>
-                          <div class="demo-inline-spacing">
-                            <button type="button" class="btn btn-outline-primary">
-                              Text
-                              <span class="badge ms-1">4</span>
-                            </button>
-                            <button type="button" class="btn btn-outline-secondary">
-                              Text
-                              <span class="badge rounded-pill ms-1">4</span>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Badge Circle -->
-                <div class="col-12">
-                  <div class="card">
-                    <h5 class="card-header">Badge Circle & Square Style</h5>
-                    <div class="card-body">
-                      <div class="row gy-6">
-                        <div class="col-xl-6">
-                          <h6>Basic</h6>
-                          <div class="small fw-medium mb-2">Default</div>
-                          <div class="demo-inline-spacing">
-                            <p>
-                              <span class="badge badge-center rounded-pill text-bg-primary">1</span>
-                              <span class="badge badge-center rounded-pill text-bg-secondary">2</span>
-                              <span class="badge badge-center rounded-pill text-bg-success">3</span>
-                              <span class="badge badge-center rounded-pill text-bg-danger">4</span>
-                              <span class="badge badge-center rounded-pill text-bg-warning">5</span>
-                              <span class="badge badge-center rounded-pill text-bg-info">6</span>
-                            </p>
-                            <p>
-                              <span class="badge badge-center text-bg-primary">1</span>
-                              <span class="badge badge-center text-bg-secondary">2</span>
-                              <span class="badge badge-center text-bg-success">3</span>
-                              <span class="badge badge-center text-bg-danger">4</span>
-                              <span class="badge badge-center text-bg-warning">5</span>
-                              <span class="badge badge-center text-bg-info">6</span>
-                            </p>
-                          </div>
-                        </div>
-                        <div class="col-xl-6">
-                          <h6>Label</h6>
-                          <div class="small fw-medium mb-2">Default</div>
-                          <div class="demo-inline-spacing">
-                            <p>
-                              <span class="badge badge-center rounded-pill bg-label-primary">1</span>
-                              <span class="badge badge-center rounded-pill bg-label-secondary">2</span>
-                              <span class="badge badge-center rounded-pill bg-label-success">3</span>
-                              <span class="badge badge-center rounded-pill bg-label-danger">4</span>
-                              <span class="badge badge-center rounded-pill bg-label-warning">5</span>
-                              <span class="badge badge-center rounded-pill bg-label-info">6</span>
-                            </p>
-                            <p>
-                              <span class="badge badge-center bg-label-primary">1</span>
-                              <span class="badge badge-center bg-label-secondary">2</span>
-                              <span class="badge badge-center bg-label-success">3</span>
-                              <span class="badge badge-center bg-label-danger">4</span>
-                              <span class="badge badge-center bg-label-warning">5</span>
-                              <span class="badge badge-center bg-label-info">6</span>
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+@section('scripts')
+<script>
+    $(document).ready(function () {
+        $('#tabel-transaksi').DataTable({
+      "order": [[0, "desc"]] 
+    });
+    });
+</script>
 @endsection

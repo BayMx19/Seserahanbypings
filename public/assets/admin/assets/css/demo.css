@@ -177,3 +177,23 @@ th.sorting-fake::after {
     border: 2px solid #919191;
 }
 
+.text-red{
+  color: red !important;
+}
+.text-green{
+  color: #198754 !important;
+}
+
+.button-change-status {
+  background-color: #198754 !important;
+  width: 100% !important;
+  color:white !important;
+  border: 2px solid #198754 !important;
+}
+
+.button-change-status:hover{
+  background-color: white !important;
+  width: 80% !important;
+  color:#198754 !important;
+  border: 2px solid #198754 !important;
+}
