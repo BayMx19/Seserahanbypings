@@ -3322,3 +3322,37 @@ input[type="reset"] {
     padding: 0.35em 0.6em !important;
     border-radius: 0.5rem !important;
 }
+
+#filterKategori {
+  background-color: #696cff !important;
+  color: white !important;
+  font-weight: bold;
+  width: 80% !important;
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid #696cff;
+  appearance: none; /* untuk hilangkan default arrow */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px;
+}
+
+/* Custom dropdown background saat di-*click* */
+#filterKategori:focus {
+  outline: none;
+  border-color: #696cff;
+  box-shadow: 0 0 0 2px rgba(105, 108, 255, 0.2);
+}
+
+/* Styling list option */
+#filterKategori option {
+  background-color: white;
+  color: #696cff;
+  font-weight: normal;
+}

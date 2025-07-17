@@ -227,7 +227,7 @@
                         </div>
                         <div class="row mb-4 justify-content-center">
                             <div class="col-md-6 text-center">
-                                <select id="filterKategori" class="form-select">
+                                <select id="filterKategori" class="form-select mx-auto d-block">
                                 <option value="all">Semua Kategori</option>
                                 @foreach($produk->pluck('kategori')->unique() as $kategori)
                                     <option value="{{ $kategori }}">{{ $kategori }}</option>
