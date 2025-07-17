@@ -155,9 +155,16 @@
                                                     <a href="{{ url('/') }}" class="nav__link">Home</a>
                                                 @endauth
                                             </li>
-                                            <li class="nav__item"><a href="#about-us" class="nav__link">Tentang</a></li>
-                                            <li class="nav__item"><a href="#products" class="nav__link">Produk</a></li>
-                                            
+                                            @php
+                                                $isHome = request()->is('home') || request()->is('home/*');
+                                            @endphp
+
+                                            <li class="nav__item">
+                                                <a href="{{ $isHome ? '#about-us' : url('/home#about-us') }}" class="nav__link">Tentang</a>
+                                            </li>
+                                            <li class="nav__item">
+                                                <a href="{{ $isHome ? '#products' : url('/home#products') }}" class="nav__link">Produk</a>
+                                            </li>                                            
                                         </ul><!-- //nav__list -->
                                         <div class="dropdown-user">
                                             <a href="javascript:void(0);" onclick="toggleDropdown()" style="color: #7A5AF8; font-weight: 600; font-size: 18px !important;">
@@ -190,7 +197,7 @@
                                                         <strong>Keranjang</strong><br>
                                                     </div>
                                                 </a>
-                                                <a href="#" class="d-flex align-items-center">
+                                                <a href="{{('/riwayat-pesanan')}}" class="d-flex align-items-center">
                                                     <span class="dot"></span>
                                                     <div style="margin-left: 5px;">
                                                         <i class="fas fa-receipt me-2"></i>
@@ -296,6 +303,19 @@
 
     <!-- partial -->
 </div><!-- //wrapper -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const hash = window.location.hash;
+
+        if (hash) {
+            // Tunggu DOM siap, baru scroll ke elemen
+            const el = document.querySelector(hash);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    });
+</script>
 <script>
     window.addEventListener('DOMContentLoaded', function () {
         document.querySelector('.wrapper').classList.add('wrapper_ready-load');

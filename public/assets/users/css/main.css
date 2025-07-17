@@ -3264,3 +3264,61 @@ input[type="reset"] {
 .text-green{
   color: #198754 !important;
 }
+
+    .nav-tabs .nav-link {
+        margin-right: 8px; /* Jarak antar tab */
+        border: 1px solid #696cff !important;
+        background-color: #fff;
+        color: #696cff !important;
+        font-weight: bold;
+        border-radius: 5px 5px 0 0;
+        transition: all 0.3s ease;
+    }
+
+    .nav-tabs .nav-link.active {
+        background-color: #696cff !important;
+        color: #fff !important;
+        font-weight: bold;
+    }
+    .nav-tabs .nav-link.active:hover{
+        background-color: white !important;
+        color: #696cff !important;
+        font-weight: bold;
+    }
+
+    .nav-tabs {
+        border-bottom: none;
+        margin-bottom: 1rem;
+    }
+
+    /* Optional: Hover effect */
+    .nav-tabs .nav-link:hover {
+        background-color: #f0f0ff;
+        color: #696cff !important;
+    }
+
+.accordion-button {
+    transition: all 0.3s ease;
+
+}
+
+.accordion-button:hover {
+    background-color: #696cff !important;
+    color: white !important;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #696cff !important;
+    color: white !important;
+    box-shadow: none !important;
+}
+
+.badge-status {
+    background-color: #696cff !important;
+    color: white !important;
+    border: 1px solid white !important;
+    font-size: 0.8em !important;
+    font-weight: bold !important;
+    padding: 0.35em 0.6em !important;
+    border-radius: 0.5rem !important;
+}

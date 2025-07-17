@@ -39,7 +39,9 @@ Route::middleware(['auth', RoleMiddleware::class . ':User'])->group(function () 
     Route::get('/checkout/{id}', [UserPesananController::class, 'getCheckoutIndex'])->name('checkout.show'); 
     Route::post('/checkout/finalize/{id}', [UserPesananController::class, 'postCheckoutFinalize'])->name('checkout.finalize');
     Route::post('/checkout/update-status', [UserPesananController::class, 'updateCheckoutStatus'])->name('checkout.updateStatus');
-    
-});
+    Route::get('/riwayat-pesanan', [UserPesananController::class, 'getRiwayatPesananIndex'])->name('riwayat-pesanan.index');});
+    Route::put('/pesanan/{id}/status-diterima', [UserPesananController::class, 'updateStatusPesananDiterima'])->name('pesanan.update-status-diterima');
+    Route::put('/pesanan/{id}/selesaikan', [UserPesananController::class, 'updateStatusPesananSelesai'])->name('pesanan.selesaikan');
+
 
 

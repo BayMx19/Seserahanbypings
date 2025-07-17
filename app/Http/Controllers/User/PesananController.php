@@ -160,5 +160,70 @@ class PesananController extends Controller
         return redirect('/')->with('success', 'Pembayaran berhasil!');
     }
 
+    public function getRiwayatPesananIndex()
+    {
+        $statusAsli = [
+            'Pending', 
+            'Diproses', 
+            'Dikirim', 
+            'Sudah Diterima', 
+            'Menunggu Pengembalian', 
+            'Sudah Dikembalikan', 
+            'Selesai'
+        ];
+        $statusLabels = [
+            'Pending' => 'Pending',
+            'Diproses' => 'Diproses',
+            'Dikirim' => 'Dalam Pengiriman',
+            'Sudah Diterima' => 'Sudah Diterima',
+            'Menunggu Pengembalian' => 'Menunggu Pengembalian',
+            'Sudah Dikembalikan' => 'Sudah Dikembalikan',
+            'Selesai' => 'Selesai',
+        ];
+        $pesananByStatus = [];
+
+         foreach ($statusAsli as $status) {
+            $pesananByStatus[$status] = Pesanan::where('pembeli_id', Auth::id())
+                ->where('status_pesanan', $status)
+                ->with(['detailPesanan.keranjang.produk', 'detailPesanan.keranjang.layananHarga'])
+                ->orderByDesc('created_at')
+                ->get();
+         }
+
+        return view('users.riwayat-pesanan.index', compact('statusAsli', 'statusLabels', 'pesananByStatus'));
+    }
+    public function updateStatusPesananDiterima($id)
+    {
+        $pesanan = Pesanan::where('id', $id)->where('pembeli_id', Auth::id())->first();
+
+        if (!$pesanan) {
+            return redirect()->back()->with('error', 'Pesanan tidak ditemukan.');
+        }
+        if ($pesanan->status_pesanan !== 'Dikirim') {
+            return redirect()->back()->with('error', 'Hanya pesanan yang sedang dikirim yang bisa diubah.');
+        }
+
+        $pesanan->status_pesanan = 'Sudah Diterima';
+        $pesanan->save();
+
+        return redirect()->back()->with('success', 'Status pesanan berhasil diperbarui menjadi Sudah Diterima.');
+    }
+    public function updateStatusPesananSelesai($id)
+    {
+        $pesanan = Pesanan::where('id', $id)->where('pembeli_id', Auth::id())->first();
+
+        if (!$pesanan) {
+            return redirect()->back()->with('error', 'Pesanan tidak ditemukan.');
+        }
+        if (!in_array($pesanan->status_pesanan, ['Sudah Diterima', 'Sudah Dikembalikan'])) {
+            return redirect()->back()->with('error', 'Pesanan belum bisa diselesaikan.');
+        }
+        $pesanan->status_pesanan = 'Selesai';
+        $pesanan->save();
+
+        return redirect()->back()->with('success', 'Pesanan telah diselesaikan.');
+    }
+
+
 
 }
