@@ -10,6 +10,7 @@ class Review extends Model
 
     protected $fillable = [
         'pesanan_id',
+        'produk_id',
         'rating',
         'review_text',
     ];

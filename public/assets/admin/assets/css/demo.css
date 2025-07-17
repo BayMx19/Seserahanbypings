@@ -18,8 +18,6 @@
   letter-spacing: -0.5px;
 }
 
-/* ! For .layout-navbar-fixed added fix padding top to .layout-page */
-/* Detached navbar */
 .layout-navbar-fixed .layout-wrapper:not(.layout-horizontal):not(.layout-without-menu) .layout-page {
   padding-top: 74px !important;
 }
@@ -115,14 +113,12 @@
 .text-bold{
   font-weight: bold !important;
 }
-/* Pastikan teks header rata kiri */
 th.nohp-header {
     text-align: left !important;
     position: relative;
-    padding-right: 30px !important; /* ruang untuk icon sort di kanan */
+    padding-right: 30px !important; 
 }
 
-/* Paksa icon sorting ke kanan */
 th.nohp-header.sorting::after,
 th.nohp-header.sorting_asc::after,
 th.nohp-header.sorting_desc::after {
@@ -133,7 +129,7 @@ th.nohp-header.sorting_desc::after {
     transform: translateY(-50%);
 }
 th.sorting-fake::after {
-  content: '\2195'; /* panah atas-bawah unicode */
+  content: '\2195';
   font-size: 0.8rem;
   position: relative;
   float: right;
@@ -154,7 +150,7 @@ th.sorting-fake::after {
 }
 .btn-submit:hover {
     background-color: white;
-    color: #4CAF50; /* Hijau lebih terang saat hover */
+    color: #4CAF50; 
     border: 2px solid #4CAF50;
 
 }
@@ -173,7 +169,7 @@ th.sorting-fake::after {
 }
 .btn-batal:hover {
     background-color: white;
-    color: #919191; /* Abu-abu lebih terang saat hover */
+    color: #919191;
     border: 2px solid #919191;
 }
 

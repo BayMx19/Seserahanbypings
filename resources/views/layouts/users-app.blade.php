@@ -302,7 +302,9 @@
 
 
     <!-- partial -->
+    @stack('modals')
 </div><!-- //wrapper -->
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const hash = window.location.hash;

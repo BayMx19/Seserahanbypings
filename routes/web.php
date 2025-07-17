@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\User\HomeController as UserHomeController;
 use App\Http\Controllers\User\KeranjangController as UserKeranjangController;
 use App\Http\Controllers\User\PesananController as UserPesananController;
+use App\Http\Controllers\User\ReviewController as UserReviewController;
 use App\Http\Controllers\User\ProfileController as UserProfileController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Auth;
@@ -42,6 +43,4 @@ Route::middleware(['auth', RoleMiddleware::class . ':User'])->group(function () 
     Route::get('/riwayat-pesanan', [UserPesananController::class, 'getRiwayatPesananIndex'])->name('riwayat-pesanan.index');});
     Route::put('/pesanan/{id}/status-diterima', [UserPesananController::class, 'updateStatusPesananDiterima'])->name('pesanan.update-status-diterima');
     Route::put('/pesanan/{id}/selesaikan', [UserPesananController::class, 'updateStatusPesananSelesai'])->name('pesanan.selesaikan');
-
-
-
+    Route::post('/pesanan/review', [UserReviewController::class, 'simpanReview'])->name('pesanan.review.simpan');

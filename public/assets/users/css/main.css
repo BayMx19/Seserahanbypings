@@ -3224,7 +3224,7 @@ input[type="reset"] {
   color: white !important;
   font-weight: bold !important;
 }
-    /* Tambahkan ini ke file CSS kamu atau dalam <style> di blade */
+
 .select-layanan {
   display: block;
   width: 100%;
@@ -3234,7 +3234,7 @@ input[type="reset"] {
   color: #212529;
   background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid #ced4da; /* Ini bikin garis seperti input biasa */
+  border: 1px solid #ced4da;
   border-radius: 0.375rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
@@ -3266,7 +3266,7 @@ input[type="reset"] {
 }
 
     .nav-tabs .nav-link {
-        margin-right: 8px; /* Jarak antar tab */
+        margin-right: 8px; 
         border: 1px solid #696cff !important;
         background-color: #fff;
         color: #696cff !important;
@@ -3291,7 +3291,6 @@ input[type="reset"] {
         margin-bottom: 1rem;
     }
 
-    /* Optional: Hover effect */
     .nav-tabs .nav-link:hover {
         background-color: #f0f0ff;
         color: #696cff !important;
@@ -3334,7 +3333,7 @@ input[type="reset"] {
   padding: 10px;
   border-radius: 10px;
   border: 2px solid #696cff;
-  appearance: none; /* untuk hilangkan default arrow */
+  appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
   background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
@@ -3343,14 +3342,12 @@ input[type="reset"] {
   background-size: 20px;
 }
 
-/* Custom dropdown background saat di-*click* */
 #filterKategori:focus {
   outline: none;
   border-color: #696cff;
   box-shadow: 0 0 0 2px rgba(105, 108, 255, 0.2);
 }
 
-/* Styling list option */
 #filterKategori option {
   background-color: white;
   color: #696cff;

@@ -90,6 +90,7 @@
                                         $produk = $keranjang->produk;
                                         $layanan = $keranjang->layananHarga;
                                         $gambar = $produk->gambar ?? 'https://via.placeholder.com/80x80';
+                                        $review = $pesanan->review()->where('produk_id', $produk->id)->first();
                                     @endphp
                                     <div class="d-flex align-items-center mb-3">
                                         <img src="{{ asset('storage/' . $gambar) }}" alt="Produk" class="rounded" width="80" height="80">
@@ -102,10 +103,31 @@
                                             <strong>Rp{{ number_format($keranjang->qty * $layanan->harga, 0, ',', '.') }}</strong>
                                         </div>
                                     </div>
+                                    @if ($status === 'Selesai')
+                                        @if ($review)
+                                            <small class="d-block mt-1"><span class="text-bold text-blue">Rating :</span></small>
+                                            <div class="text-warning">
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                    {!! $i <= $review->rating ? '★' : '☆' !!}
+                                                @endfor
+                                            </div>
+                                            @if ($review->review_text)
+                                                <small class="d-block mt-1"><span class="text-bold text-blue">Ulasan :</span> "{{ $review->review_text }}"</small>
+                                            @endif
+                                        @else
+                                            <button class="btn btn-sm btn-outline-primary mt-2"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#reviewModal-{{ $pesanan->id }}-{{ $produk->id }}">
+                                                Beri Review
+                                            </button>
+                                        @endif
+                                    @endif
                                     @if (!$loop->last)
                                         <hr>
                                     @endif
+                                    
                                 @endforeach
+                                <hr>
                                 <div class="text-end text-blue fw-bold mt-3">
                                     Total: Rp{{ number_format($pesanan->total_harga, 0, ',', '.') }}
                                 </div>
@@ -144,6 +166,8 @@
                                 @endif
 
 
+
+
                             </div>
                         </div>
                     </div>
@@ -164,3 +188,99 @@
 </section>
 @endsection
 
+@push('modals')
+    @foreach ($statusAsli as $index => $status)
+        @php $daftarPesanan = $pesananByStatus[$status]; @endphp
+        @foreach ($daftarPesanan as $pesanan)
+            @foreach ($pesanan->detailPesanan as $detail)
+                @php
+                    $keranjang = $detail->keranjang;
+                    $produk = $keranjang->produk;
+                    $review = $pesanan->review()->where('produk_id', $produk->id)->first();
+                @endphp
+
+                @if ($status === 'Selesai' && !$review)
+                    <div class="modal fade" id="reviewModal-{{ $pesanan->id }}-{{ $produk->id }}" tabindex="-1" aria-labelledby="reviewModalLabel-{{ $pesanan->id }}-{{ $produk->id }}" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <form action="{{ route('pesanan.review.simpan') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="pesanan_id" value="{{ $pesanan->id }}">
+                                <input type="hidden" name="produk_id" value="{{ $produk->id }}">
+                                <input type="hidden" name="rating" id="rating-value-{{ $pesanan->id }}-{{ $produk->id }}" value="0">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="reviewModalLabel-{{ $pesanan->id }}-{{ $produk->id }}">Beri Penilaian untuk {{ $produk->nama }}</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="mb-3 text-center">
+                                            <label class="form-label d-block mb-2">Rating:</label>
+                                            <div class="star-rating d-inline-flex" data-target="rating-value-{{ $pesanan->id }}-{{ $produk->id }}">
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                    <span class="star" data-value="{{ $i }}">&#9733;</span>
+                                                @endfor
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="review_text" class="form-label">Ulasan:</label>
+                                            <textarea name="review_text" class="form-control" rows="3" placeholder="Tulis ulasan Anda..." required></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn" style="background-color: #696cff; color: white;">Kirim</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                @endif
+            @endforeach
+        @endforeach
+    @endforeach
+
+    {{-- CSS & JS Rating --}}
+    <style>
+        .star-rating .star {
+            font-size: 2rem;
+            color: #ccc;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .star-rating .star.active,
+        .star-rating .star.hovered {
+            color: gold;
+        }
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll(".star-rating").forEach(ratingEl => {
+                const targetInputId = ratingEl.getAttribute("data-target");
+                const input = document.getElementById(targetInputId);
+                const stars = ratingEl.querySelectorAll(".star");
+
+                stars.forEach((star, index) => {
+                    star.addEventListener("click", () => {
+                        const rating = star.getAttribute("data-value");
+                        input.value = rating;
+
+                        stars.forEach((s, i) => {
+                            s.classList.toggle("active", i < rating);
+                        });
+                    });
+
+                    star.addEventListener("mouseover", () => {
+                        stars.forEach((s, i) => {
+                            s.classList.toggle("hovered", i <= index);
+                        });
+                    });
+
+                    star.addEventListener("mouseout", () => {
+                        stars.forEach(s => s.classList.remove("hovered"));
+                    });
+                });
+            });
+        });
+    </script>
+@endpush
