@@ -55,27 +55,39 @@
                         <td class="text-center align-middle">
                             @php
                                 $status = $pesanan->status_pesanan;
-                                $badgeClass = '';
+                                $badgeClass = 'badge px-3 py-2 rounded';
+                                $customStyle = '';
 
                                 switch ($status) {
                                     case 'Pending':
-                                        $badgeClass = 'bg-dark text-white';
+                                        $badgeClass .= ' bg-dark text-white';
                                         break;
                                     case 'Diproses':
-                                        $badgeClass = 'text-dark';
+                                        $badgeClass .= ' text-dark';
                                         $customStyle = 'background-color: #03c3ec;';
                                         break;
                                     case 'Dikirim':
-                                        $badgeClass = 'text-dark';
+                                        $badgeClass .= ' text-dark';
                                         $customStyle = 'background-color: #ffab00;';
                                         break;
+                                    case 'Sudah Diterima':
+                                        $badgeClass .= ' text-white';
+                                        $customStyle = 'background-color: #0d6efd;'; // Bootstrap primary
+                                        break;
+                                    case 'Menunggu Pengembalian':
+                                        $badgeClass .= ' text-white';
+                                        $customStyle = 'background-color: #fd7e14;'; // Bootstrap orange
+                                        break;
+                                    case 'Sudah Dikembalikan':
+                                        $badgeClass .= ' text-white';
+                                        $customStyle = 'background-color: #20c997;'; // Bootstrap teal
+                                        break;
                                     case 'Selesai':
-                                        $badgeClass = 'text-white';
+                                        $badgeClass .= ' text-white';
                                         $customStyle = 'background-color: #198754;';
                                         break;
                                     default:
-                                        $badgeClass = 'bg-secondary text-white';
-                                        $customStyle = '';
+                                        $badgeClass .= ' bg-secondary text-white';
                                         break;
                                 }
                             @endphp

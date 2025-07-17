@@ -15,11 +15,14 @@
         @php
           $status = $pesanan->status_pesanan;
           $badgeClass = match($status) {
-            'Pending' => 'bg-dark text-white',
-            'Diproses' => 'bg-info text-black',
-            'Dikirim' => 'bg-warning text-black',
-            'Selesai' => 'bg-success text-white',
-            default => 'bg-secondary'
+              'Pending' => 'bg-dark text-white',
+              'Diproses' => 'bg-info text-black',
+              'Dikirim' => 'bg-warning text-black',
+              'Sudah Diterima' => 'bg-primary text-white',
+              'Menunggu Pengembalian' => 'bg-red text-white',
+              'Sudah Dikembalikan' => 'bg-teal text-white',
+              'Selesai' => 'bg-success text-white',
+              default => 'bg-secondary text-white'
           };
         @endphp
         <span class="badge {{ $badgeClass }}">{{ $status }}</span>
@@ -80,44 +83,78 @@
     <h5 class="text-primary text-bold mt-0 mb-0">Total: Rp{{ number_format($pesanan->total_harga, 0, ',', '.') }}</h5>
   </div>
 </div>
+@php
+    $isSewa = $pesanan->detailPesanan->contains(function ($detail) {
+        return in_array($detail->keranjang->layananHarga->layanan, ['Sewa + Jasa Hias', 'Sewa Box']);
+    });
+@endphp
+
 <div class="row mt-5">
   <div class="col-sm-12">
 
+    {{-- Pending → Diproses --}}
     @if ($pesanan->status_pesanan === 'Pending')
       <form action="{{ route('admin.transaksi.updateStatus', $pesanan->id) }}" method="POST" class="d-inline">
-        @csrf
-        @method('PUT')
+        @csrf @method('PUT')
         <input type="hidden" name="status_pesanan" value="Diproses">
         <button class="btn button-change-status">Proses Pesanan</button>
       </form>
     @endif
 
-    @if ($pesanan->status_pesanan === 'Diproses' && $pesanan->pengiriman && $pesanan->pengiriman->status_pengiriman === 'Belum Dikirim')
-      <form action="{{ route('admin.transaksi.updateStatus', $pesanan->id) }}" method="POST" class="d-inline">
-        @csrf
-        @method('PUT')
-        <input type="hidden" name="status_pengiriman" value="Sudah Dikirim">
-        <button class="btn button-change-status">Set Sudah Dikirim</button>
-      </form>
+    {{-- Diproses → Sudah Dikirim / Sudah Diambil --}}
+    @if ($pesanan->status_pesanan === 'Diproses' && $pesanan->pengiriman)
+      @if ($pesanan->pengiriman->status_pengiriman === 'Belum Dikirim')
+        <form action="{{ route('admin.transaksi.updateStatus', $pesanan->id) }}" method="POST" class="d-inline">
+          @csrf @method('PUT')
+          <input type="hidden" name="status_pengiriman" value="Sudah Dikirim">
+          <button class="btn button-change-status">Set Sudah Dikirim</button>
+        </form>
+      @endif
+      @if ($pesanan->pengiriman->status_pengiriman === 'Belum Diambil')
+        <form action="{{ route('admin.transaksi.updateStatus', $pesanan->id) }}" method="POST" class="d-inline">
+          @csrf @method('PUT')
+          <input type="hidden" name="status_pengiriman" value="Sudah Diambil">
+          <button class="btn button-change-status">Set Sudah Diambil</button>
+        </form>
+      @endif
     @endif
 
-    @if ($pesanan->status_pesanan === 'Diproses' && $pesanan->pengiriman && $pesanan->pengiriman->status_pengiriman === 'Belum Diambil')
-      <form action="{{ route('admin.transaksi.updateStatus', $pesanan->id) }}" method="POST" class="d-inline">
-        @csrf
-        @method('PUT')
-        <input type="hidden" name="status_pengiriman" value="Sudah Diambil">
-        <button class="btn button-change-status">Set Sudah Diambil</button>
-      </form>
-    @endif
-
+    {{-- Dikirim/Diambil → Sudah Diterima --}}
     @if (
-        $pesanan->status_pesanan === 'Dikirim' &&
+        in_array($pesanan->status_pesanan, ['Dikirim', 'Diambil']) &&
         $pesanan->pengiriman &&
         in_array($pesanan->pengiriman->status_pengiriman, ['Sudah Dikirim', 'Sudah Diambil'])
     )
       <form action="{{ route('admin.transaksi.updateStatus', $pesanan->id) }}" method="POST" class="d-inline">
-        @csrf
-        @method('PUT')
+        @csrf @method('PUT')
+        <input type="hidden" name="status_pesanan" value="Sudah Diterima">
+        <button class="btn button-change-status">Tandai Sudah Diterima</button>
+      </form>
+    @endif
+    {{-- Sudah Diterima (sewa) → Menunggu Pengembalian --}}
+    @if ($isSewa && $pesanan->status_pesanan === 'Sudah Diterima')
+      <form action="{{ route('admin.transaksi.updateStatus', $pesanan->id) }}" method="POST" class="d-inline">
+        @csrf @method('PUT')
+        <input type="hidden" name="status_pesanan" value="Menunggu Pengembalian">
+        <button class="btn button-change-status">Tandai Menunggu Pengembalian</button>
+      </form>
+    @endif
+    {{-- Menunggu Pengembalian (setelah Sudah Diterima untuk sewa) --}}
+    @if ($pesanan->status_pesanan === 'Menunggu Pengembalian')
+      <form action="{{ route('admin.transaksi.updateStatus', $pesanan->id) }}" method="POST" class="d-inline">
+        @csrf @method('PUT')
+        <input type="hidden" name="status_pesanan" value="Sudah Dikembalikan">
+        <button class="btn button-change-status">Tandai Sudah Dikembalikan</button>
+      </form>
+    @endif
+
+    {{-- Selesai: setelah Sudah Diterima (non-sewa) atau Sudah Dikembalikan (sewa) --}}
+    @if (
+      (!$isSewa && $pesanan->status_pesanan === 'Sudah Diterima') ||
+      ($isSewa && $pesanan->status_pesanan === 'Sudah Dikembalikan')
+    )
+      <form action="{{ route('admin.transaksi.updateStatus', $pesanan->id) }}" method="POST" class="d-inline">
+        @csrf @method('PUT')
         <input type="hidden" name="status_pesanan" value="Selesai">
         <button class="btn button-change-status">Selesaikan Pesanan</button>
       </form>
@@ -125,11 +162,6 @@
 
   </div>
 </div>
-<div class="row mt-5">
-  <div class="col-sm-12">
-    <button class="btn button-back">Selesaikan Pesanan</button>
 
-  </div>
-</div>
 
 @endsection

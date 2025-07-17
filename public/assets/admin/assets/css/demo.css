@@ -193,7 +193,7 @@ th.sorting-fake::after {
 
 .button-change-status:hover{
   background-color: white !important;
-  width: 80% !important;
+  width: 100% !important;
   color:#198754 !important;
   border: 2px solid #198754 !important;
 }
