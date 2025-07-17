@@ -162,6 +162,8 @@
 
   </div>
 </div>
-
+<div style="text-align: center; margin-top: 10px;">
+        <a href="{{ route('transaksi.index') }}"><button class="btn btn-batal">Kembali</button></a>
+</div>
 
 @endsection

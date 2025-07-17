@@ -15,14 +15,14 @@ class TransaksiController extends Controller
     }
     public function index()
     {
-    $pesananList = Pesanan::with(['pembeli', 'pembayaran', 'pengiriman'])
-            ->orderByDesc('created_at')
-            ->whereHas('pembayaran', function ($query) {
-                            $query->where('status_pembayaran', '!=', 'Belum Dibayar');
-                        })
-            ->get();
+        $pesananList = Pesanan::with(['pembeli', 'pembayaran', 'pengiriman'])
+                ->orderByDesc('created_at')
+                ->whereHas('pembayaran', function ($query) {
+                                $query->where('status_pembayaran', '!=', 'Belum Dibayar');
+                            })
+                ->get();
 
-    return view('admin.data-transaksi.index', compact('pesananList'));
+        return view('admin.data-transaksi.index', compact('pesananList'));
     }
     public function show($id)
     {

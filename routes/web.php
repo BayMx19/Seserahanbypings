@@ -25,7 +25,7 @@ Route::middleware(['auth', RoleMiddleware::class . ':Admin'])->group(function ()
     Route::resource('/admin/produk', AdminProdukController::class);
     Route::get('/admin/data-produk', [AdminProdukController:: class, 'getListProduk']);
     Route::resource('/admin/transaksi', AdminTransaksiController::class);
-    Route::resource('/admin/review', AdminReviewController::class);
+    Route::resource('/admin/review', AdminReviewController::class)->only(['index', 'show'])->names(['index' => 'admin.data-review.index','show' => 'admin.data-review.show',]);;
     Route::get('/admin/profile', [AdminProfileController::class, 'index'])->name('admin.profile.index');
     Route::put('/admin/profile', [AdminProfileController::class, 'update'])->name('admin.profile.update');
     Route::put('/admin/transaksi/{id}/status', [AdminTransaksiController::class, 'updateTransaksiStatus'])->name('admin.transaksi.updateStatus');
