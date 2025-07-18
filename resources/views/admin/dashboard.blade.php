@@ -158,26 +158,26 @@
                               </tr>
                             </thead>
                             <tbody>
-    @foreach ($sewaPesanan as $pesanan)
-      @foreach ($pesanan->detailPesanan as $detail)
-        @php
-          $layanan = $detail->keranjang->layananHarga->layanan ?? '-';
-          $produk = $detail->keranjang->produk->nama ?? '-';
-        @endphp
-        @if (in_array($layanan, ['Sewa + Jasa Hias', 'Sewa Box']))
-          <tr>
-            <td>{{ $loop->iteration }}</td>
-            <td>{{ $pesanan->kode_invoice }}</td>
-            <td>{{ $pesanan->pembeli->name ?? '-' }}</td>
-            <td>{{ $produk }}</td>
-            <td>{{ $layanan }}</td>
-            <td>{{ $pesanan->tanggal_acara ? \Carbon\Carbon::parse($pesanan->tanggal_acara)->locale('id')->isoFormat('D MMMM YYYY') : '-' }}</td>
-            <td class="tgl-pengembalian text-red" data-tanggal="{{ $pesanan->tanggal_acara }}"></td>
-          </tr>
-        @endif
-      @endforeach
-    @endforeach
-  </tbody>
+                              @foreach ($sewaPesanan as $pesanan)
+                                @foreach ($pesanan->detailPesanan as $detail)
+                                  @php
+                                    $layanan = $detail->keranjang->layananHarga->layanan ?? '-';
+                                    $produk = $detail->keranjang->produk->nama ?? '-';
+                                  @endphp
+                                  @if (in_array($layanan, ['Sewa + Jasa Hias', 'Sewa Box']))
+                                    <tr>
+                                      <td>{{ $loop->iteration }}</td>
+                                      <td>{{ $pesanan->kode_invoice }}</td>
+                                      <td>{{ $pesanan->pembeli->name ?? '-' }}</td>
+                                      <td>{{ $produk }}</td>
+                                      <td>{{ $layanan }}</td>
+                                      <td>{{ $pesanan->tanggal_acara ? \Carbon\Carbon::parse($pesanan->tanggal_acara)->locale('id')->isoFormat('D MMMM YYYY') : '-' }}</td>
+                                      <td class="tgl-pengembalian text-red" data-tanggal="{{ $pesanan->tanggal_acara }}"></td>
+                                    </tr>
+                                  @endif
+                                @endforeach
+                              @endforeach
+                            </tbody>
                           </table>
                         </div>
                       </div>
@@ -250,7 +250,6 @@
   $(document).ready(function () {
     $('#tabelSewa').DataTable();
 
-    // Hitung batas pengembalian (2 hari setelah tanggal acara)
     $('.tgl-pengembalian').each(function () {
       var tanggalAcara = $(this).data('tanggal');
       if (tanggalAcara) {
