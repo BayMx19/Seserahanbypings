@@ -28,12 +28,13 @@ class DashboardController extends Controller
         if ($from && $to) {
             $pesananQuery->whereBetween('created_at', [$from . ' 00:00:00', $to . ' 23:59:59']);
         }
-        $getCountTransaksi = $pesananQuery->count();
+        $getCountTransaksi = $pesananQuery->where('status_pesanan', 'Selesai')->count();
         $getCountSaldo = number_format($pesananQuery->sum('total_harga'), 0, ',', '.');
 
         $getChartPemasukan = clone $pesananQuery;
         $getChartPemasukan = $getChartPemasukan
             ->selectRaw('MONTH(created_at) as month, SUM(total_harga) as total')
+            ->where('status_pesanan', 'Selesai')
             ->groupBy(DB::raw('MONTH(created_at)'))
             ->orderBy('month')
             ->pluck('total', 'month')
