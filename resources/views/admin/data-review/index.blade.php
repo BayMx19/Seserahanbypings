@@ -27,7 +27,7 @@
           <td>{{ $item->pesanan->kode_invoice ?? '-' }}</td>
           <td>{{ $item->pesanan->pembeli->name ?? '-' }}</td>
           <td>{{ $firstDetail ? ($firstDetail->keranjang->produk->nama ?? '-') : '-' }}</td>
-          <td>{{ $item->rating }} / 5</td>
+          <td class="text-green text-bold"><i class="bx bxs-star"></i>{{ $item->rating }} / 5</td>
           <td>{{ \Str::limit($item->review_text, 100) }}</td>
           <td>{{ $item->created_at->format('d M Y') }}</td>
           <td>

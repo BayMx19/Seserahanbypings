@@ -187,7 +187,7 @@
             </div>
 
 @endsection
-@push('scripts')
+@section('scripts')
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     var options = {
@@ -266,4 +266,4 @@
   });
 </script>
 
-@endpush
+@endsection
