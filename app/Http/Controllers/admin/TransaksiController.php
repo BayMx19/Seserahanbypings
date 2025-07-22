@@ -36,57 +36,122 @@ class TransaksiController extends Controller
 
         return view('admin.data-transaksi.show', compact('pesanan'));
     }
-    public function updateTransaksiStatus(Request $request, $id)
-    {
-        $pesanan = Pesanan::with(['pembayaran', 'pengiriman', 'detailPesanan.keranjang.layananHarga'])->findOrFail($id);
+public function updateTransaksiStatus(Request $request, $id)
+{
+    
+    $pesanan = Pesanan::with(['pembayaran', 'pengiriman', 'detailPesanan.keranjang.layananHarga', 'detailPesanan.keranjang.produk'])->findOrFail($id);
 
-        DB::beginTransaction();
-        try {
-            if ($request->has('status_pembayaran')) {
-                $pesanan->pembayaran->status_pembayaran = $request->status_pembayaran;
-            }
-            $isSewa = $pesanan->detailPesanan->contains(function ($detail) {
-                return in_array($detail->keranjang->layananHarga->layanan, ['Sewa + Jasa Hias', 'Sewa Box']);
-            });
-            if ($request->has('status_pesanan')) {
-                $pesanan->status_pesanan = $request->status_pesanan;
-            }
-            if ($request->has('status_pengiriman')) {
-                $pesanan->pengiriman->status_pengiriman = $request->status_pengiriman;
+    DB::beginTransaction();
+    try {
+        if ($request->has('status_pembayaran')) {
+            $pesanan->pembayaran->status_pembayaran = $request->status_pembayaran;
+        }
 
-                if ($request->status_pengiriman === 'Sudah Dikirim') {
-                    $pesanan->pengiriman->status_pengiriman = 'Sudah Dikirim';
+        $isSewa = $pesanan->detailPesanan->contains(fn ($detail) =>
+            in_array($detail->keranjang->layananHarga->layanan, ['Sewa + Jasa Hias', 'Sewa Box'])
+        );
+
+        $isBeli = $pesanan->detailPesanan->contains(fn ($detail) =>
+            in_array($detail->keranjang->layananHarga->layanan, ['Beli', 'Jasa'])
+        );
+
+        $metodePengiriman = $pesanan->pengiriman->metode_pengiriman;
+        $statusPengiriman = $request->status_pengiriman ?? null;
+        $statusPesanan = $request->status_pesanan ?? null;
+
+        // Handle status pengiriman
+        if ($statusPengiriman) {
+            $pesanan->pengiriman->status_pengiriman = $statusPengiriman;
+
+            if ($metodePengiriman === 'Dikirim') {
+                if ($statusPengiriman === 'Sudah Dikirim' && $pesanan->status_pesanan === 'Diproses') {
                     $pesanan->status_pesanan = 'Dikirim';
-                } elseif ($request->status_pengiriman === 'Sudah Diambil') {
-                    $pesanan->pengiriman->status_pengiriman = 'Sudah Diambil';
-                    $pesanan->status_pesanan = 'Diambil';
+                }
+            } elseif ($metodePengiriman === 'Ambil di Tempat') {
+                if ($statusPengiriman === 'Belum Diambil' && $pesanan->status_pesanan === 'Diproses') {
+                    $pesanan->status_pesanan = 'Siap Diambil';
+                } elseif ($statusPengiriman === 'Sudah Diambil' && $pesanan->status_pesanan === 'Siap Diambil') {
+                    $pesanan->status_pesanan = 'Sudah Diterima';
                 }
             }
-            
-            if ($request->has('status_pesanan')) {
-            $statusReq = $request->status_pesanan;
+        }
 
-            if ($statusReq === 'Sudah Diterima') {
-                if (in_array($pesanan->status_pesanan, ['Dikirim', 'Diambil'])) {
-                    $pesanan->status_pesanan = $isSewa ? 'Menunggu Pengembalian' : 'Sudah Diterima';
-                }
-            } elseif ($statusReq === 'Sudah Dikembalikan' && $pesanan->status_pesanan === 'Menunggu Pengembalian') {
-                $pesanan->status_pesanan = 'Sudah Dikembalikan';
-            } elseif ($statusReq === 'Selesai') {
-                if (in_array($pesanan->status_pesanan, ['Sudah Diterima', 'Sudah Dikembalikan'])) {
-                    $pesanan->status_pesanan = 'Selesai';
-                }
-            } else {
-                // Status lain langsung di-set
-                $pesanan->status_pesanan = $statusReq;
+        // Handle status pesanan manual
+        if ($statusPesanan) {
+            switch ($statusPesanan) {
+                case 'Diproses':
+                    if ($pesanan->status_pesanan === 'Pending') {
+                        $pesanan->status_pesanan = 'Diproses';
+                    }
+                    break;
+
+                case 'Sudah Diterima':
+                    if ($metodePengiriman === 'Dikirim' && $pesanan->status_pesanan === 'Dikirim') {
+                        $pesanan->status_pesanan = 'Sudah Diterima';
+                    } elseif ($metodePengiriman === 'Ambil di Tempat' && $pesanan->status_pesanan === 'Siap Diambil') {
+                        $pesanan->status_pesanan = 'Sudah Diterima';
+                    }
+                    break;
+
+                case 'Menunggu Pengembalian':
+                    if ($isSewa && $pesanan->status_pesanan === 'Sudah Diterima') {
+                        $pesanan->status_pesanan = 'Menunggu Pengembalian';
+                    }
+                    break;
+
+                case 'Sudah Dikembalikan':
+                    if ($isSewa && $pesanan->status_pesanan === 'Menunggu Pengembalian') {
+                        $pesanan->status_pesanan = 'Sudah Dikembalikan';
+                    }
+                    break;
+
+                case 'Selesai':
+                    if ($isSewa && $pesanan->status_pesanan === 'Sudah Dikembalikan') {
+                        $pesanan->status_pesanan = 'Selesai';
+                        foreach ($pesanan->detailPesanan as $detail) {
+                            $produk = $detail->keranjang->produk;
+
+                            if ($produk) {
+                                $produk->stok -= $detail->keranjang->qty;
+
+                                if ($produk->stok < 0) {
+                                    $produk->stok = 0;
+                                }
+
+                                $produk->save();
+                            }
+                        }
+                    } elseif ($isBeli && $pesanan->status_pesanan === 'Sudah Diterima') {
+                        $pesanan->status_pesanan = 'Selesai';
+
+                        foreach ($pesanan->detailPesanan as $detail) {
+                            $produk = $detail->keranjang->produk;
+
+                            if ($produk) {
+                                $produk->stok -= $detail->keranjang->qty;
+
+                                if ($produk->stok < 0) {
+                                    $produk->stok = 0;
+                                }
+
+                                $produk->save();
+                            }
+                        }
+                    }
+                    break;
             }
         }
-            $pesanan->push(); 
-            DB::commit();
-            return back()->with('success', 'Status berhasil diperbarui.');
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return back()->with('error', 'Gagal memperbarui status: ' . $e->getMessage());
-        }
+
+        $pesanan->push();
+        DB::commit();
+        return back()->with('success', 'Status berhasil diperbarui.');
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return back()->with('error', 'Gagal memperbarui status: ' . $e->getMessage());
     }
+}
+
+
+
+
 }

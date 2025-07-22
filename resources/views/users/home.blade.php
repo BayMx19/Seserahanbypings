@@ -1,10 +1,29 @@
 @extends('layouts.users-app')
 @section('title', 'Home')
 @section('content')
-
+                
                 <section class="section main-section">
                     <div class="container">
-                        @if (session('success'))
+                        @if ($menungguPengembalian)
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function () {
+                                    Swal.fire({
+                                        icon: 'warning',
+                                        title: 'Pengembalian Diperlukan!',
+                                        text: 'Anda memiliki pesanan yang Menunggu Pengembalian. Harap segera kembalikan barang sewaan Anda.',
+                                        confirmButtonText: 'Lihat Pesanan',
+                                        confirmButtonColor: '#6c5ce7',
+                                        showCancelButton: true,
+                                        cancelButtonText: 'Nanti Saja',
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            window.location.href = "{{ '/riwayat-pesanan' }}";
+                                        }
+                                    });
+                                });
+                            </script>
+                        @endif
+                        {{-- @if (session('success'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 {{ session('success') }}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -16,7 +35,7 @@
                                 {{ session('error') }}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
-                        @endif
+                        @endif --}}
                         <div class="row">
                             <div class="col col_7 col_desktop-12 order-desktop-2">
                                 <div class="photo-list main-photo">

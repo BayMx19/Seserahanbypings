@@ -111,7 +111,11 @@
                             @endforeach
                         </ul>
                         <hr>
-                        <h5 class="text-end text-bold text-blue">Total : Rp {{ number_format($pesanan->total_harga, 0, ',', '.') }}</h5>
+                        <div id="biaya-tambahan-wrapper" style="display: none; margin-bottom: 10px;" class="text-end">
+                            <p id="biaya-pengiriman-text" class="mb-1">Biaya Pengiriman: <strong id="biaya-kirim-display">Rp 10.000</strong></p>
+                            <p class="mb-1">Biaya Layanan: <strong>Rp 4.000</strong></p>
+                        </div>
+                        <h5 class="text-end text-bold text-blue">Total : Rp <strong id="total-harga-display">Rp {{ number_format($pesanan->total_harga, 0, ',', '.') }}</strong></h5>
                     </div>
                 </div>
 
@@ -133,16 +137,58 @@
     const day = String(minDate.getDate()).padStart(2, '0');
     document.getElementById('tanggal_acara').setAttribute('min', `${year}-${month}-${day}`);
 </script>
+<script>
+  const biayaLayanan = 4000;
+  const biayaKirim = 10000;
+  const hargaProduk = {{ $pesanan->total_harga }};
+
+  const radioButtons = document.querySelectorAll('input[name="metode_pengiriman"]');
+  const wrapper = document.getElementById('biaya-tambahan-wrapper');
+  const totalDisplay = document.getElementById('total-harga-display');
+  const biayaKirimDisplay = document.getElementById('biaya-kirim-display');
+
+  function updateTotalDisplay(metode) {
+    let total = hargaProduk + biayaLayanan;
+    if (metode === 'Dikirim') {
+      total += biayaKirim;
+      biayaKirimDisplay.innerText = 'Rp ' + biayaKirim.toLocaleString('id-ID');
+    } else {
+      biayaKirimDisplay.innerText = 'Rp 0';
+    }
+    totalDisplay.innerText = 'Rp ' + total.toLocaleString('id-ID');
+    wrapper.style.display = 'block';
+  }
+
+  radioButtons.forEach(rb => {
+    rb.addEventListener('change', function () {
+      updateTotalDisplay(this.value);
+    });
+  });
+</script>
+
 <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ env('MIDTRANS_CLIENT_KEY') }}"></script>
 <script>
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
     document.getElementById('form-checkout').addEventListener('submit', function (e) {
         e.preventDefault();
-
+        const biayaLayanan = 4000;
+        const biayaKirim = 10000;
+        
         const form = e.target;
         const url = document.getElementById('finalize-url').value;
         const formData = new FormData(form);
+        let totalProduk = {{ $pesanan->total_harga }};
+        const metodePengiriman = formData.get('metode_pengiriman');
+
+        let totalAkhir = totalProduk + biayaLayanan;
+        if (metodePengiriman === 'Dikirim') {
+            totalAkhir += biayaKirim;
+        }
+
+        formData.append('biaya_layanan', biayaLayanan);
+        formData.append('biaya_pengiriman', metodePengiriman === 'Dikirim' ? biayaKirim : 0);
+        formData.append('total_akhir', totalAkhir);
 
         fetch(url, {
             method: 'POST',

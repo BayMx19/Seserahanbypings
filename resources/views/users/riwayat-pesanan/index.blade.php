@@ -26,6 +26,9 @@
 <!-- Tabs -->
 <ul class="nav nav-tabs" id="pesananTabs" role="tablist">
     @foreach ($statusAsli as $index => $status)
+        @php
+            $jumlahPesanan = count($pesananByStatus[$status]);
+        @endphp
         <li class="nav-item" role="presentation">
             <button class="nav-link @if ($index === 0) active @endif"
                 id="tab-{{ $index }}"
@@ -35,7 +38,12 @@
                 role="tab"
                 aria-controls="status-{{ $index }}"
                 aria-selected="{{ $index === 0 ? 'true' : 'false' }}">
-                {{ $statusLabels[$status] }}
+                {{ $status }}
+                @if ($jumlahPesanan > 0)
+                    <span class="badge bg-danger text-white">
+                        {{ $jumlahPesanan }}
+                    </span>
+                @endif
             </button>
         </li>
     @endforeach
@@ -128,6 +136,14 @@
                                     
                                 @endforeach
                                 <hr>
+                                @if ($pesanan->pengiriman->metode_pengiriman === 'Dikirim')
+                                    <div class="text-end">
+                                        <p class="mb-1">Biaya Pengiriman: <strong>Rp {{ number_format(10000, 0, ',', '.') }}</strong></p>
+                                    </div>
+                                @endif
+                                <div class="text-end">
+                                    <p class="mb-1">Biaya Layanan: <strong>Rp {{ number_format(4000, 0, ',', '.') }}</strong></p>
+                                </div>
                                 <div class="text-end text-blue fw-bold mt-3">
                                     Total: Rp{{ number_format($pesanan->total_harga, 0, ',', '.') }}
                                 </div>

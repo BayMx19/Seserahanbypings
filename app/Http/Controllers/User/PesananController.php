@@ -89,8 +89,12 @@ class PesananController extends Controller
             ->where('pembeli_id', Auth::id())
             ->firstOrFail();
         try {
+            $biayaLayanan = (int) $request->input('biaya_layanan', 0);
+            $biayaKirim = (int) $request->input('biaya_pengiriman', 0);
+            $totalAkhir = (int) $request->input('total_akhir', $pesanan->total_harga);
             $pesanan->update([
                 'tanggal_acara' => $request->tanggal_acara,
+                'total_harga' => $totalAkhir,
             ]);
             $status_pengiriman = $request->metode_pengiriman === 'Ambil di Tempat'
                 ? 'Belum Diambil'
@@ -112,7 +116,7 @@ class PesananController extends Controller
             $midtransParams = [
                 'transaction_details' => [
                     'order_id' => $pesanan->kode_invoice,
-                    'gross_amount' => $pesanan->total_harga,
+                    'gross_amount' => $totalAkhir,
                 ],
                 'customer_details' => [
                     'first_name' => Auth::user()->name,
@@ -165,7 +169,8 @@ class PesananController extends Controller
         $statusAsli = [
             'Pending', 
             'Diproses', 
-            'Dikirim', 
+            'Dikirim',
+            'Siap Diambil', 
             'Sudah Diterima', 
             'Menunggu Pengembalian', 
             'Sudah Dikembalikan', 
@@ -174,6 +179,7 @@ class PesananController extends Controller
         $statusLabels = [
             'Pending' => 'Pending',
             'Diproses' => 'Diproses',
+            'Siap Diambil' => 'Siap Diambil',
             'Dikirim' => 'Dalam Pengiriman',
             'Sudah Diterima' => 'Sudah Diterima',
             'Menunggu Pengembalian' => 'Menunggu Pengembalian',
@@ -210,13 +216,28 @@ class PesananController extends Controller
     }
     public function updateStatusPesananSelesai($id)
     {
-        $pesanan = Pesanan::where('id', $id)->where('pembeli_id', Auth::id())->first();
+        $pesanan = Pesanan::with('detailPesanan.keranjang.produk')->where('id', $id)->where('pembeli_id', Auth::id())->first();
 
         if (!$pesanan) {
             return redirect()->back()->with('error', 'Pesanan tidak ditemukan.');
         }
         if (!in_array($pesanan->status_pesanan, ['Sudah Diterima', 'Sudah Dikembalikan'])) {
             return redirect()->back()->with('error', 'Pesanan belum bisa diselesaikan.');
+        }
+
+        foreach ($pesanan->detailPesanan as $detail) {
+            $produk = $detail->keranjang->produk;
+
+            if ($produk) {
+                $produk->stok -= $detail->keranjang->qty;
+
+                // Pastikan stok tidak minus
+                if ($produk->stok < 0) {
+                    $produk->stok = 0;
+                }
+
+                $produk->save();
+            }
         }
         $pesanan->status_pesanan = 'Selesai';
         $pesanan->save();
