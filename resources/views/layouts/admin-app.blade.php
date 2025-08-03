@@ -13,7 +13,7 @@
 
     <title>@yield('title') | Seserahan byPings - Toko Seserahan Elegan & Eksklusif</title>
     <meta name="description" content="Seserahan byPings menyediakan seserahan eksklusif untuk pernikahan, lamaran, dan tunangan. Desain elegan & harga bersahabat.">
-    <meta name="keywords" content="seserahan, Seserahan byPings, seserahan banyuwangi, seserahan pernikahan, seserahan lamaran, toko seserahan, seserahan murah, seserahan eksklusif">
+    <meta name="keywords" content="seserahan, SeserahanbyPings, Seserahan byPings, seserahan banyuwangi, seserahan pernikahan, seserahan lamaran, toko seserahan, seserahan murah, seserahan eksklusif">
     <meta property="og:title" content="Seserahan byPings - Toko Seserahan Eksklusif">
     <meta property="og:description" content="Desain seserahan terbaik untuk momen spesial Anda. Cek katalog & pesan sekarang!">
     <meta property="og:image" content="{{ asset('/assets/logo/logo.png')}}">

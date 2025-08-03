@@ -23,7 +23,7 @@
                     <div class="input-group input-group-merge">
                         <span class="input-group-text"><i class="icon-base bx bx-grid-alt"></i></span>
                         <select class="form-select" name="kategori" required>
-                            <option value="Box" {{ $produk->kategori == 'Box' ? 'selected' : '' }}>Box</option>
+                            <option value="Mahar" {{ $produk->kategori == 'Mahar' ? 'selected' : '' }}>Mahar</option>
                             <option value="Seserahan" {{ $produk->kategori == 'Seserahan' ? 'selected' : '' }}>Seserahan</option>
                         </select>
                     </div>

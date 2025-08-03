@@ -29,7 +29,7 @@
                         <span class="input-group-text"><i class="icon-base bx bx-grid-alt"></i></span>
                         <select class="form-select" id="kategori" name="kategori" required>
                             <option value="" disabled selected>Pilih Kategori</option>
-                            <option value="Box">Box</option>
+                            <option value="Mahar">Mahar</option>
                             <option value="Seserahan">Seserahan</option>
                         </select>
                     </div>
