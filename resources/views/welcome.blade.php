@@ -169,7 +169,7 @@
                                 <div class="photo-item emotional-photo__item emotional-photo__item-2">
                                     <div class="photo-img">
                                         <div class="photo-img__block">
-                                            <img src="{{ asset('assets/img/4.jpg')}}" alt="moment-2">
+                                            <img src="{{ asset('assets/img/9.jpg')}}" alt="moment-2">
                                         </div>
                                     </div>
                                 </div>
