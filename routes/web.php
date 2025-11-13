@@ -5,12 +5,17 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\ProdukController as AdminProdukController;
 use App\Http\Controllers\Admin\TransaksiController as AdminTransaksiController;
 use App\Http\Controllers\Admin\ReviewController as AdminReviewController;
+use App\Http\Controllers\Admin\ArtikelController as AdminArtikelController;
+use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\User\HomeController as UserHomeController;
 use App\Http\Controllers\User\KeranjangController as UserKeranjangController;
 use App\Http\Controllers\User\PesananController as UserPesananController;
 use App\Http\Controllers\User\ReviewController as UserReviewController;
 use App\Http\Controllers\User\ProfileController as UserProfileController;
+use App\Http\Controllers\User\ArtikelController as UserArtikelController;
+use App\Http\Controllers\User\GalleryController as UserGalleryController;
+
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -18,6 +23,11 @@ use App\Http\Middleware\RoleMiddleware;
 
 Route::get('/', [WelcomeController::class, 'index']);
 Auth::routes();
+Route::get('/artikel', [UserArtikelController::class, 'index'])->name('user.artikel.index');
+Route::get('/artikel/{slug}', [UserArtikelController::class, 'show'])->name('user.artikel.show');
+
+Route::get('/gallery', [UserGalleryController::class, 'index'])->name('user.gallery.index');
+
 Route::get('/checkout/finish', [UserPesananController::class, 'getCheckoutFinish'])->name('checkout.redirect-finish');
 Route::middleware(['auth', RoleMiddleware::class . ':Admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
@@ -29,8 +39,10 @@ Route::middleware(['auth', RoleMiddleware::class . ':Admin'])->group(function ()
     Route::get('/admin/profile', [AdminProfileController::class, 'index'])->name('admin.profile.index');
     Route::put('/admin/profile', [AdminProfileController::class, 'update'])->name('admin.profile.update');
     Route::put('/admin/transaksi/{id}/status', [AdminTransaksiController::class, 'updateTransaksiStatus'])->name('admin.transaksi.updateStatus');
-
-
+    Route::resource('/admin/artikel', AdminArtikelController::class);
+    Route::get('/admin/data-artikel', [AdminArtikelController:: class, 'getListArtikel']);
+    Route::resource('/admin/gallery', AdminGalleryController::class);
+    Route::get('/admin/data-gallery', [AdminGalleryController:: class, 'getListGallery']);
 });
 Route::middleware(['auth', RoleMiddleware::class . ':User'])->group(function () {
     Route::get('/home', [UserHomeController::class, 'index'])->name('home');

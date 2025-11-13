@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="id">
 <head>
     <!-- partial:parts/_head.html -->
 <meta charset="utf-8">
-<title>@yield('title') | Seserahan byPings Toko - Seserahan Elegan & Eksklusif</title>
-<meta name="description" content="Seserahan byPings menyediakan seserahan eksklusif untuk pernikahan, lamaran, dan tunangan. Desain elegan & harga bersahabat.">
-<meta name="keywords" content="seserahan, SeserahanbyPings, Seserahan byPings, seserahan banyuwangi, seserahan pernikahan, seserahan lamaran, toko seserahan, seserahan murah, seserahan eksklusif">
-<meta property="og:title" content="Seserahan byPings - Toko Seserahan Eksklusif">
-<meta property="og:description" content="Desain seserahan terbaik untuk momen spesial Anda. Cek katalog & pesan sekarang!">
-<meta property="og:image" content="{{ asset('/assets/logo/logo.png')}}">
-<meta name="viewport" content="width=device-width, initial-scale=1 , maximum-scale=1, user-scalable=0">
-<meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{{ $meta_title ?? trim($__env->yieldContent('title') . ' | Seserahan byPings - Toko Seserahan Elegan & Eksklusif') }}</title>
+    <meta name="description" content="{{ $meta_description ?? 'Seserahan byPings menyediakan seserahan eksklusif untuk pernikahan, lamaran, dan tunangan. Desain elegan & harga bersahabat.' }}">
+    <meta name="keywords" content="seserahan, SeserahanbyPings, Seserahan byPings, seserahan banyuwangi, seserahan pernikahan, seserahan lamaran, toko seserahan, seserahan murah, seserahan eksklusif">
+
+    <meta property="og:title" content="{{ $meta_title ?? 'Seserahan byPings - Toko Seserahan Eksklusif' }}">
+    <meta property="og:description" content="{{ $meta_description ?? 'Desain seserahan terbaik untuk momen spesial Anda. Cek katalog & pesan sekarang!' }}">
+    <meta property="og:image" content="{{ $meta_image ?? asset('/assets/logo/logo.png') }}">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1 , maximum-scale=1, user-scalable=0">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
 <link rel="stylesheet" href="{{ asset('assets/users/css/libs.min.css')}}"/>
 <link rel="stylesheet" href="{{ asset('assets/users/css/main.css')}}"/>
 <link href="{{ asset('/assets/logo/logo.png')}}" rel="shortcut icon" type="image/x-icon" /><link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&display=swap" rel="stylesheet">
@@ -164,7 +166,13 @@
                                             </li>
                                             <li class="nav__item">
                                                 <a href="{{ $isHome ? '#products' : url('/home#products') }}" class="nav__link">Produk</a>
-                                            </li>                                            
+                                            </li> 
+                                            <li class="nav__item">
+                                                <a href="{{ $isHome ? '#products' : url('/home#products') }}" class="nav__link">Gallery</a>
+                                            </li>   
+                                            <li class="nav__item">
+                                                <a href="{{ $isHome ? '#artikel' : url('/home#products') }}" class="nav__link">Artikel</a>
+                                            </li>                                          
                                         </ul><!-- //nav__list -->
                                         <div class="dropdown-user">
                                             <a href="javascript:void(0);" onclick="toggleDropdown()" style="color: #7A5AF8; font-weight: 600; font-size: 18px !important;">

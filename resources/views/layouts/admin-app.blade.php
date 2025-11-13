@@ -1,7 +1,7 @@
 <!doctype html>
 
 <html
-  lang="en"
+  lang="id"
   class="layout-wide customizer-hide"
   data-assets-path="{{ asset('assets/admin/assets/')}}"
   data-template="vertical-menu-template-free">
@@ -88,6 +88,20 @@
               <a href="{{'/admin/produk'}}" class="menu-link">
                 <i class="menu-icon bx bx-box"></i>
                 <div class="text-truncate" data-i18n="Dashboards">Master Produk</div>
+                
+              </a>
+            </li>
+            <li class="menu-item @if (request()->is('admin/artikel')) active @endif">
+              <a href="{{'/admin/artikel'}}" class="menu-link">
+                <i class="menu-icon bx bx-note"></i>
+                <div class="text-truncate" data-i18n="Dashboards">Master Artikel</div>
+                
+              </a>
+            </li>
+            <li class="menu-item @if (request()->is('admin/gallery')) active @endif">
+              <a href="{{'/admin/gallery'}}" class="menu-link">
+                <i class="menu-icon bx bx-photo-album"></i>
+                <div class="text-truncate" data-i18n="Dashboards">Master Gallery</div>
                 
               </a>
             </li>
