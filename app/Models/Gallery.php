@@ -10,5 +10,15 @@ class Gallery extends Model
 
     protected $guarded = [
         'id',
+        'judul',
+        'kategori',
+        'deskripsi',
+        'gambar',
+        'lokasi',
+        'tanggal_event',
+        'user_id',
+        'is_published',
+        'created_at',
+        'updated_at',
     ];
 }

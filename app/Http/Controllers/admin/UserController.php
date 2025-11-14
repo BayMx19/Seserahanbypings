@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -29,16 +29,15 @@ class UserController extends Controller
     }
 
     public function store(Request $request)
-    { 
- 
+    {
+
         $fotoProfilPath = null;
         if ($request->hasFile('foto_profil')) {
             $fotoProfilPath = $request->file('foto_profil')->store('foto_profil', 'public');
-            
         }
 
         try {
-           
+
             DB::table('users')->insert([
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
@@ -62,8 +61,8 @@ class UserController extends Controller
 
             return redirect('/admin/users')->with('success', 'User berhasil ditambahkan.');
         } catch (QueryException $e) {
-             Log::error('Gagal insert user: ' . $e->getMessage());
-                return redirect('/admin/users')->with('error', 'Gagal menambahkan User.');
+            Log::error('Gagal insert user: ' . $e->getMessage());
+            return redirect('/admin/users')->with('error', 'Gagal menambahkan User.');
         }
     }
 
@@ -127,6 +126,4 @@ class UserController extends Controller
 
         return redirect()->route('users.index')->with('success', 'Data user berhasil dihapus.');
     }
-
-
 }
