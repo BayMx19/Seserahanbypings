@@ -2,30 +2,48 @@
 <html lang="id">
 
 <head>
-    <!-- partial:parts/_head.html -->
     <meta charset="utf-8">
+
+    <!-- TITLE SEO-FRIENDLY -->
     <title>
-        {{ $meta_title ?? trim($__env->yieldContent('title') . ' Seserahan byPings - Toko Seserahan Elegan & Eksklusif') }}
+        {{ $meta_title ?? 'Seserahan byPings | Toko Seserahan Lamaran & Pernikahan Elegan di Banyuwangi' }}
     </title>
-    <meta name="description"
-        content="{{ $meta_description ?? 'Seserahan byPings menyediakan seserahan eksklusif untuk pernikahan, lamaran, dan tunangan. Desain elegan & harga bersahabat.' }}">
-    <meta name="keywords"
-        content="seserahan, SeserahanbyPings, Seserahan byPings, seserahan banyuwangi, seserahan pernikahan, seserahan lamaran, toko seserahan, seserahan murah, seserahan eksklusif">
 
-    <meta property="og:title" content="{{ $meta_title ?? 'Seserahan byPings - Toko Seserahan Eksklusif' }}">
-    <meta property="og:description"
-        content="{{ $meta_description ?? 'Desain seserahan terbaik untuk momen spesial Anda. Cek katalog & pesan sekarang!' }}">
+    <!-- DESCRIPTION KUAT UNTUK KEYWORD -->
+    <meta name="description" content="{{ 
+        $meta_description ??
+        'Seserahan byPings adalah penyedia seserahan lamaran, tunangan, dan pernikahan di Banyuwangi. Hadir dengan desain elegan, custom, harga terjangkau dan pengiriman ke seluruh Indonesia.' 
+    }}">
+
+    <!-- KEYWORDS (tidak lagi super penting, tapi tetap aman dipakai) -->
+    <meta name="keywords" content="seserahanbypings, seserahan di banyuwangi, seserahan bypings, seserahan banyuwangi, toko seserahan, seserahan lamaran, seserahan pernikahan, jasa seserahan, hantaran pernikahan, seserahan murah, seserahan elegan">
+
+    <!-- OPEN GRAPH -->
+    <meta property="og:title" content="{{ $meta_title ?? 'Seserahan byPings – Toko Seserahan Elegan & Custom' }}">
+    <meta property="og:description" content="{{ $meta_description ?? 'Toko seserahan lamaran & pernikahan dengan desain eksklusif dan custom. Tersedia berbagai paket seserahan lengkap.' }}">
     <meta property="og:image" content="{{ $meta_image ?? asset('/assets/logo/logo.png') }}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:type" content="website">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1 , maximum-scale=1, user-scalable=0">
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Seserahan byPings – Toko Seserahan Elegan & Custom">
+    <meta name="twitter:description" content="Desain seserahan lamaran & pernikahan eksklusif, bisa custom tema & warna.">
+    <meta name="twitter:image" content="{{ $meta_image ?? asset('/assets/logo/logo.png') }}">
+
+    <!-- VIEWPORT & ETC -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <link rel="stylesheet" href="{{ asset('assets/users/css/libs.min.css')}}" />
-    <link rel="stylesheet" href="{{ asset('assets/users/css/main.css')}}" />
-    <link href="{{ asset('/assets/logo/logo.png')}}" rel="shortcut icon" type="image/x-icon" />
+
+    <!-- Canonical tag (PENTING BANGET) -->
+    <link rel="canonical" href="{{ url()->current() }}">
+
+    <!-- CSS & Fonts -->
+    <link rel="stylesheet" href="{{ asset('assets/users/css/libs.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/users/css/main.css')}}">
+    <link rel="shortcut icon" href="{{ asset('/assets/logo/logo.png')}}">
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .text-blue {
             color: #696cff !important
@@ -159,7 +177,7 @@
                         @endforeach
                     </div>
 
-                    @if($testimoni->isEmpty() && $produk->isEmpty())
+                    @if($testimoni->isEmpty() )
                     <div class="row">
                         <div class="col-12 text-center">
                             <div class="alert alert-info">
@@ -221,6 +239,55 @@
             });
         </script>
     </div>
+        <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+        "@type": "Question",
+        "name": "Apa itu Seserahan byPings?",
+        "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Seserahan byPings adalah penyedia seserahan lamaran, tunangan, dan pernikahan dengan desain elegan dan bisa custom sesuai permintaan."
+        }
+        },
+        {
+        "@type": "Question",
+        "name": "Apakah Seserahan byPings bisa custom?",
+        "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ya, kamu bisa request tema, warna, isi, serta konsep sesuai kebutuhan acara lamaran atau pernikahan."
+        }
+        },
+        {
+        "@type": "Question",
+        "name": "Apakah Seserahan byPings melayani pengiriman seluruh Indonesia?",
+        "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ya, pengiriman tersedia ke seluruh Indonesia dengan packing aman dan estetik."
+        }
+        }
+    ]
+    }
+    </script>
+        <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "Store",
+    "name": "Seserahan byPings",
+    "image": "{{ asset('/assets/logo/logo.png') }}",
+    "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Banyuwangi",
+        "addressCountry": "ID"
+    },
+    "url": "{{ url('/') }}",
+    "telephone": "+62"
+    }
+    </script>
+
+
 </body>
 
 </html>

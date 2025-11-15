@@ -66,7 +66,7 @@
         </div>
         <div class="col col_5 col_desktop-12 order-desktop-1">
             <div class="main-container">
-                <h1 class="h1 main-title">Bingkisan Istimewa<br><span class="round-border round-border-3">Seserahan
+                <h1 class="h1 main-title">Seserahan Lamaran & Pernikahan Elegan<br><span class="round-border round-border-3">Seserahan
                         byPings</span></h1>
                 <div class="wysiwyg main-description">Hadirkan kesan elegan di hari spesialmu dengan seserahan handmade
                     penuh cinta. Cocok untuk lamaran, tunangan, hingga pernikahan.</div>
@@ -627,6 +627,54 @@ return [
         });
     });
 </script>
+    <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+        "@type": "Question",
+        "name": "Apa itu Seserahan byPings?",
+        "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Seserahan byPings adalah penyedia seserahan lamaran, tunangan, dan pernikahan dengan desain elegan dan bisa custom sesuai permintaan."
+        }
+        },
+        {
+        "@type": "Question",
+        "name": "Apakah Seserahan byPings bisa custom?",
+        "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ya, kamu bisa request tema, warna, isi, serta konsep sesuai kebutuhan acara lamaran atau pernikahan."
+        }
+        },
+        {
+        "@type": "Question",
+        "name": "Apakah Seserahan byPings melayani pengiriman seluruh Indonesia?",
+        "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ya, pengiriman tersedia ke seluruh Indonesia dengan packing aman dan estetik."
+        }
+        }
+    ]
+    }
+    </script>
+        <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "Store",
+    "name": "Seserahan byPings",
+    "image": "{{ asset('/assets/logo/logo.png') }}",
+    "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Banyuwangi",
+        "addressCountry": "ID"
+    },
+    "url": "{{ url('/') }}",
+    "telephone": "+62"
+    }
+    </script>
+
 
 
 
