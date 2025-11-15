@@ -159,7 +159,7 @@
                         @endforeach
                     </div>
 
-                    @if($testimoni->isEmpty() && $produk->isEmpty())
+                    @if($testimoni->isEmpty() && $foto>isEmpty())
                     <div class="row">
                         <div class="col-12 text-center">
                             <div class="alert alert-info">
