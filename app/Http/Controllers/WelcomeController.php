@@ -16,6 +16,13 @@ class WelcomeController extends Controller
         return view('welcome', compact('produk', 'artikels'));
     }
 
+    public function seserahanBanyuwangi()
+    {
+        $produk = Produk::with('harga')->where('status', 'ACTIVE')->get();
+        $artikels = Artikel::where('is_published', '1')->latest()->take(5)->get();
+        return view('seserahan-banyuwangi', compact('produk', 'artikels'));
+    }
+
     public function artikel()
     {
         $totalArtikels = Artikel::where('is_published', '1')->count();

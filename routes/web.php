@@ -22,6 +22,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RoleMiddleware;
 
 Route::get('/', [WelcomeController::class, 'index']);
+Route::get('/seserahan-banyuwangi', [WelcomeController::class, 'seserahanBanyuwangi']);
+
 Route::get('/welcome-artikel', [WelcomeController::class, 'artikel'])->name('welcome.artikel');
 Route::get('/welcome-artikel/{slug}', [WelcomeController::class, 'artikelShow'])->name('welcome.artikel.show');
 Route::get('/welcome-gallery', [WelcomeController::class, 'gallery'])->name('welcome.gallery');
