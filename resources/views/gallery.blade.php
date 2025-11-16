@@ -178,7 +178,7 @@
                         @endforeach
                     </div>
 
-                    @if($testimoni->isEmpty() )
+                    @if($testimoni->isEmpty() && $produk->isEmpty())
                     <div class="row">
                         <div class="col-12 text-center">
                             <div class="alert alert-info">
